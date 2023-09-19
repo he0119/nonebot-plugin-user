@@ -14,7 +14,7 @@ async def test_remove_bind(app: App, patch_current_time, mocker: MockerFixture):
     from nonebot_plugin_user import bind_cmd
     from nonebot_plugin_user.models import Bind, User
 
-    with patch_current_time("2023-09-14 10:46:10.416389", tick=False):
+    with patch_current_time("2023-09-14 10:46:10", tick=False):
         async with create_session() as session:
             user = User(id=1, name="nickname")
             user2 = User(id=2, name="nickname2")
@@ -56,7 +56,7 @@ async def test_remove_bind_self(app: App, patch_current_time, mocker: MockerFixt
     """解除最初的绑定"""
     from nonebot_plugin_user import bind_cmd
 
-    with patch_current_time("2023-09-14 10:46:10.416389", tick=False):
+    with patch_current_time("2023-09-14 10:46:10", tick=False):
         async with app.test_matcher(bind_cmd) as ctx:
             adapter = get_adapter(Adapter)
             bot = ctx.create_bot(base=Bot, adapter=adapter)

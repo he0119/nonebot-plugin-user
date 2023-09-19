@@ -9,7 +9,7 @@ async def test_user(app: App, patch_current_time):
     """获取用户信息"""
     from nonebot_plugin_user import user_cmd
 
-    with patch_current_time("2023-09-14 10:46:10.416389", tick=False):
+    with patch_current_time("2023-09-14 10:46:10", tick=False):
         async with app.test_matcher(user_cmd) as ctx:
             adapter = get_adapter(Adapter)
             bot = ctx.create_bot(base=Bot, adapter=adapter)
@@ -27,7 +27,7 @@ async def test_user(app: App, patch_current_time):
             )
             ctx.should_call_send(
                 event,
-                "用户 ID：1\n用户名：nickname\n用户创建日期：2023-09-14 10:46:10.416389+08:00\n用户所在平台 ID：10\n用户所在平台：qq",
+                "用户 ID：1\n用户名：nickname\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：10\n用户所在平台：qq",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -48,7 +48,7 @@ async def test_user(app: App, patch_current_time):
             )
             ctx.should_call_send(
                 event,
-                "用户 ID：1\n用户名：nickname\n用户创建日期：2023-09-14 10:46:10.416389+08:00\n用户所在平台 ID：10\n用户所在平台：qq",
+                "用户 ID：1\n用户名：nickname\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：10\n用户所在平台：qq",
                 True,
             )
             ctx.should_finished(user_cmd)

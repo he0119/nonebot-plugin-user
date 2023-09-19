@@ -13,7 +13,7 @@ async def test_bind_private(app: App, patch_current_time, mocker: MockerFixture)
     mocked_random = mocker.patch("nonebot_plugin_user.random.randint")
     mocked_random.return_value = 123456
 
-    with patch_current_time("2023-09-14 10:46:10.416389", tick=False):
+    with patch_current_time("2023-09-14 10:46:10", tick=False):
         async with app.test_matcher(user_cmd) as ctx:
             adapter = get_adapter(Adapter)
             bot = ctx.create_bot(base=Bot, adapter=adapter)
@@ -30,7 +30,7 @@ async def test_bind_private(app: App, patch_current_time, mocker: MockerFixture)
             )
             ctx.should_call_send(
                 event,
-                "用户 ID：1\n用户名：nickname1\n用户创建日期：2023-09-14 10:46:10.416389+08:00\n用户所在平台 ID：1\n用户所在平台：qq",
+                "用户 ID：1\n用户名：nickname1\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：1\n用户所在平台：qq",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -51,7 +51,7 @@ async def test_bind_private(app: App, patch_current_time, mocker: MockerFixture)
             )
             ctx.should_call_send(
                 event,
-                "用户 ID：2\n用户名：nickname10\n用户创建日期：2023-09-14 10:46:10.416389+08:00\n用户所在平台 ID：10\n用户所在平台：qq",
+                "用户 ID：2\n用户名：nickname10\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：10\n用户所在平台：qq",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -88,7 +88,7 @@ async def test_bind_private(app: App, patch_current_time, mocker: MockerFixture)
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "用户 ID：1\n用户名：nickname1\n用户创建日期：2023-09-14 10:46:10.416389+08:00\n用户所在平台 ID：1\n用户所在平台：qq",
+                "用户 ID：1\n用户名：nickname1\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：1\n用户所在平台：qq",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -101,7 +101,7 @@ async def test_bind_private(app: App, patch_current_time, mocker: MockerFixture)
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "用户 ID：1\n用户名：nickname1\n用户创建日期：2023-09-14 10:46:10.416389+08:00\n用户所在平台 ID：10\n用户所在平台：qq",
+                "用户 ID：1\n用户名：nickname1\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：10\n用户所在平台：qq",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -116,7 +116,7 @@ async def test_bind_private_invalid_token(
     mocked_random = mocker.patch("nonebot_plugin_user.random.randint")
     mocked_random.return_value = 123456
 
-    with patch_current_time("2023-09-14 10:46:10.416389", tick=False):
+    with patch_current_time("2023-09-14 10:46:10", tick=False):
         async with app.test_matcher(user_cmd) as ctx:
             adapter = get_adapter(Adapter)
             bot = ctx.create_bot(base=Bot, adapter=adapter)
@@ -133,7 +133,7 @@ async def test_bind_private_invalid_token(
             )
             ctx.should_call_send(
                 event,
-                "用户 ID：1\n用户名：nickname1\n用户创建日期：2023-09-14 10:46:10.416389+08:00\n用户所在平台 ID：1\n用户所在平台：qq",
+                "用户 ID：1\n用户名：nickname1\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：1\n用户所在平台：qq",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -154,7 +154,7 @@ async def test_bind_private_invalid_token(
             )
             ctx.should_call_send(
                 event,
-                "用户 ID：2\n用户名：nickname10\n用户创建日期：2023-09-14 10:46:10.416389+08:00\n用户所在平台 ID：10\n用户所在平台：qq",
+                "用户 ID：2\n用户名：nickname10\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：10\n用户所在平台：qq",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -191,7 +191,7 @@ async def test_bind_private_invalid_token(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "用户 ID：1\n用户名：nickname1\n用户创建日期：2023-09-14 10:46:10.416389+08:00\n用户所在平台 ID：1\n用户所在平台：qq",
+                "用户 ID：1\n用户名：nickname1\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：1\n用户所在平台：qq",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -204,7 +204,7 @@ async def test_bind_private_invalid_token(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "用户 ID：2\n用户名：nickname10\n用户创建日期：2023-09-14 10:46:10.416389+08:00\n用户所在平台 ID：10\n用户所在平台：qq",
+                "用户 ID：2\n用户名：nickname10\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：10\n用户所在平台：qq",
                 True,
             )
             ctx.should_finished(user_cmd)
