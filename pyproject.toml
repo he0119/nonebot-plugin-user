@@ -1,0 +1,73 @@
+[tool.poetry]
+name = "nonebot-plugin-user"
+version = "0.0.1"
+description = "适用于 Nonebot2 的用户插件"
+authors = ["hemengyang <hmy0119@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/he0119/nonebot-plugin-user"
+repository = "https://github.com/he0119/nonebot-plugin-user"
+documentation = "https://github.com/he0119/nonebot-plugin-user#readme"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+nonebot2 = "^2.1.0"
+nonebot-plugin-datastore = "^1.1.2"
+nonebot-plugin-alconna = "^0.24.0"
+nonebot-plugin-session = "^0.1.0"
+nonebot-plugin-userinfo = "^0.1.0"
+expiringdict = "^1.2.2"
+
+[tool.poetry.group.dev.dependencies]
+nb-cli = "^1.0.4"
+nonebot-adapter-onebot = "^2.2.3"
+nonebot-adapter-red = "^0.4.1"
+
+[tool.poetry.group.test.dependencies]
+nonebug = "^0.3.1"
+pytest-cov = "^4.0.0"
+pytest-xdist = "^3.0.2"
+pytest-mock = "^3.10.0"
+pytest-asyncio = ">=0.20.2,<0.22.0"
+freezegun = "^1.2.2"
+
+[tool.black]
+line-length = 88
+
+[tool.isort]
+profile = "black"
+line_length = 88
+skip_gitignore = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+
+[tool.pyright]
+pythonVersion = "3.8"
+pythonPlatform = "All"
+typeCheckingMode = "basic"
+
+[tool.ruff]
+select = ["E", "W", "F", "UP", "C", "T", "PYI", "Q"]
+ignore = ["E402", "E501", "C901", "UP037"]
+
+[tool.nonebot]
+adapters = [
+  { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" },
+]
+plugins = ["nonebot_plugin_user"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  "raise NotImplementedError",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+  "@overload",
+  "except ImportError:",
+]
+omit = ["*/script/command.py", "*/migrations/*"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
