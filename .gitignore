@@ -143,3 +143,5 @@ dmypy.json
 # VSCode
 .vscode/*
 !.vscode/launch.json
+
+data/
