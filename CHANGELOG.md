@@ -13,5 +13,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 - 可以使用的版本。
 
-[unreleased]: https://github.com/he0119/nonebot-plugin-user/compare/v0.3.0...HEAD
+[unreleased]: https://github.com/he0119/nonebot-plugin-user/compare/v0.0.1...HEAD
 [0.0.1]: https://github.com/he0119/nonebot-plugin-user/releases/tag/v0.0.1
