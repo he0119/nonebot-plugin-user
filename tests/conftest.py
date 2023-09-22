@@ -6,7 +6,6 @@ import pytest
 from freezegun import freeze_time
 from nonebot.adapters.onebot.v11 import Adapter as OnebotV11Adapter
 from nonebug import NONEBOT_INIT_KWARGS, App
-from nonebug.app import App
 from sqlalchemy import delete, event
 
 

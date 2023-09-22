@@ -5,7 +5,6 @@ Revises: 8aa030575da8
 Create Date: 2023-09-22 09:59:01.649159
 
 """
-import sqlalchemy as sa
 from alembic import op
 from nonebot import logger
 from sqlalchemy.ext.automap import automap_base
