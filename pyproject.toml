@@ -12,16 +12,17 @@ documentation = "https://github.com/he0119/nonebot-plugin-user#readme"
 [tool.poetry.dependencies]
 python = "^3.8"
 nonebot2 = "^2.1.0"
-nonebot-plugin-datastore = "^1.1.2"
+nonebot-plugin-orm = { git = "https://github.com/ProgramRipper/plugin-orm.git" }
 nonebot-plugin-alconna = "^0.24.0"
-nonebot-plugin-session = "^0.1.0"
-nonebot-plugin-userinfo = "^0.1.0"
+nonebot-plugin-session = { git = "https://github.com/noneplugin/nonebot-plugin-session.git", branch = "dev" }
+nonebot-plugin-userinfo = { git = "https://github.com/noneplugin/nonebot-plugin-userinfo.git", branch = "dev" }
 expiringdict = "^1.2.2"
 
 [tool.poetry.group.dev.dependencies]
 nb-cli = "^1.0.4"
 nonebot-adapter-onebot = "^2.2.3"
 nonebot-adapter-red = "^0.4.1"
+aiosqlite = "^0.19.0"
 
 [tool.poetry.group.test.dependencies]
 nonebug = "^0.3.1"

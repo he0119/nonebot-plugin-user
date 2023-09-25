@@ -1,9 +1,11 @@
+from pathlib import Path
+
 from nonebot import require
 
 require("nonebot_plugin_alconna")
 require("nonebot_plugin_session")
 require("nonebot_plugin_userinfo")
-require("nonebot_plugin_datastore")
+require("nonebot_plugin_orm")
 
 import random
 from typing import Dict, Optional, Tuple, cast
@@ -35,6 +37,9 @@ __plugin_meta__ = PluginMetadata(
     supported_adapters=inherit_supported_adapters(
         "nonebot_plugin_alconna", "nonebot_plugin_session", "nonebot_plugin_userinfo"
     ),
+    extra={
+        "orm_version_location": Path(__file__).with_name("migrations"),
+    },
 )
 
 user_cmd = on_alconna(Alconna("user"), use_cmd_start=True)

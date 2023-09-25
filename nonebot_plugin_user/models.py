@@ -2,13 +2,11 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import List, Optional
 
-from nonebot_plugin_datastore import get_plugin_data
+from nonebot_plugin_orm import Model
 from nonebot_plugin_session import Session, SessionIdType, SessionLevel
 from nonebot_plugin_userinfo import UserInfo
 from sqlalchemy import DateTime, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-
-Model = get_plugin_data().Model
 
 
 class User(Model):

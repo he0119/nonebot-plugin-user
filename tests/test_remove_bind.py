@@ -9,13 +9,15 @@ from tests.fake import fake_private_message_event_v11
 
 async def test_remove_bind(app: App, patch_current_time, mocker: MockerFixture):
     """解除绑定"""
-    from nonebot_plugin_datastore import create_session
+    from nonebot_plugin_orm import get_scoped_session
+
+    Session = get_scoped_session()
 
     from nonebot_plugin_user import bind_cmd
     from nonebot_plugin_user.models import Bind, User
 
     with patch_current_time("2023-09-14 10:46:10", tick=False):
-        async with create_session() as session:
+        async with Session() as session:
             user = User(id=1, name="nickname")
             user2 = User(id=2, name="nickname2")
             session.add(user)
@@ -47,7 +49,7 @@ async def test_remove_bind(app: App, patch_current_time, mocker: MockerFixture):
             )
             ctx.should_finished(bind_cmd)
 
-        async with create_session() as session:
+        async with Session() as session:
             bind = (await session.scalars(select(Bind).where(Bind.pid == 10))).one()
             assert bind.aid == 2
 

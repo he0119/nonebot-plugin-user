@@ -11,7 +11,7 @@ from sqlalchemy import delete, event
 
 def pytest_configure(config: pytest.Config) -> None:
     config.stash[NONEBOT_INIT_KWARGS] = {
-        "datastore_database_url": "sqlite+aiosqlite:///:memory:"
+        "sqlalchemy_database_url": "sqlite+aiosqlite:///:memory:"
     }
 
 
@@ -25,9 +25,9 @@ def load_adapters(nonebug_init: None):
 async def app(app: App):
     # 加载插件
     nonebot.require("nonebot_plugin_user")
-    from nonebot_plugin_datastore.db import create_session, init_db
+    from nonebot_plugin_orm import get_scoped_session
 
-    await init_db()
+    Session = get_scoped_session()
 
     yield app
 
@@ -35,7 +35,7 @@ async def app(app: App):
 
     from nonebot_plugin_user.models import Bind, User
 
-    async with create_session() as session, session.begin():
+    async with Session() as session, session.begin():
         await session.execute(delete(Bind))
         await session.execute(delete(User))
 
@@ -47,9 +47,11 @@ async def app(app: App):
 
 @pytest.fixture
 async def session(app: App):
-    from nonebot_plugin_datastore.db import create_session
+    from nonebot_plugin_orm import get_scoped_session
 
-    async with create_session() as session:
+    Session = get_scoped_session()
+
+    async with Session() as session:
         yield session
 
 
