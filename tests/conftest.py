@@ -1,5 +1,5 @@
 import datetime
-from contextlib import contextmanager
+from contextlib import contextmanager, suppress
 
 import nonebot
 import pytest
@@ -25,9 +25,12 @@ def load_adapters(nonebug_init: None):
 async def app(app: App):
     # 加载插件
     nonebot.require("nonebot_plugin_user")
-    from nonebot_plugin_orm import get_scoped_session
+    from nonebot_plugin_orm import get_scoped_session, greenlet_spawn, orm
 
     Session = get_scoped_session()
+
+    with suppress(SystemExit):
+        await greenlet_spawn(orm, ["upgrade"])
 
     yield app
 

@@ -1,4 +1,3 @@
-import asyncio
 from typing import cast
 
 from alembic import context
@@ -6,6 +5,7 @@ from nonebot_plugin_orm import Model
 from nonebot_plugin_orm import config as plugin_config
 from nonebot_plugin_orm.migrate import AlembicConfig
 from sqlalchemy import Connection
+from sqlalchemy.util import await_fallback
 
 # Alembic Config 对象，它提供正在使用的 .ini 文件中的值。
 config = cast(AlembicConfig, context.config)
@@ -71,4 +71,4 @@ async def run_migrations_online() -> None:
 if context.is_offline_mode():
     run_migrations_offline()
 else:
-    asyncio.run(run_migrations_online())
+    await_fallback(run_migrations_online())
