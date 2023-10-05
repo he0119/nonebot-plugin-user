@@ -1,5 +1,5 @@
 import datetime
-from contextlib import contextmanager, suppress
+from contextlib import contextmanager
 
 import nonebot
 import pytest
@@ -11,7 +11,8 @@ from sqlalchemy import delete, event
 
 def pytest_configure(config: pytest.Config) -> None:
     config.stash[NONEBOT_INIT_KWARGS] = {
-        "sqlalchemy_database_url": "sqlite+aiosqlite:///:memory:"
+        "sqlalchemy_database_url": "sqlite+aiosqlite:///:memory:",
+        "alembic_startup_check": False,
     }
 
 
@@ -25,12 +26,9 @@ def load_adapters(nonebug_init: None):
 async def app(app: App):
     # 加载插件
     nonebot.require("nonebot_plugin_user")
-    from nonebot_plugin_orm import get_scoped_session, greenlet_spawn, orm
+    from nonebot_plugin_orm import get_scoped_session, init_orm
 
-    Session = get_scoped_session()
-
-    with suppress(SystemExit):
-        await greenlet_spawn(orm, ["upgrade"])
+    await init_orm()
 
     yield app
 
@@ -38,6 +36,7 @@ async def app(app: App):
 
     from nonebot_plugin_user.models import Bind, User
 
+    Session = get_scoped_session()
     async with Session() as session, session.begin():
         await session.execute(delete(Bind))
         await session.execute(delete(User))

@@ -5,6 +5,14 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "ORM Upgrade",
+      "type": "python",
+      "request": "launch",
+      "module": "nb-cli",
+      "args": ["orm", "upgrade"],
+      "justMyCode": true
+    },
+    {
       "name": "Run",
       "type": "python",
       "request": "launch",
