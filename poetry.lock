@@ -1108,18 +1108,21 @@ typing-extensions = ">=4.0.0,<5.0.0"
 
 [[package]]
 name = "nonebot-adapter-red"
-version = "0.4.2"
+version = "0.5.1"
 description = "Red Protocol Adapter for Nonebot2"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "nonebot_adapter_red-0.4.2-py3-none-any.whl", hash = "sha256:f9ab53cb3d7fb53726b738e13b8242bc9a5243a4e5e48385473951f66b7eca8b"},
-    {file = "nonebot_adapter_red-0.4.2.tar.gz", hash = "sha256:81f98dced6adc0cd835327cc9b0aa07ff4ced32df8ed6da873342b1e6ffc1744"},
+    {file = "nonebot_adapter_red-0.5.1-py3-none-any.whl", hash = "sha256:57d41547f4587cc140641cfb361766a34bde31b593690bf15841ad8cfaf3362b"},
+    {file = "nonebot_adapter_red-0.5.1.tar.gz", hash = "sha256:12dde60000f3827f1f9d2939ec71ba6fe7c9b71cbf04266612db10ab992bded9"},
 ]
 
 [package.dependencies]
 nonebot2 = ">=2.0.1"
 packaging = ">=23.1"
+
+[package.extras]
+auto-detect = ["PyYAML"]
 
 [[package]]
 name = "nonebot-plugin-alconna"
@@ -1158,7 +1161,7 @@ name = "nonebot-plugin-orm"
 version = "0.1.0"
 description = "SQLAlchemy ORM support for nonebot"
 optional = false
-python-versions = ">=3.9"
+python-versions = "<4.0,>=3.9"
 files = []
 develop = false
 
@@ -1179,7 +1182,7 @@ default = ["aiosqlite (>=0.19,<1.0)", "nonebot-plugin-localstore (>=0.5,<1.0)"]
 type = "git"
 url = "https://github.com/ProgramRipper/plugin-orm.git"
 reference = "master"
-resolved_reference = "3654acb0fa51fa83569006a23c7a5da555708012"
+resolved_reference = "74a7ff836321fa4752394f4e58e859bcf55d222e"
 
 [[package]]
 name = "nonebot-plugin-session"
@@ -2240,4 +2243,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "b80e6e8098bb764c7668d60b2c45737493b0f8fac0876bd6f4764f399529c5fb"
+content-hash = "cd67465c43aad90efb7227ac0dc23687b284df30020437c02075e13318c83ff9"

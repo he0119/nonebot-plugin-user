@@ -20,6 +20,7 @@ from nonebot_plugin_alconna import (
 )
 from nonebot_plugin_session import SessionLevel
 
+from . import migrations
 from .annotated import UserSession as UserSession
 from .utils import get_user, remove_bind, set_bind
 
@@ -35,6 +36,7 @@ __plugin_meta__ = PluginMetadata(
     supported_adapters=inherit_supported_adapters(
         "nonebot_plugin_alconna", "nonebot_plugin_session", "nonebot_plugin_userinfo"
     ),
+    extra={"orm_version_location": migrations},
 )
 
 user_cmd = on_alconna(Alconna("user"), use_cmd_start=True)
@@ -45,11 +47,11 @@ async def _(session: UserSession):
     await user_cmd.finish(
         "\n".join(
             [
+                f"平台：{session.platform}",
+                f"平台 ID：{session.pid}",
                 f"用户 ID：{session.uid}",
                 f"用户名：{session.name}",
-                f"用户创建日期：{session.created_at.strftime('%Y-%m-%d %H:%M:%S')}",
-                f"用户所在平台 ID：{session.pid}",
-                f"用户所在平台：{session.platform}",
+                f"创建日期：{session.created_at.strftime('%Y-%m-%d %H:%M:%S')}",
             ]
         )
     )

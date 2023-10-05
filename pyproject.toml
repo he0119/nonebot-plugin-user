@@ -23,7 +23,7 @@ expiringdict = "^1.2.2"
 [tool.poetry.group.dev.dependencies]
 nb-cli = "^1.0.4"
 nonebot-adapter-onebot = "^2.2.3"
-nonebot-adapter-red = "^0.4.1"
+nonebot-adapter-red = "^0.5.1"
 
 [tool.poetry.group.test.dependencies]
 nonebug = "^0.3.1"
@@ -56,6 +56,8 @@ ignore = ["E402", "E501", "C901", "UP037"]
 [tool.nonebot]
 adapters = [
   { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" },
+  { name = "RedProtocol", module_name = "nonebot.adapters.red" },
+  {name = "OneBot V12", module_name = "nonebot.adapters.onebot.v12"},
 ]
 plugins = ["nonebot_plugin_user"]
 
