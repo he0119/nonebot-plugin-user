@@ -28,7 +28,7 @@ async def test_user(app: App, patch_current_time):
             )
             ctx.should_call_send(
                 event,
-                "用户 ID：1\n用户名：nickname\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：10\n用户所在平台：qq",
+                "平台：qq\n平台 ID：10\n用户名：nickname\n创建日期：2023-09-14 10:46:10",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -49,7 +49,7 @@ async def test_user(app: App, patch_current_time):
             )
             ctx.should_call_send(
                 event,
-                "用户 ID：1\n用户名：nickname\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：10\n用户所在平台：qq",
+                "平台：qq\n平台 ID：10\n用户名：nickname\n创建日期：2023-09-14 10:46:10",
                 True,
             )
             ctx.should_finished(user_cmd)

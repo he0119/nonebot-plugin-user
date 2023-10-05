@@ -56,7 +56,7 @@ class UserSession:
         return self.user.id
 
     @property
-    def name(self) -> str:
+    def user_name(self) -> str:
         """用户名"""
         return self.user.name
 
