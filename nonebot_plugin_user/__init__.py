@@ -47,11 +47,11 @@ async def _(session: UserSession):
     await user_cmd.finish(
         "\n".join(
             [
-                f"平台：{session.platform}",
-                f"平台 ID：{session.pid}",
                 f"用户 ID：{session.uid}",
                 f"用户名：{session.name}",
-                f"创建日期：{session.created_at.strftime('%Y-%m-%d %H:%M:%S')}",
+                f"用户创建日期：{session.created_at.strftime('%Y-%m-%d %H:%M:%S')}",
+                f"用户所在平台 ID：{session.pid}",
+                f"用户所在平台：{session.platform}",
             ]
         )
     )

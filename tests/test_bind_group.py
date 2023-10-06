@@ -31,7 +31,7 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
             )
             ctx.should_call_send(
                 event,
-                "平台：qq\n平台 ID：1\n用户 ID：1\n用户名：nickname1\n创建日期：2023-09-14 10:46:10",
+                "用户 ID：1\n用户名：nickname1\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：1\n用户所在平台：qq",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -53,7 +53,7 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
             )
             ctx.should_call_send(
                 event,
-                "平台：qq\n平台 ID：10\n用户 ID：2\n用户名：nickname10\n创建日期：2023-09-14 10:46:10",
+                "用户 ID：2\n用户名：nickname10\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：10\n用户所在平台：qq",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -105,7 +105,7 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台：qq\n平台 ID：10\n用户 ID：1\n用户名：nickname1\n创建日期：2023-09-14 10:46:10",
+                "用户 ID：1\n用户名：nickname1\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：10\n用户所在平台：qq",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -118,7 +118,7 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台：qq\n平台 ID：1\n用户 ID：1\n用户名：nickname1\n创建日期：2023-09-14 10:46:10",
+                "用户 ID：1\n用户名：nickname1\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：1\n用户所在平台：qq",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -151,7 +151,7 @@ async def test_bind_group_different_user(
             )
             ctx.should_call_send(
                 event,
-                "平台：qq\n平台 ID：1\n用户 ID：1\n用户名：nickname1\n创建日期：2023-09-14 10:46:10",
+                "用户 ID：1\n用户名：nickname1\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：1\n用户所在平台：qq",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -173,7 +173,7 @@ async def test_bind_group_different_user(
             )
             ctx.should_call_send(
                 event,
-                "平台：qq\n平台 ID：10\n用户 ID：2\n用户名：nickname10\n创建日期：2023-09-14 10:46:10",
+                "用户 ID：2\n用户名：nickname10\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：10\n用户所在平台：qq",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -225,7 +225,7 @@ async def test_bind_group_different_user(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台：qq\n平台 ID：1\n用户 ID：1\n用户名：nickname1\n创建日期：2023-09-14 10:46:10",
+                "用户 ID：1\n用户名：nickname1\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：1\n用户所在平台：qq",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -238,7 +238,7 @@ async def test_bind_group_different_user(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台：qq\n平台 ID：10\n用户 ID：2\n用户名：nickname10\n创建日期：2023-09-14 10:46:10",
+                "用户 ID：2\n用户名：nickname10\n用户创建日期：2023-09-14 10:46:10\n用户所在平台 ID：10\n用户所在平台：qq",
                 True,
             )
             ctx.should_finished(user_cmd)
