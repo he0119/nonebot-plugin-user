@@ -48,11 +48,9 @@ async def app(app: App):
 
 @pytest.fixture
 async def session(app: App):
-    from nonebot_plugin_orm import get_scoped_session
+    from nonebot_plugin_orm import get_session
 
-    Session = get_scoped_session()
-
-    async with Session() as session:
+    async with get_session() as session:
         yield session
 
 
