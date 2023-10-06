@@ -1186,22 +1186,18 @@ resolved_reference = "74a7ff836321fa4752394f4e58e859bcf55d222e"
 
 [[package]]
 name = "nonebot-plugin-session"
-version = "0.2.0"
+version = "0.2.0b1"
 description = "Nonebot2 会话信息提取与会话id定义"
 optional = false
-python-versions = "^3.8"
-files = []
-develop = false
+python-versions = ">=3.8,<4.0"
+files = [
+    {file = "nonebot_plugin_session-0.2.0b1-py3-none-any.whl", hash = "sha256:4c958e4e0d1b224b49d67cc1d229c52221ab8f9828e91ef3c6ec5f6769436b6f"},
+    {file = "nonebot_plugin_session-0.2.0b1.tar.gz", hash = "sha256:9e8df488b0fc9c1b2a848dca9d3b4de3c949a845aa50ca38d5213a094fd33578"},
+]
 
 [package.dependencies]
-nonebot2 = {version = "^2.0.0", extras = ["fastapi"]}
-strenum = "^0.4.8"
-
-[package.source]
-type = "git"
-url = "https://github.com/noneplugin/nonebot-plugin-session.git"
-reference = "dev"
-resolved_reference = "0bf49f6c9431a04cd24ed116c1abdc133318a879"
+nonebot2 = {version = ">=2.0.0,<3.0.0", extras = ["fastapi"]}
+strenum = ">=0.4.8,<0.5.0"
 
 [[package]]
 name = "nonebot-plugin-userinfo"
@@ -2243,4 +2239,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "cd67465c43aad90efb7227ac0dc23687b284df30020437c02075e13318c83ff9"
+content-hash = "2895ea5b34b8884335721d3b30045aa952ba1a83652a7555eb8d1886b9d6a82b"

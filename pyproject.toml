@@ -16,7 +16,7 @@ nonebot-plugin-orm = { extras = [
   "default",
 ], git = "https://github.com/ProgramRipper/plugin-orm.git", branch = "master" }
 nonebot-plugin-alconna = "^0.24.0"
-nonebot-plugin-session = { git = "https://github.com/noneplugin/nonebot-plugin-session.git", branch = "dev" }
+nonebot-plugin-session = "^0.2.0b1"
 nonebot-plugin-userinfo = "^0.1.1"
 expiringdict = "^1.2.2"
 
@@ -56,8 +56,8 @@ ignore = ["E402", "E501", "C901", "UP037"]
 [tool.nonebot]
 adapters = [
   { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" },
+  { name = "OneBot V12", module_name = "nonebot.adapters.onebot.v12" },
   { name = "RedProtocol", module_name = "nonebot.adapters.red" },
-  {name = "OneBot V12", module_name = "nonebot.adapters.onebot.v12"},
 ]
 plugins = ["nonebot_plugin_user"]
 
@@ -70,7 +70,7 @@ exclude_lines = [
   "@overload",
   "except ImportError:",
 ]
-omit = ["*/script/command.py", "*/migrations/*"]
+omit = ["*/migrations/*"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
