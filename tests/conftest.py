@@ -26,7 +26,7 @@ def load_adapters(nonebug_init: None):
 async def app(app: App):
     # 加载插件
     nonebot.require("nonebot_plugin_user")
-    from nonebot_plugin_orm import get_scoped_session, init_orm
+    from nonebot_plugin_orm import get_session, init_orm
 
     await init_orm()
 
@@ -36,8 +36,7 @@ async def app(app: App):
 
     from nonebot_plugin_user.models import Bind, User
 
-    Session = get_scoped_session()
-    async with Session() as session, session.begin():
+    async with get_session() as session, session.begin():
         await session.execute(delete(Bind))
         await session.execute(delete(User))
 
