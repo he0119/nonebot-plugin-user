@@ -69,6 +69,25 @@ async def set_bind(platform_id: str, platform: str, aid: int):
         await session.commit()
 
 
+async def set_user_name(platform_id: str, platform: str, name: str):
+    """设置用户名"""
+    async with get_session() as session:
+        bind = (
+            await session.scalars(
+                select(Bind)
+                .where(Bind.platform_id == platform_id)
+                .where(Bind.platform == platform)
+                .options(selectinload(Bind.bind_user))
+            )
+        ).one_or_none()
+
+        if not bind:
+            raise ValueError("找不到用户信息")
+
+        bind.bind_user.name = name
+        await session.commit()
+
+
 async def remove_bind(platform_id: str, platform: str):
     """解除账号绑定"""
     async with get_session() as db_session:

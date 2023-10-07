@@ -40,11 +40,6 @@ async def app(app: App):
         await session.execute(delete(Bind))
         await session.execute(delete(User))
 
-    # UserInfo 有自己的缓存，所以要清理
-    from nonebot_plugin_userinfo.getter import _user_info_cache
-
-    _user_info_cache.clear()
-
 
 @pytest.fixture
 async def session(app: App):

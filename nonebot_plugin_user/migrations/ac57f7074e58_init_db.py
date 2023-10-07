@@ -2,7 +2,7 @@
 
 修订 ID: ac57f7074e58
 父修订:
-创建时间: 2023-10-07 10:09:49.921974
+创建时间: 2023-10-07 18:17:40.861103
 
 """
 from __future__ import annotations
@@ -28,6 +28,7 @@ def upgrade(name: str = "") -> None:
         sa.Column("name", sa.String(length=255), nullable=False),
         sa.Column("created_at", sa.DateTime(), nullable=False),
         sa.PrimaryKeyConstraint("id", name=op.f("pk_nonebot_plugin_user_user")),
+        sa.UniqueConstraint("name", name=op.f("uq_nonebot_plugin_user_user_name")),
     )
     op.create_table(
         "nonebot_plugin_user_bind",

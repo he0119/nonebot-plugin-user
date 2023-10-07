@@ -11,7 +11,7 @@ async def test_remove_bind(app: App, patch_current_time, mocker: MockerFixture):
     """解除绑定"""
     from nonebot_plugin_orm import get_session
 
-    from nonebot_plugin_user import bind_cmd
+    from nonebot_plugin_user.matcher import bind_cmd
     from nonebot_plugin_user.models import Bind, User
 
     with patch_current_time("2023-09-14 10:46:10", tick=False):
@@ -36,17 +36,9 @@ async def test_remove_bind(app: App, patch_current_time, mocker: MockerFixture):
             event = fake_private_message_event_v11(message=Message("/bind -r"))
 
             ctx.receive_event(bot, event)
-            ctx.should_call_api(
-                "get_stranger_info",
-                {"user_id": 10},
-                {
-                    "user_id": 10,
-                    "nickname": "nickname10",
-                },
-            )
             ctx.should_call_send(
                 event,
-                "解绑成功",
+                Message("解绑成功"),
                 True,
             )
             ctx.should_finished(bind_cmd)
@@ -60,7 +52,7 @@ async def test_remove_bind(app: App, patch_current_time, mocker: MockerFixture):
 
 async def test_remove_bind_self(app: App, patch_current_time, mocker: MockerFixture):
     """解除最初的绑定"""
-    from nonebot_plugin_user import bind_cmd
+    from nonebot_plugin_user.matcher import bind_cmd
 
     with patch_current_time("2023-09-14 10:46:10", tick=False):
         async with app.test_matcher(bind_cmd) as ctx:
@@ -69,17 +61,9 @@ async def test_remove_bind_self(app: App, patch_current_time, mocker: MockerFixt
             event = fake_private_message_event_v11(message=Message("/bind -r"))
 
             ctx.receive_event(bot, event)
-            ctx.should_call_api(
-                "get_stranger_info",
-                {"user_id": 10},
-                {
-                    "user_id": 10,
-                    "nickname": "nickname10",
-                },
-            )
             ctx.should_call_send(
                 event,
-                "不能解绑最初绑定的账号",
+                Message("不能解绑最初绑定的账号"),
                 True,
             )
             ctx.should_finished(bind_cmd)
