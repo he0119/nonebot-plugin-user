@@ -40,13 +40,15 @@ async def test_user(app: App, patch_current_time):
     user = await get_user_by_id(1)
     assert user.id == 1
 
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError) as e:
         await get_user_by_id(2)
+
+    assert str(e.value) == "找不到用户信息"
 
 
 async def test_user_set_name(app: App, patch_current_time):
     """设置用户名"""
-    from nonebot_plugin_user.matcher import user_cmd
+    from nonebot_plugin_user.matcher import set_user_name, user_cmd
 
     with patch_current_time("2023-09-14 10:46:10", tick=False):
         async with app.test_matcher(user_cmd) as ctx:
@@ -113,3 +115,8 @@ async def test_user_set_name(app: App, patch_current_time):
                 True,
             )
             ctx.should_finished(user_cmd)
+
+    with pytest.raises(ValueError) as e:
+        await set_user_name("123", "qq", "not exist")
+
+    assert str(e.value) == "找不到用户信息"
