@@ -22,7 +22,10 @@ from nonebot_plugin_session import SessionLevel
 
 from . import migrations
 from .annotated import UserSession as UserSession
-from .utils import get_user, remove_bind, set_bind
+from .utils import get_user as get_user
+from .utils import get_user_by_id as get_user_by_id
+from .utils import remove_bind as remove_bind
+from .utils import set_bind as set_bind
 
 __plugin_meta__ = PluginMetadata(
     name="用户",
