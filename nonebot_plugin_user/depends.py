@@ -31,7 +31,7 @@ async def get_user(
     """获取一个用户"""
     try:
         user = await get_or_create_user(session)
-    except ValueError as e:
+    except ValueError as e:  # pragma: no cover
         await matcher.finish(str(e))
     return user
 
