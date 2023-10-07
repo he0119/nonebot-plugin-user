@@ -17,6 +17,10 @@ __plugin_meta__ = PluginMetadata(
     description="管理和绑定不同平台的用户",
     usage="""查看用户信息
 /user
+修改用户名
+/user [用户名]
+查看会话信息
+/inspect
 绑定用户
 /bind
 解除绑定
