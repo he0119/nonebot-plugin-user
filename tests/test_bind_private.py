@@ -8,9 +8,9 @@ from tests.fake import fake_private_message_event_v11
 
 async def test_bind_private(app: App, patch_current_time, mocker: MockerFixture):
     """私聊绑定用户"""
-    from nonebot_plugin_user.matcher import bind_cmd, user_cmd
+    from nonebot_plugin_user.matchers import bind_cmd, user_cmd
 
-    mocked_random = mocker.patch("nonebot_plugin_user.matcher.random.randint")
+    mocked_random = mocker.patch("nonebot_plugin_user.matchers.random.randint")
     mocked_random.return_value = 123456
 
     with patch_current_time("2023-09-14 10:46:10", tick=False):
@@ -22,7 +22,7 @@ async def test_bind_private(app: App, patch_current_time, mocker: MockerFixture)
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                Message("平台：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10"),
+                Message("平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10"),
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -35,7 +35,7 @@ async def test_bind_private(app: App, patch_current_time, mocker: MockerFixture)
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                Message("平台：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10"),
+                Message("平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10"),
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -74,7 +74,7 @@ async def test_bind_private(app: App, patch_current_time, mocker: MockerFixture)
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                Message("平台：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10"),
+                Message("平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10"),
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -87,7 +87,7 @@ async def test_bind_private(app: App, patch_current_time, mocker: MockerFixture)
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                Message("平台：qq\n平台 ID：10\n用户名：qq-1\n创建日期：2023-09-14 10:46:10"),
+                Message("平台名：qq\n平台 ID：10\n用户名：qq-1\n创建日期：2023-09-14 10:46:10"),
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -97,9 +97,9 @@ async def test_bind_private_invalid_token(
     app: App, patch_current_time, mocker: MockerFixture
 ):
     """私聊绑定用户，无效的令牌"""
-    from nonebot_plugin_user.matcher import bind_cmd, user_cmd
+    from nonebot_plugin_user.matchers import bind_cmd, user_cmd
 
-    mocked_random = mocker.patch("nonebot_plugin_user.matcher.random.randint")
+    mocked_random = mocker.patch("nonebot_plugin_user.matchers.random.randint")
     mocked_random.return_value = 123456
 
     with patch_current_time("2023-09-14 10:46:10", tick=False):
@@ -111,7 +111,7 @@ async def test_bind_private_invalid_token(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                Message("平台：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10"),
+                Message("平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10"),
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -124,7 +124,7 @@ async def test_bind_private_invalid_token(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                Message("平台：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10"),
+                Message("平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10"),
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -163,7 +163,7 @@ async def test_bind_private_invalid_token(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                Message("平台：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10"),
+                Message("平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10"),
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -176,7 +176,7 @@ async def test_bind_private_invalid_token(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                Message("平台：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10"),
+                Message("平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10"),
                 True,
             )
             ctx.should_finished(user_cmd)
