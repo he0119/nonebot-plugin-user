@@ -19,7 +19,7 @@ async def test_user(app: App, patch_current_time):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                Message("平台：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10"),
+                Message("平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10"),
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -32,7 +32,7 @@ async def test_user(app: App, patch_current_time):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                Message("平台：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10"),
+                Message("平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10"),
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -59,7 +59,7 @@ async def test_user_set_name(app: App, patch_current_time):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                Message("平台：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10"),
+                Message("平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10"),
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -72,7 +72,7 @@ async def test_user_set_name(app: App, patch_current_time):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                Message("平台：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10"),
+                Message("平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10"),
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -111,7 +111,7 @@ async def test_user_set_name(app: App, patch_current_time):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                Message("平台：qq\n平台 ID：10\n用户名：name\n创建日期：2023-09-14 10:46:10"),
+                Message("平台名：qq\n平台 ID：10\n用户名：name\n创建日期：2023-09-14 10:46:10"),
                 True,
             )
             ctx.should_finished(user_cmd)

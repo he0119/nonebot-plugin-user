@@ -44,7 +44,7 @@ async def _(
     await user_cmd.finish(
         "\n".join(
             [
-                f"平台：{session.platform}",
+                f"平台名：{session.platform}",
                 f"平台 ID：{session.platform_id}",
                 f"用户名：{session.user_name}",
                 f"创建日期：{session.created_at.strftime('%Y-%m-%d %H:%M:%S')}",
@@ -59,7 +59,7 @@ inspect_cmd = on_alconna(Alconna("inspect"), use_cmd_start=True)
 @inspect_cmd.handle()
 async def _(bot: Bot, session: UserSession):
     msgs = [
-        f"平台：{session.platform}",
+        f"平台名：{session.platform}",
         f"平台 ID：{session.platform_id}",
         f"自身 ID：{bot.self_id}",
     ]
