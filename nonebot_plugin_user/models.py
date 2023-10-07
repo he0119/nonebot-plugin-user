@@ -2,13 +2,11 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import List, Optional
 
-from nonebot_plugin_datastore import get_plugin_data
+from nonebot_plugin_orm import Model
 from nonebot_plugin_session import Session, SessionIdType, SessionLevel
 from nonebot_plugin_userinfo import UserInfo
 from sqlalchemy import DateTime, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-
-Model = get_plugin_data().Model
 
 
 class User(Model):
@@ -17,27 +15,32 @@ class User(Model):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
     binds: Mapped[List["Bind"]] = relationship(
-        back_populates="auser", foreign_keys="[Bind.aid]"
+        back_populates="bind_user", foreign_keys="[Bind.bind_id]"
     )
     """当前绑定的平台"""
     bind: Mapped["Bind"] = relationship(
-        back_populates="buser", foreign_keys="[Bind.bid]"
+        back_populates="original_user", foreign_keys="[Bind.original_id]"
     )
     """初始时绑定的平台"""
 
 
 class Bind(Model):
-    pid: Mapped[str] = mapped_column(String(64), primary_key=True)
-    """平台 ID"""
     platform: Mapped[str] = mapped_column(String(32), primary_key=True)
     """平台名称"""
-    aid: Mapped[int] = mapped_column(ForeignKey("nonebot_plugin_user_user.id"))
+    platform_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    """平台 ID"""
+    bind_id: Mapped[int] = mapped_column(ForeignKey("nonebot_plugin_user_user.id"))
     """当前绑定的账号 ID"""
-    bid: Mapped[int] = mapped_column(ForeignKey("nonebot_plugin_user_user.id"))
+    original_id: Mapped[int] = mapped_column(ForeignKey("nonebot_plugin_user_user.id"))
     """初始时绑定的账号 ID"""
-    auser: Mapped[User] = relationship(back_populates="binds", foreign_keys=[aid])
+
+    bind_user: Mapped[User] = relationship(
+        back_populates="binds", foreign_keys=[bind_id]
+    )
     """当前绑定的账号"""
-    buser: Mapped[User] = relationship(back_populates="bind", foreign_keys=[bid])
+    original_user: Mapped[User] = relationship(
+        back_populates="bind", foreign_keys=[original_id]
+    )
     """初始时绑定的账号"""
 
 
@@ -48,7 +51,7 @@ class UserSession:
     user: User
 
     @property
-    def uid(self) -> int:
+    def user_id(self) -> int:
         """用户 ID"""
         return self.user.id
 
@@ -63,7 +66,7 @@ class UserSession:
         return self.user.created_at.astimezone()
 
     @property
-    def pid(self) -> str:
+    def platform_id(self) -> str:
         """用户所在平台 ID"""
         assert self.session.id1
         return self.session.id1
@@ -79,8 +82,8 @@ class UserSession:
         return self.session.level
 
     @property
-    def group_id(self) -> str:
-        """用户所在群组 ID
+    def group_session_id(self) -> str:
+        """用户所在群组会话 ID
 
         ID 由平台名称和平台的群组 ID 组成，例如 `qq_123456789`。
         """
