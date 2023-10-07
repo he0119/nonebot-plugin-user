@@ -8,7 +8,7 @@ from tests.fake import fake_group_message_event_v11, fake_private_message_event_
 
 async def test_user(app: App, patch_current_time):
     """获取用户信息"""
-    from nonebot_plugin_user.matcher import get_user_by_id, user_cmd
+    from nonebot_plugin_user.matchers import get_user_by_id, user_cmd
 
     with patch_current_time("2023-09-14 10:46:10", tick=False):
         async with app.test_matcher(user_cmd) as ctx:
@@ -48,7 +48,7 @@ async def test_user(app: App, patch_current_time):
 
 async def test_user_set_name(app: App, patch_current_time):
     """设置用户名"""
-    from nonebot_plugin_user.matcher import set_user_name, user_cmd
+    from nonebot_plugin_user.matchers import set_user_name, user_cmd
 
     with patch_current_time("2023-09-14 10:46:10", tick=False):
         async with app.test_matcher(user_cmd) as ctx:

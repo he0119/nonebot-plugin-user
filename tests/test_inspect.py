@@ -10,7 +10,7 @@ from tests.fake import fake_channel_message_event_v12, fake_group_message_event_
 
 async def test_inspect(app: App):
     """获取会话信息"""
-    from nonebot_plugin_user.matcher import inspect_cmd
+    from nonebot_plugin_user.matchers import inspect_cmd
 
     async with app.test_matcher() as ctx:
         adapter = get_adapter(Adapter)

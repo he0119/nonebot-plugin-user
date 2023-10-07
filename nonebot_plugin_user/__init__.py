@@ -39,4 +39,4 @@ __all__ = [
     "SessionLevel",
 ]
 
-from . import matcher  # noqa: F401
+from . import matchers  # noqa: F401
