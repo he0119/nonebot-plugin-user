@@ -2,6 +2,7 @@ import random
 from typing import Dict, Optional, Tuple, cast
 
 from expiringdict import ExpiringDict
+from nonebot.adapters import Bot
 from nonebot_plugin_alconna import (
     Alconna,
     AlconnaQuery,
@@ -50,6 +51,25 @@ async def _(
             ]
         )
     )
+
+
+inspect_cmd = on_alconna(Alconna("inspect"), use_cmd_start=True)
+
+
+@inspect_cmd.handle()
+async def _(bot: Bot, session: UserSession):
+    msgs = [
+        f"平台：{session.platform}",
+        f"平台 ID：{session.platform_id}",
+        f"自身 ID：{bot.self_id}",
+    ]
+
+    if session.level == SessionLevel.LEVEL3:
+        msgs.append(f"频道 ID：{session.session.id3}")
+    if session.level != SessionLevel.LEVEL1:
+        msgs.append(f"群组 ID：{session.session.id2}")
+
+    await inspect_cmd.finish("\n".join(msgs))
 
 
 tokens = cast(

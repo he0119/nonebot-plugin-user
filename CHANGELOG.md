@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 ### Added
 
 - 支持修改用户名
+- 添加 inspect 命令
 
 ## [0.0.1] - 2022-07-02
 

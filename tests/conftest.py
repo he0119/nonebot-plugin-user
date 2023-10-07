@@ -5,6 +5,7 @@ import nonebot
 import pytest
 from freezegun import freeze_time
 from nonebot.adapters.onebot.v11 import Adapter as OnebotV11Adapter
+from nonebot.adapters.onebot.v12 import Adapter as OnebotV12Adapter
 from nonebug import NONEBOT_INIT_KWARGS, App
 from sqlalchemy import delete, event
 
@@ -20,6 +21,7 @@ def pytest_configure(config: pytest.Config) -> None:
 def load_adapters(nonebug_init: None):
     driver = nonebot.get_driver()
     driver.register_adapter(OnebotV11Adapter)
+    driver.register_adapter(OnebotV12Adapter)
 
 
 @pytest.fixture
