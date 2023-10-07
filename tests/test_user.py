@@ -17,18 +17,9 @@ async def test_user(app: App, patch_current_time):
             event = fake_group_message_event_v11(message=Message("/user"))
 
             ctx.receive_event(bot, event)
-            ctx.should_call_api(
-                "get_group_member_info",
-                {"group_id": 10000, "user_id": 10},
-                {
-                    "user_id": 10,
-                    "nickname": "nickname",
-                    "card": "card",
-                },
-            )
             ctx.should_call_send(
                 event,
-                "平台：qq\n平台 ID：10\n用户名：nickname\n创建日期：2023-09-14 10:46:10",
+                Message("平台：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10"),
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -39,17 +30,9 @@ async def test_user(app: App, patch_current_time):
             event = fake_private_message_event_v11(message=Message("/user"))
 
             ctx.receive_event(bot, event)
-            ctx.should_call_api(
-                "get_stranger_info",
-                {"user_id": 10},
-                {
-                    "user_id": 10,
-                    "nickname": "nickname10",
-                },
-            )
             ctx.should_call_send(
                 event,
-                "平台：qq\n平台 ID：10\n用户名：nickname\n创建日期：2023-09-14 10:46:10",
+                Message("平台：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10"),
                 True,
             )
             ctx.should_finished(user_cmd)

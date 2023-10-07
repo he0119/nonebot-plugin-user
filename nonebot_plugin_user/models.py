@@ -1,17 +1,16 @@
 from dataclasses import dataclass
 from datetime import datetime
-from typing import List, Optional
+from typing import List
 
 from nonebot_plugin_orm import Model
 from nonebot_plugin_session import Session, SessionIdType, SessionLevel
-from nonebot_plugin_userinfo import UserInfo
 from sqlalchemy import DateTime, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 
 class User(Model):
     id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String(255))
+    name: Mapped[str] = mapped_column(String(255), unique=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
     binds: Mapped[List["Bind"]] = relationship(
@@ -47,7 +46,6 @@ class Bind(Model):
 @dataclass
 class UserSession:
     session: Session
-    info: Optional[UserInfo]
     user: User
 
     @property

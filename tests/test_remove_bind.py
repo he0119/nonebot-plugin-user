@@ -36,17 +36,9 @@ async def test_remove_bind(app: App, patch_current_time, mocker: MockerFixture):
             event = fake_private_message_event_v11(message=Message("/bind -r"))
 
             ctx.receive_event(bot, event)
-            ctx.should_call_api(
-                "get_stranger_info",
-                {"user_id": 10},
-                {
-                    "user_id": 10,
-                    "nickname": "nickname10",
-                },
-            )
             ctx.should_call_send(
                 event,
-                "解绑成功",
+                Message("解绑成功"),
                 True,
             )
             ctx.should_finished(bind_cmd)
@@ -69,17 +61,9 @@ async def test_remove_bind_self(app: App, patch_current_time, mocker: MockerFixt
             event = fake_private_message_event_v11(message=Message("/bind -r"))
 
             ctx.receive_event(bot, event)
-            ctx.should_call_api(
-                "get_stranger_info",
-                {"user_id": 10},
-                {
-                    "user_id": 10,
-                    "nickname": "nickname10",
-                },
-            )
             ctx.should_call_send(
                 event,
-                "不能解绑最初绑定的账号",
+                Message("不能解绑最初绑定的账号"),
                 True,
             )
             ctx.should_finished(bind_cmd)
