@@ -20,7 +20,7 @@ expiringdict = "^1.2.2"
 [tool.poetry.group.dev.dependencies]
 nb-cli = "^1.0.4"
 nonebot-adapter-onebot = "^2.2.3"
-nonebot-adapter-red = "^0.5.1"
+nonebot-adapter-red = ">=0.5.1,<0.7.0"
 nonebot-plugin-orm = { extras = ["default"], version = "^0.1.0" }
 
 [tool.poetry.group.test.dependencies]
