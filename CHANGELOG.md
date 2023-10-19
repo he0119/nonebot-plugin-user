@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 ## [Unreleased]
 
+### Added
+
+- 升级 ORM 版本，降低 Python 版本限制
+
 ## [0.0.2] - 2023-10-07
 
 ### Added

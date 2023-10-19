@@ -19,7 +19,7 @@ _✨ NoneBot 用户插件 ✨_
   <a href="https://pypi.python.org/pypi/nonebot-plugin-user">
     <img src="https://img.shields.io/pypi/v/nonebot-plugin-user.svg" alt="pypi">
   </a>
-  <img src="https://img.shields.io/badge/python-3.9+-blue.svg" alt="python">
+  <img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="python">
   <a href="https://codecov.io/gh/he0119/nonebot-plugin-user">
     <img src="https://codecov.io/gh/he0119/nonebot-plugin-user/branch/main/graph/badge.svg?token=jd5ufc1alv"/>
   </a>
