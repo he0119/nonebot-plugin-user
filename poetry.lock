@@ -59,13 +59,13 @@ trio = ["trio (<0.22)"]
 
 [[package]]
 name = "arclet-alconna"
-version = "1.7.30"
+version = "1.7.31"
 description = "A High-performance, Generality, Humane Command Line Arguments Parser Library."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "arclet_alconna-1.7.30-py3-none-any.whl", hash = "sha256:1b7a33a4459f735165ffc83ff1448c949b5c98ce72800140af704193a640ec9e"},
-    {file = "arclet_alconna-1.7.30.tar.gz", hash = "sha256:1a14a03d35c8f01dad8dac799f6584d627afb6f73efaf2a1590c346e6d752ee4"},
+    {file = "arclet_alconna-1.7.31-py3-none-any.whl", hash = "sha256:cee463ab045a7fcc262be82ca761ce8f1e4fb6b8369f6ac4f9d1a17e0de0e917"},
+    {file = "arclet_alconna-1.7.31.tar.gz", hash = "sha256:44d52c86709b76375fe2499f8130b52cb6dbef54aeb119e526b9aa591fd930ad"},
 ]
 
 [package.dependencies]
@@ -1154,13 +1154,13 @@ typing-extensions = ">=4.0.0"
 
 [[package]]
 name = "nonebot-plugin-orm"
-version = "0.2.3"
+version = "0.2.4"
 description = "SQLAlchemy ORM support for nonebot"
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "nonebot_plugin_orm-0.2.3-py3-none-any.whl", hash = "sha256:0b28225cee362641215a04c06a1e91def4180b1da5f02b8ad82f0ca8ccf5f4da"},
-    {file = "nonebot_plugin_orm-0.2.3.tar.gz", hash = "sha256:bd2a9e489bf769ad569d121d022cc730110e72c9ea87c687413807f65069fe74"},
+    {file = "nonebot_plugin_orm-0.2.4-py3-none-any.whl", hash = "sha256:a677e46b98764cdf8cf8811a7ceda4075f3a4ff961bdb54a9af106f86f231b12"},
+    {file = "nonebot_plugin_orm-0.2.4.tar.gz", hash = "sha256:23b41d60209bc0e28476fba0d47446f9a64fd0e2a25e12868b10c2a4f685d565"},
 ]
 
 [package.dependencies]
@@ -2289,4 +2289,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "d9f88b0b9a4b7e460741be17a1fad9b1a022e33d31df8842528b8677d9106931"
+content-hash = "beab270305a3a6095b267ddce6891e45497b329ff5c13719dae68e88242aff10"
