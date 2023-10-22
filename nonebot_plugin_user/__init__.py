@@ -8,6 +8,7 @@ from nonebot.plugin import PluginMetadata, inherit_supported_adapters
 from nonebot_plugin_session import SessionLevel as SessionLevel
 
 from . import migrations
+from .annotated import User as User
 from .annotated import UserSession as UserSession
 from .utils import get_user as get_user
 from .utils import get_user_by_id as get_user_by_id
@@ -35,6 +36,7 @@ __plugin_meta__ = PluginMetadata(
 __all__ = [
     "get_user",
     "get_user_by_id",
+    "User",
     "UserSession",
     "SessionLevel",
 ]
