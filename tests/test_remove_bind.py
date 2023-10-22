@@ -38,7 +38,7 @@ async def test_remove_bind(app: App, patch_current_time, mocker: MockerFixture):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                Message("解绑成功"),
+                "解绑成功",
                 True,
             )
             ctx.should_finished(bind_cmd)
@@ -63,7 +63,7 @@ async def test_remove_bind_self(app: App, patch_current_time, mocker: MockerFixt
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                Message("不能解绑最初绑定的账号"),
+                "不能解绑最初绑定的账号",
                 True,
             )
             ctx.should_finished(bind_cmd)
