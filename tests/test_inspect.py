@@ -20,7 +20,7 @@ async def test_inspect(app: App):
         ctx.receive_event(bot, event)
         ctx.should_call_send(
             event,
-            Message("平台名：qq\n平台 ID：10\n自身 ID：test\n群组 ID：10000"),
+            "平台名：qq\n平台 ID：10\n自身 ID：test\n群组 ID：10000",
             True,
         )
         ctx.should_finished(inspect_cmd)
@@ -33,7 +33,7 @@ async def test_inspect(app: App):
         ctx.receive_event(bot, event)
         ctx.should_call_send(
             event,
-            MessageV12("平台名：test\n平台 ID：10\n自身 ID：test\n频道 ID：10000\n群组 ID：100000"),
+            "平台名：test\n平台 ID：10\n自身 ID：test\n频道 ID：10000\n群组 ID：100000",
             True,
         )
         ctx.should_finished(inspect_cmd)
