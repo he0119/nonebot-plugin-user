@@ -36,6 +36,33 @@ _✨ NoneBot 用户插件 ✨_
 
 ## 插件适配
 
+先在插件代码最前面声明依赖
+
+```python
+from nonebot import require
+require("nonebot_plugin_user")
+```
+
+获取用户信息
+
+```python
+from nonebot_plugin_user import User
+
+@matcher.handle()
+async def _(user: User):
+    print(user.id)
+```
+
+获取用户会话信息
+
+```python
+from nonebot_plugin_user import UserSession
+
+@matcher.handle()
+async def _(session: UserSession):
+    print(session.user_id)
+```
+
 ## 配置项
 
 配置方式：直接在 `NoneBot` 全局配置文件中添加以下配置项即可。
