@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 ## [Unreleased]
 
+## [0.0.3] - 2023-10-22
+
 ### Added
 
 - 升级 ORM 版本，降低 Python 版本限制
@@ -28,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 - 可以使用的版本。
 
-[unreleased]: https://github.com/he0119/nonebot-plugin-user/compare/v0.0.2...HEAD
+[unreleased]: https://github.com/he0119/nonebot-plugin-user/compare/v0.0.3...HEAD
+[0.0.3]: https://github.com/he0119/nonebot-plugin-user/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/he0119/nonebot-plugin-user/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/he0119/nonebot-plugin-user/releases/tag/v0.0.1
