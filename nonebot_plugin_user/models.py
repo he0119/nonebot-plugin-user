@@ -28,9 +28,9 @@ class Bind(Model):
     """平台名称"""
     platform_id: Mapped[str] = mapped_column(String(64), primary_key=True)
     """平台 ID"""
-    bind_id: Mapped[int] = mapped_column(ForeignKey("nonebot_plugin_user_user.id"))
+    bind_id: Mapped[int] = mapped_column(ForeignKey(User.id))
     """当前绑定的账号 ID"""
-    original_id: Mapped[int] = mapped_column(ForeignKey("nonebot_plugin_user_user.id"))
+    original_id: Mapped[int] = mapped_column(ForeignKey(User.id))
     """初始时绑定的账号 ID"""
 
     bind_user: Mapped[User] = relationship(
