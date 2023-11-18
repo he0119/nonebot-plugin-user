@@ -1,43 +1,47 @@
 from nonebot_plugin_orm import get_session
 from sqlalchemy import select
-from sqlalchemy.orm import selectinload
 
 from .models import Bind, User
 
 
 async def create_user(platform_id: str, platform: str, name: str):
     """创建账号"""
-    async with get_session() as session:
-        user = User(name=name)
-        session.add(user)
+    async with get_session(expire_on_commit=False) as session:
+        user = (
+            await session.scalars(select(User).where(User.name == name))
+        ).one_or_none()
+        if not user:
+            user = User(name=name)
+            session.add(user)
+            await session.commit()
+
         bind = Bind(
             platform_id=platform_id,
             platform=platform,
-            bind_user=user,
-            original_user=user,
+            bind_id=user.id,
+            original_id=user.id,
         )
         session.add(bind)
         await session.commit()
-        await session.refresh(user)
         return user
 
 
 async def get_user(platform_id: str, platform: str):
     """获取账号"""
     async with get_session() as session:
-        bind = (
+        user = (
             await session.scalars(
-                select(Bind)
+                select(User)
                 .where(Bind.platform_id == platform_id)
                 .where(Bind.platform == platform)
-                .options(selectinload(Bind.bind_user))
+                .join(Bind, User.id == Bind.bind_id)
             )
         ).one_or_none()
 
-        if not bind:
+        if not user:
             raise ValueError("找不到用户信息")
 
-        return bind.bind_user
+        return user
 
 
 async def get_user_by_id(uid: int):
@@ -72,19 +76,19 @@ async def set_bind(platform_id: str, platform: str, aid: int):
 async def set_user_name(platform_id: str, platform: str, name: str):
     """设置用户名"""
     async with get_session() as session:
-        bind = (
+        user = (
             await session.scalars(
-                select(Bind)
+                select(User)
                 .where(Bind.platform_id == platform_id)
                 .where(Bind.platform == platform)
-                .options(selectinload(Bind.bind_user))
+                .join(Bind, User.id == Bind.bind_id)
             )
         ).one_or_none()
 
-        if not bind:
+        if not user:
             raise ValueError("找不到用户信息")
 
-        bind.bind_user.name = name
+        user.name = name
         await session.commit()
 
 

@@ -1,9 +1,20 @@
-from nonebot.matcher import Matcher
+from typing import Optional
+
+from nonebot.adapters import Bot, Event
 from nonebot.params import Depends
-from nonebot_plugin_session import Session, SessionLevel, extract_session
+
+from nonebot_plugin_user.consts import SessionLevel
 
 from . import utils
-from .models import UserSession
+from .adapters import MAPPING
+from .models import Session, UserSession
+
+
+def extract_session(bot: Bot, event: Event) -> Optional[Session]:
+    adapter_name = bot.adapter.get_name()
+
+    if fn := MAPPING.get(adapter_name):
+        return fn.get_session(bot, event)
 
 
 async def get_or_create_user(session: Session = Depends(extract_session)):
@@ -24,22 +35,7 @@ async def get_or_create_user(session: Session = Depends(extract_session)):
     return user
 
 
-async def get_user(
-    matcher: Matcher,
-    session: Session = Depends(extract_session),
-):
-    """获取一个用户"""
-    try:
-        user = await get_or_create_user(session)
-    except ValueError as e:  # pragma: no cover
-        await matcher.finish(str(e))
-    return user
-
-
-async def get_user_session(
-    matcher: Matcher,
-    session: Session = Depends(extract_session),
-):
+async def get_user_session(session: Session = Depends(extract_session)):
     """获取用户会话"""
-    user = await get_user(matcher, session)
+    user = await get_or_create_user(session)
     return UserSession(session, user)

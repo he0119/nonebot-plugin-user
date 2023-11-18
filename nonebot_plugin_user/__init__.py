@@ -1,11 +1,9 @@
 from nonebot import require
 
 require("nonebot_plugin_alconna")
-require("nonebot_plugin_session")
 require("nonebot_plugin_orm")
 
 from nonebot.plugin import PluginMetadata, inherit_supported_adapters
-from nonebot_plugin_session import SessionLevel as SessionLevel
 
 from . import migrations
 from .annotated import User as User
@@ -26,9 +24,7 @@ __plugin_meta__ = PluginMetadata(
 /bind
 解除绑定
 /bind -r""",
-    supported_adapters=inherit_supported_adapters(
-        "nonebot_plugin_alconna", "nonebot_plugin_session"
-    ),
+    supported_adapters=inherit_supported_adapters("nonebot_plugin_alconna"),
     extra={"orm_version_location": migrations},
 )
 
@@ -38,7 +34,6 @@ __all__ = [
     "get_user_by_id",
     "User",
     "UserSession",
-    "SessionLevel",
 ]
 
 from . import matchers  # noqa: F401

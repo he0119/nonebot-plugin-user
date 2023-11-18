@@ -11,10 +11,10 @@ from nonebot_plugin_alconna import (
     Query,
     on_alconna,
 )
-from nonebot_plugin_session import SessionLevel as SessionLevel
 from sqlalchemy.exc import IntegrityError
 
 from .annotated import UserSession as UserSession
+from .consts import SessionLevel
 from .utils import get_user as get_user
 from .utils import get_user_by_id as get_user_by_id
 from .utils import remove_bind, set_bind, set_user_name

@@ -74,3 +74,4 @@ async def _(session: UserSession):
 ## 鸣谢
 
 - [Koishi](https://github.com/koishijs/koishi): 本项目直接参考
+- [nonebot-plugin-session](https://github.com/noneplugin/nonebot-plugin-session): Session 部分参考
