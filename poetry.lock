@@ -1228,17 +1228,15 @@ name = "nonebot-plugin-session"
 version = "0.2.0"
 description = "Nonebot2 会话信息提取与会话id定义"
 optional = false
-python-versions = "^3.8"
-files = []
-develop = true
+python-versions = ">=3.8,<4.0"
+files = [
+    {file = "nonebot_plugin_session-0.2.0-py3-none-any.whl", hash = "sha256:00859872b7c7d2967e1eaabf161c8a47dc83bc85791629b659922b2f425d4854"},
+    {file = "nonebot_plugin_session-0.2.0.tar.gz", hash = "sha256:5f92706dfeb6e21dcce04998bc3b8dafc59f5af50d2908aceeed0faf9d88a67c"},
+]
 
 [package.dependencies]
-nonebot2 = {version = "^2.0.0", extras = ["fastapi"]}
-strenum = "^0.4.8"
-
-[package.source]
-type = "directory"
-url = "../nonebot-plugin-session"
+nonebot2 = {version = ">=2.0.0,<3.0.0", extras = ["fastapi"]}
+strenum = ">=0.4.8,<0.5.0"
 
 [[package]]
 name = "nonebot2"
@@ -1422,13 +1420,13 @@ files = [
 
 [[package]]
 name = "pygments"
-version = "2.17.0"
+version = "2.17.1"
 description = "Pygments is a syntax highlighting package written in Python."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "pygments-2.17.0-py3-none-any.whl", hash = "sha256:cd0c46944b2551af02ecc15961050182ea120d3895000e2676160820f3421527"},
-    {file = "pygments-2.17.0.tar.gz", hash = "sha256:edaa0fa2453d055d0ac94449d1f73ec7bc52c5e318204da1377c1392978c4a8d"},
+    {file = "pygments-2.17.1-py3-none-any.whl", hash = "sha256:1b37f1b1e1bff2af52ecaf28cc601e2ef7077000b227a0675da25aef85784bc4"},
+    {file = "pygments-2.17.1.tar.gz", hash = "sha256:e45a0e74bf9c530f564ca81b8952343be986a29f6afe7f5ad95c5f06b7bdf5e8"},
 ]
 
 [package.extras]
@@ -2327,4 +2325,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "3282824b41749f91f52bf6d21329cb6db961c23c209526c882279d1adeb6294d"
+content-hash = "c7e944fcaebba0c3567a658f2292d6f18ed6a1eba416abf5e97f645eb0f93a2f"

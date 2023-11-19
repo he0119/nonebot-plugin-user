@@ -19,10 +19,9 @@ expiringdict = "^1.2.2"
 
 [tool.poetry.group.dev.dependencies]
 nb-cli = "^1.0.4"
+nonebot-plugin-orm = { extras = ["default"], version = ">=0.3.0" }
 nonebot-adapter-onebot = ">=2.2.3"
 nonebot-adapter-red = ">=0.6.1"
-nonebot-plugin-orm = { extras = ["default"], version = ">=0.3.0" }
-nonebot-plugin-session = { path = "../nonebot-plugin-session", develop = true }
 nonebot-adapter-qq = "^1.1.1"
 nonebot-adapter-satori = "^0.8.0"
 
