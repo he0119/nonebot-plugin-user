@@ -1,5 +1,6 @@
 import datetime
 from contextlib import contextmanager
+from pathlib import Path
 
 import nonebot
 import pytest
@@ -7,6 +8,7 @@ from freezegun import freeze_time
 from nonebot.adapters.onebot.v11 import Adapter as OnebotV11Adapter
 from nonebot.adapters.onebot.v12 import Adapter as OnebotV12Adapter
 from nonebug import NONEBOT_INIT_KWARGS, App
+from pytest_mock import MockerFixture
 from sqlalchemy import delete, event
 
 
@@ -25,10 +27,12 @@ def load_adapters(nonebug_init: None):
 
 
 @pytest.fixture
-async def app(app: App):
+async def app(app: App, mocker: MockerFixture, tmp_path: Path):
     # 加载插件
     nonebot.require("nonebot_plugin_user")
     from nonebot_plugin_orm import get_session, init_orm
+
+    mocker.patch("nonebot_plugin_orm._data_dir", tmp_path / "orm")
 
     await init_orm()
 
