@@ -11,7 +11,7 @@ from nonebot_plugin_alconna import (
     Query,
     on_alconna,
 )
-from nonebot_plugin_session import SessionLevel as SessionLevel
+from nonebot_plugin_session import SessionLevel
 from sqlalchemy.exc import IntegrityError
 
 from .annotated import UserSession as UserSession

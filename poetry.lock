@@ -59,13 +59,13 @@ trio = ["trio (<0.22)"]
 
 [[package]]
 name = "arclet-alconna"
-version = "1.7.33"
+version = "1.7.37"
 description = "A High-performance, Generality, Humane Command Line Arguments Parser Library."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "arclet_alconna-1.7.33-py3-none-any.whl", hash = "sha256:9f540a0885354bca207099ab4b3daabc67ca312c6cc54db8c452815e9b0193a7"},
-    {file = "arclet_alconna-1.7.33.tar.gz", hash = "sha256:f4dc5a82f66caa9579093a5bed1d22f2c53015300f43246f099af4120c92dfbc"},
+    {file = "arclet_alconna-1.7.37-py3-none-any.whl", hash = "sha256:2a680acefdb63b3995c53ab0fdf70fa82d3a410705ff3993740554b73f5ce67f"},
+    {file = "arclet_alconna-1.7.37.tar.gz", hash = "sha256:ad54c297c1c76f4fe5741303ddcf0c2a7c9ecb3a14465103f42f1da4b23e6081"},
 ]
 
 [package.dependencies]
@@ -78,18 +78,18 @@ full = ["arclet-alconna-tools (>=0.2.0)"]
 
 [[package]]
 name = "arclet-alconna-tools"
-version = "0.6.7"
+version = "0.6.8"
 description = "Builtin Tools for Alconna"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "arclet-alconna-tools-0.6.7.tar.gz", hash = "sha256:3cc640956883d5c8452b241d85368970de4150037d696216ef8d117bde388dca"},
-    {file = "arclet_alconna_tools-0.6.7-py3-none-any.whl", hash = "sha256:acffb10ccc77a32d282c3683c4589aa875711a8a56547136752db7a43d5ceb12"},
+    {file = "arclet-alconna-tools-0.6.8.tar.gz", hash = "sha256:a36ddc9c311cae3e1d9df0d6b11eb8d69c57304bbca744dc2c9532e53093cc6f"},
+    {file = "arclet_alconna_tools-0.6.8-py3-none-any.whl", hash = "sha256:eff5254e19b3fb24222164f419302f5f8849b8c14ddf8d96199747adc1916a13"},
 ]
 
 [package.dependencies]
-arclet-alconna = ">=1.7.21,<2.0"
-nepattern = ">=0.5.14,<0.6.0"
+arclet-alconna = ">=1.7.33"
+nepattern = ">=0.5.15"
 
 [[package]]
 name = "arrow"
@@ -175,13 +175,13 @@ tests = ["hypothesis", "pytest", "pytest-asyncio"]
 
 [[package]]
 name = "certifi"
-version = "2023.7.22"
+version = "2023.11.17"
 description = "Python package for providing Mozilla's CA Bundle."
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "certifi-2023.7.22-py3-none-any.whl", hash = "sha256:92d6037539857d8206b8f6ae472e8b77db8058fec5937a1ef3f54304089edbb9"},
-    {file = "certifi-2023.7.22.tar.gz", hash = "sha256:539cc1d13202e33ca466e88b2807e29f4c13049d6d87031a3c110744495cb082"},
+    {file = "certifi-2023.11.17-py3-none-any.whl", hash = "sha256:e036ab49d5b79556f99cfc2d9320b34cfbe5be05c5871b51de9329f0603b0474"},
+    {file = "certifi-2023.11.17.tar.gz", hash = "sha256:9b469f3a900bf28dc19b8cfbf8019bf47f7fdd1a65a1d4ffb98fc14166beb4d1"},
 ]
 
 [[package]]
@@ -497,6 +497,16 @@ testing = ["covdefaults (>=2.3)", "coverage (>=7.3.2)", "diff-cover (>=8)", "pyt
 typing = ["typing-extensions (>=4.8)"]
 
 [[package]]
+name = "fleep"
+version = "1.0.1"
+description = "File format determination library"
+optional = false
+python-versions = ">=3.1"
+files = [
+    {file = "fleep-1.0.1.tar.gz", hash = "sha256:c8f62b258ee5364d7f6c1ed1f3f278e99020fc3f0a60a24ad1e10846e31d104c"},
+]
+
+[[package]]
 name = "freezegun"
 version = "1.2.2"
 description = "Let your Python tests travel through time"
@@ -593,13 +603,13 @@ files = [
 
 [[package]]
 name = "httpcore"
-version = "1.0.1"
+version = "1.0.2"
 description = "A minimal low-level HTTP client."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "httpcore-1.0.1-py3-none-any.whl", hash = "sha256:c5e97ef177dca2023d0b9aad98e49507ef5423e9f1d94ffe2cfe250aa28e63b0"},
-    {file = "httpcore-1.0.1.tar.gz", hash = "sha256:fce1ddf9b606cfb98132ab58865c3728c52c8e4c3c46e2aabb3674464a186e92"},
+    {file = "httpcore-1.0.2-py3-none-any.whl", hash = "sha256:096cc05bca73b8e459a1fc3dcf585148f63e534eae4339559c9b8a8d6399acc7"},
+    {file = "httpcore-1.0.2.tar.gz", hash = "sha256:9fc092e4799b26174648e54b74ed5f683132a464e95643b226e00c2ed2fa6535"},
 ]
 
 [package.dependencies]
@@ -716,13 +726,13 @@ testing = ["flufl.flake8", "importlib-resources (>=1.3)", "packaging", "pyfakefs
 
 [[package]]
 name = "importlib-resources"
-version = "6.1.0"
+version = "6.1.1"
 description = "Read resources from Python packages"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "importlib_resources-6.1.0-py3-none-any.whl", hash = "sha256:aa50258bbfa56d4e33fbd8aa3ef48ded10d1735f11532b8df95388cc6bdb7e83"},
-    {file = "importlib_resources-6.1.0.tar.gz", hash = "sha256:9d48dcccc213325e810fd723e7fbb45ccb39f6cf5c31f00cf2b965f5f10f3cb9"},
+    {file = "importlib_resources-6.1.1-py3-none-any.whl", hash = "sha256:e8bf90d8213b486f428c9c39714b920041cb02c184686a3dee24905aaa8105d6"},
+    {file = "importlib_resources-6.1.1.tar.gz", hash = "sha256:3893a00122eafde6894c59914446a512f728a0c1a45f9bb9b63721b6bacf0b4a"},
 ]
 
 [package.dependencies]
@@ -780,13 +790,13 @@ dev = ["Sphinx (==7.2.5)", "colorama (==0.4.5)", "colorama (==0.4.6)", "exceptio
 
 [[package]]
 name = "mako"
-version = "1.2.4"
+version = "1.3.0"
 description = "A super-fast templating language that borrows the best ideas from the existing templating languages."
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "Mako-1.2.4-py3-none-any.whl", hash = "sha256:c97c79c018b9165ac9922ae4f32da095ffd3c4e6872b45eded42926deea46818"},
-    {file = "Mako-1.2.4.tar.gz", hash = "sha256:d60a3903dc3bb01a18ad6a89cdbe2e4eadc69c0bc8ef1e3773ba53d44c3f7a34"},
+    {file = "Mako-1.3.0-py3-none-any.whl", hash = "sha256:57d4e997349f1a92035aa25c17ace371a4213f2ca42f99bee9a602500cfd54d9"},
+    {file = "Mako-1.3.0.tar.gz", hash = "sha256:e3a9d388fd00e87043edbe8792f45880ac0114e9c4adc69f6e9bfb2c55e3b11b"},
 ]
 
 [package.dependencies]
@@ -1099,14 +1109,31 @@ nonebot2 = ">=2.1.0,<3.0.0"
 typing-extensions = ">=4.0.0,<5.0.0"
 
 [[package]]
+name = "nonebot-adapter-qq"
+version = "1.1.1"
+description = "QQ adapter for nonebot2"
+optional = false
+python-versions = ">=3.8,<4.0"
+files = [
+    {file = "nonebot_adapter_qq-1.1.1-py3-none-any.whl", hash = "sha256:45014d435ee56cd2a0885bcbdec12b00fd2a2267205d5452de4e9cbcfb584edb"},
+    {file = "nonebot_adapter_qq-1.1.1.tar.gz", hash = "sha256:d452d5a7046c4021e18bbdc6a27fb0880e3911844d0bfba3e2bd08042ae5c671"},
+]
+
+[package.dependencies]
+nonebot2 = ">=2.1.0,<3.0.0"
+pydantic = ">=1.9.0,<2.0.0"
+typing-extensions = ">=4.4.0,<5.0.0"
+yarl = ">=1.9.0,<2.0.0"
+
+[[package]]
 name = "nonebot-adapter-red"
-version = "0.6.2"
+version = "0.7.4"
 description = "Red Protocol Adapter for Nonebot2"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "nonebot_adapter_red-0.6.2-py3-none-any.whl", hash = "sha256:9489a827489c12f9a5e3b3102f08dfcefb017983a3b67be1b70ccc56db33525e"},
-    {file = "nonebot_adapter_red-0.6.2.tar.gz", hash = "sha256:033f0f5d2f7a36e3ce67be92258e3761caf19cbb5fd821692f4644d0c68e6be9"},
+    {file = "nonebot_adapter_red-0.7.4-py3-none-any.whl", hash = "sha256:f886c6615ba3333ea6391a03f3418f22043c7f94a69236d8b23dac8b8a2fea14"},
+    {file = "nonebot_adapter_red-0.7.4.tar.gz", hash = "sha256:22253bcb8f4ec188d1d9293b1d42f4f87c6034dd4a607919961890d062d27c1f"},
 ]
 
 [package.dependencies]
@@ -1117,19 +1144,34 @@ packaging = ">=23.1"
 auto-detect = ["PyYAML"]
 
 [[package]]
+name = "nonebot-adapter-satori"
+version = "0.8.0"
+description = "Satori Protocol Adapter for Nonebot2"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "nonebot_adapter_satori-0.8.0-py3-none-any.whl", hash = "sha256:25d9726a961b73b6900a4dba3a8ec4f5d228a6cb96078b542379c9d6c9d3cefe"},
+    {file = "nonebot_adapter_satori-0.8.0.tar.gz", hash = "sha256:267c5b708ec2dd77b405d3ec779e817506e6d6914cc06688b529b43fe4288727"},
+]
+
+[package.dependencies]
+nonebot2 = ">=2.1.0"
+
+[[package]]
 name = "nonebot-plugin-alconna"
-version = "0.31.3"
+version = "0.33.5"
 description = "Alconna Adapter for Nonebot"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "nonebot_plugin_alconna-0.31.3-py3-none-any.whl", hash = "sha256:ddd4a313d7203eee5686378adf2a96cea33210d99103512d408cff79d710d397"},
-    {file = "nonebot_plugin_alconna-0.31.3.tar.gz", hash = "sha256:4fa6c7c621aaaa589b3e920bbd8d6171d4e71a9abfda260c2d56530ca92e3145"},
+    {file = "nonebot_plugin_alconna-0.33.5-py3-none-any.whl", hash = "sha256:57414d52fbe586479c6a372a58213346ceeccf7aeec261a18df5351f9a489069"},
+    {file = "nonebot_plugin_alconna-0.33.5.tar.gz", hash = "sha256:ecb5213402cff4cd93a04e7a8c618d434972ca144eb2a6010df6e85b47f520fa"},
 ]
 
 [package.dependencies]
 arclet-alconna = ">=1.7.31,<2.0.0"
 arclet-alconna-tools = ">=0.6.7,<0.7.0"
+fleep = ">=1.0.1"
 nepattern = ">=0.5.14,<0.6.0"
 nonebot2 = ">=2.1.0"
 
@@ -1150,13 +1192,13 @@ typing-extensions = ">=4.0.0"
 
 [[package]]
 name = "nonebot-plugin-orm"
-version = "0.4.1"
+version = "0.6.0"
 description = "SQLAlchemy ORM support for nonebot"
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "nonebot_plugin_orm-0.4.1-py3-none-any.whl", hash = "sha256:3b46cf1668946bc121d0e9102a3b98c4bd760efa758a516b29ac3b30f00c1b09"},
-    {file = "nonebot_plugin_orm-0.4.1.tar.gz", hash = "sha256:5833a7a337eba9592c95e10767b293f3bf8c6ab6031a6a13e714819e1d64ac6d"},
+    {file = "nonebot_plugin_orm-0.6.0-py3-none-any.whl", hash = "sha256:482f35d102749eda93cd635608ec79e81718d080a80fa325c24d8fa7316f7d83"},
+    {file = "nonebot_plugin_orm-0.6.0.tar.gz", hash = "sha256:e1b4db52da60b53f33eac95bb4b9875d7000d71f47ec6a034aa908adde41c33e"},
 ]
 
 [package.dependencies]
@@ -1165,17 +1207,17 @@ alembic = ">=1.12,<2.0"
 click = ">=8.1,<9.0"
 importlib-metadata = {version = ">=6.8,<7.0", markers = "python_version < \"3.10\""}
 importlib-resources = {version = ">=6.1,<7.0", markers = "python_version < \"3.12\""}
-nonebot-plugin-localstore = {version = ">=0.5,<1.0", optional = true, markers = "extra == \"default\""}
+nonebot-plugin-localstore = ">=0.5,<1.0"
 nonebot2 = ">=2.1,<3.0"
 sqlalchemy = ">=2.0,<3.0"
-typing-extensions = {version = ">=4.8,<5.0", markers = "python_version < \"3.12\""}
+typing-extensions = {version = ">=4.8,<5.0", markers = "python_version < \"3.11\""}
 
 [package.extras]
 aiomysql = ["aiomysql (>=0.2,<1.0)"]
 aiosqlite = ["aiosqlite (>=0.19,<1.0)"]
 asyncmy = ["asyncmy (>=0.2,<1.0)"]
 asyncpg = ["asyncpg (>=0.28,<1.0)"]
-default = ["aiosqlite (>=0.19,<1.0)", "nonebot-plugin-localstore (>=0.5,<1.0)"]
+default = ["aiosqlite (>=0.19,<1.0)"]
 mysql = ["aiomysql (>=0.2,<1.0)"]
 postgresql = ["psycopg[binary] (>=3.1,<4.0)"]
 psycopg = ["psycopg[binary] (>=3.1,<4.0)"]
@@ -1186,15 +1228,17 @@ name = "nonebot-plugin-session"
 version = "0.2.0"
 description = "Nonebot2 会话信息提取与会话id定义"
 optional = false
-python-versions = ">=3.8,<4.0"
-files = [
-    {file = "nonebot_plugin_session-0.2.0-py3-none-any.whl", hash = "sha256:00859872b7c7d2967e1eaabf161c8a47dc83bc85791629b659922b2f425d4854"},
-    {file = "nonebot_plugin_session-0.2.0.tar.gz", hash = "sha256:5f92706dfeb6e21dcce04998bc3b8dafc59f5af50d2908aceeed0faf9d88a67c"},
-]
+python-versions = "^3.8"
+files = []
+develop = true
 
 [package.dependencies]
-nonebot2 = {version = ">=2.0.0,<3.0.0", extras = ["fastapi"]}
-strenum = ">=0.4.8,<0.5.0"
+nonebot2 = {version = "^2.0.0", extras = ["fastapi"]}
+strenum = "^0.4.8"
+
+[package.source]
+type = "directory"
+url = "../nonebot-plugin-session"
 
 [[package]]
 name = "nonebot2"
@@ -1300,13 +1344,13 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "prompt-toolkit"
-version = "3.0.39"
+version = "3.0.41"
 description = "Library for building powerful interactive command lines in Python"
 optional = false
 python-versions = ">=3.7.0"
 files = [
-    {file = "prompt_toolkit-3.0.39-py3-none-any.whl", hash = "sha256:9dffbe1d8acf91e3de75f3b544e4842382fc06c6babe903ac9acb74dc6e08d88"},
-    {file = "prompt_toolkit-3.0.39.tar.gz", hash = "sha256:04505ade687dc26dc4284b1ad19a83be2f2afe83e7a828ace0c72f3a1df72aac"},
+    {file = "prompt_toolkit-3.0.41-py3-none-any.whl", hash = "sha256:f36fe301fafb7470e86aaf90f036eef600a3210be4decf461a5b1ca8403d3cb2"},
+    {file = "prompt_toolkit-3.0.41.tar.gz", hash = "sha256:941367d97fc815548822aa26c2a269fdc4eb21e9ec05fc5d447cf09bad5d75f0"},
 ]
 
 [package.dependencies]
@@ -1378,17 +1422,18 @@ files = [
 
 [[package]]
 name = "pygments"
-version = "2.16.1"
+version = "2.17.0"
 description = "Pygments is a syntax highlighting package written in Python."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "Pygments-2.16.1-py3-none-any.whl", hash = "sha256:13fc09fa63bc8d8671a6d247e1eb303c4b343eaee81d861f3404db2935653692"},
-    {file = "Pygments-2.16.1.tar.gz", hash = "sha256:1daff0494820c69bc8941e407aa20f577374ee88364ee10a98fdbe0aece96e29"},
+    {file = "pygments-2.17.0-py3-none-any.whl", hash = "sha256:cd0c46944b2551af02ecc15961050182ea120d3895000e2676160820f3421527"},
+    {file = "pygments-2.17.0.tar.gz", hash = "sha256:edaa0fa2453d055d0ac94449d1f73ec7bc52c5e318204da1377c1392978c4a8d"},
 ]
 
 [package.extras]
 plugins = ["importlib-metadata"]
+windows-terminal = ["colorama (>=0.4.6)"]
 
 [[package]]
 name = "pygtrie"
@@ -1478,13 +1523,13 @@ dev = ["pre-commit", "pytest-asyncio", "tox"]
 
 [[package]]
 name = "pytest-xdist"
-version = "3.3.1"
+version = "3.4.0"
 description = "pytest xdist plugin for distributed testing, most importantly across multiple CPUs"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "pytest-xdist-3.3.1.tar.gz", hash = "sha256:d5ee0520eb1b7bcca50a60a518ab7a7707992812c578198f8b44fdfac78e8c93"},
-    {file = "pytest_xdist-3.3.1-py3-none-any.whl", hash = "sha256:ff9daa7793569e6a68544850fd3927cd257cc03a7ef76c95e86915355e82b5f2"},
+    {file = "pytest-xdist-3.4.0.tar.gz", hash = "sha256:3a94a931dd9e268e0b871a877d09fe2efb6175c2c23d60d56a6001359002b832"},
+    {file = "pytest_xdist-3.4.0-py3-none-any.whl", hash = "sha256:e513118bf787677a427e025606f55e95937565e06dfaac8d87f55301e57ae607"},
 ]
 
 [package.dependencies]
@@ -1613,13 +1658,13 @@ use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
 name = "rich"
-version = "13.6.0"
+version = "13.7.0"
 description = "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal"
 optional = false
 python-versions = ">=3.7.0"
 files = [
-    {file = "rich-13.6.0-py3-none-any.whl", hash = "sha256:2b38e2fe9ca72c9a00170a1a2d20c63c790d0e10ef1fe35eba76e1e7b1d7d245"},
-    {file = "rich-13.6.0.tar.gz", hash = "sha256:5c14d22737e6d5084ef4771b62d5d4363165b403455a30a1c8ca39dc7b644bef"},
+    {file = "rich-13.7.0-py3-none-any.whl", hash = "sha256:6da14c108c4866ee9520bbffa71f6fe3962e193b7da68720583850cd4548e235"},
+    {file = "rich-13.7.0.tar.gz", hash = "sha256:5cb5123b5cf9ee70584244246816e9114227e0b98ad9176eede6ad54bf5403fa"},
 ]
 
 [package.dependencies]
@@ -1847,13 +1892,13 @@ files = [
 
 [[package]]
 name = "tomlkit"
-version = "0.12.2"
+version = "0.12.3"
 description = "Style preserving TOML library"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "tomlkit-0.12.2-py3-none-any.whl", hash = "sha256:eeea7ac7563faeab0a1ed8fe12c2e5a51c61f933f2502f7e9db0241a65163ad0"},
-    {file = "tomlkit-0.12.2.tar.gz", hash = "sha256:df32fab589a81f0d7dc525a4267b6d7a64ee99619cbd1eeb0fae32c1dd426977"},
+    {file = "tomlkit-0.12.3-py3-none-any.whl", hash = "sha256:b0a645a9156dc7cb5d3a1f0d4bab66db287fcb8e0430bdd4664a095ea16414ba"},
+    {file = "tomlkit-0.12.3.tar.gz", hash = "sha256:75baf5012d06501f07bee5bf8e801b9f343e7aac5a92581f20f80ce632e6b5a4"},
 ]
 
 [[package]]
@@ -1880,30 +1925,29 @@ files = [
 
 [[package]]
 name = "urllib3"
-version = "2.0.7"
+version = "2.1.0"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "urllib3-2.0.7-py3-none-any.whl", hash = "sha256:fdb6d215c776278489906c2f8916e6e7d4f5a9b602ccbcfdf7f016fc8da0596e"},
-    {file = "urllib3-2.0.7.tar.gz", hash = "sha256:c97dfde1f7bd43a71c8d2a58e369e9b2bf692d1334ea9f9cae55add7d0dd0f84"},
+    {file = "urllib3-2.1.0-py3-none-any.whl", hash = "sha256:55901e917a5896a349ff771be919f8bd99aff50b79fe58fec595eb37bbc56bb3"},
+    {file = "urllib3-2.1.0.tar.gz", hash = "sha256:df7aa8afb0148fa78488e7899b2c59b5f4ffcfa82e6c54ccb9dd37c1d7b52d54"},
 ]
 
 [package.extras]
 brotli = ["brotli (>=1.0.9)", "brotlicffi (>=0.8.0)"]
-secure = ["certifi", "cryptography (>=1.9)", "idna (>=2.0.0)", "pyopenssl (>=17.1.0)", "urllib3-secure-extra"]
 socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
 name = "uvicorn"
-version = "0.23.2"
+version = "0.24.0.post1"
 description = "The lightning-fast ASGI server."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "uvicorn-0.23.2-py3-none-any.whl", hash = "sha256:1f9be6558f01239d4fdf22ef8126c39cb1ad0addf76c40e760549d2c2f43ab53"},
-    {file = "uvicorn-0.23.2.tar.gz", hash = "sha256:4d3cc12d7727ba72b64d12d3cc7743124074c0a69f7b201512fc50c3e3f1569a"},
+    {file = "uvicorn-0.24.0.post1-py3-none-any.whl", hash = "sha256:7c84fea70c619d4a710153482c0d230929af7bcf76c7bfa6de151f0a3a80121e"},
+    {file = "uvicorn-0.24.0.post1.tar.gz", hash = "sha256:09c8e5a79dc466bdf28dead50093957db184de356fcdc48697bad3bde4c2588e"},
 ]
 
 [package.dependencies]
@@ -2074,13 +2118,13 @@ anyio = ">=3.0.0"
 
 [[package]]
 name = "wcwidth"
-version = "0.2.9"
+version = "0.2.10"
 description = "Measures the displayed width of unicode strings in a terminal"
 optional = false
 python-versions = "*"
 files = [
-    {file = "wcwidth-0.2.9-py2.py3-none-any.whl", hash = "sha256:9a929bd8380f6cd9571a968a9c8f4353ca58d7cd812a4822bba831f8d685b223"},
-    {file = "wcwidth-0.2.9.tar.gz", hash = "sha256:a675d1a4a2d24ef67096a04b85b02deeecd8e226f57b5e3a72dbb9ed99d27da8"},
+    {file = "wcwidth-0.2.10-py2.py3-none-any.whl", hash = "sha256:aec5179002dd0f0d40c456026e74a729661c9d468e1ed64405e3a6c2176ca36f"},
+    {file = "wcwidth-0.2.10.tar.gz", hash = "sha256:390c7454101092a6a5e43baad8f83de615463af459201709556b6e4b1c861f97"},
 ]
 
 [[package]]
@@ -2283,4 +2327,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "c42304d145b042f22fa2387b308683e5ea87c8cf44bb4e82908a1ba657647ded"
+content-hash = "3282824b41749f91f52bf6d21329cb6db961c23c209526c882279d1adeb6294d"
