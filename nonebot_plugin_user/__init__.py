@@ -5,7 +5,6 @@ require("nonebot_plugin_session")
 require("nonebot_plugin_orm")
 
 from nonebot.plugin import PluginMetadata, inherit_supported_adapters
-from nonebot_plugin_session import SessionLevel as SessionLevel
 
 from . import migrations
 from .annotated import User as User
@@ -38,7 +37,6 @@ __all__ = [
     "get_user_by_id",
     "User",
     "UserSession",
-    "SessionLevel",
 ]
 
 from . import matchers  # noqa: F401

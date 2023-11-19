@@ -10,10 +10,12 @@ async def create_user(platform_id: str, platform: str, name: str):
         user = (
             await session.scalars(select(User).where(User.name == name))
         ).one_or_none()
-        if not user:
-            user = User(name=name)
-            session.add(user)
-            await session.commit()
+        if user:
+            raise ValueError("用户名已存在")
+
+        user = User(name=name)
+        session.add(user)
+        await session.commit()
 
         bind = Bind(
             platform_id=platform_id,
@@ -44,10 +46,12 @@ async def get_user(platform_id: str, platform: str):
         return user
 
 
-async def get_user_by_id(uid: int):
-    """通过 uid 获取账号"""
+async def get_user_by_id(user_id: int):
+    """通过 user_id 获取账号"""
     async with get_session() as session:
-        user = (await session.scalars(select(User).where(User.id == uid))).one_or_none()
+        user = (
+            await session.scalars(select(User).where(User.id == user_id))
+        ).one_or_none()
 
         if not user:
             raise ValueError("找不到用户信息")
