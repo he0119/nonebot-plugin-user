@@ -7,12 +7,6 @@ from .models import Bind, User
 async def create_user(platform_id: str, platform: str, name: str):
     """创建账号"""
     async with get_session(expire_on_commit=False) as session:
-        user = (
-            await session.scalars(select(User).where(User.name == name))
-        ).one_or_none()
-        if user:
-            raise ValueError("用户名已存在")
-
         user = User(name=name)
         session.add(user)
         await session.commit()
