@@ -77,10 +77,23 @@ class Session(BaseModel):
         return seperator.join(parts)
 
 
+class Subject(BaseModel):
+    content: str
+    offer_by: str
+    tag: Optional[str]
+
+    def __str__(self):
+        return self.content
+
+    def __repr__(self):
+        return f"{self.content} (tag: {self.tag}, offer by: {self.offer_by})"
+
+
 @dataclass
 class UserSession:
     session: Session
     user: User
+    subjects: List[Subject]
 
     @property
     def user_id(self) -> int:

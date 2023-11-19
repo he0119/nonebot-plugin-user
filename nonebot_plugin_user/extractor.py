@@ -3,7 +3,7 @@ from typing import Generic, List, TypeVar
 
 from nonebot.adapters import Bot, Event
 
-from .models import Session
+from .models import Session, Subject
 
 B = TypeVar("B", bound=Bot)
 E = TypeVar("E", bound=Event)
@@ -20,5 +20,5 @@ class Extractor(Generic[B, E], metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def get_subjects(self, bot: B, event: E) -> List[str]:
+    def get_subjects(self, bot: B, event: E) -> List[Subject]:
         raise NotImplementedError

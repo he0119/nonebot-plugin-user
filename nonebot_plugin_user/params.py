@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import List, Optional
 
 from nonebot.adapters import Bot, Event
 from nonebot.params import Depends
@@ -7,14 +7,23 @@ from nonebot_plugin_user.consts import SessionLevel
 
 from . import utils
 from .adapters import MAPPING
-from .models import Session, UserSession
+from .models import Session, Subject, UserSession
 
 
-def extract_session(bot: Bot, event: Event) -> Optional[Session]:
+async def extract_session(bot: Bot, event: Event) -> Optional[Session]:
     adapter_name = bot.adapter.get_name()
 
     if fn := MAPPING.get(adapter_name):
         return fn.get_session(bot, event)
+
+
+async def extract_subjects(bot: Bot, event: Event) -> List[Subject]:
+    adapter_name = bot.adapter.get_name()
+
+    if fn := MAPPING.get(adapter_name):
+        return fn.get_subjects(bot, event)
+
+    return []
 
 
 async def get_or_create_user(session: Session = Depends(extract_session)):
@@ -35,7 +44,10 @@ async def get_or_create_user(session: Session = Depends(extract_session)):
     return user
 
 
-async def get_user_session(session: Session = Depends(extract_session)):
+async def get_user_session(
+    session: Session = Depends(extract_session),
+    subjects: List[Subject] = Depends(extract_subjects),
+) -> UserSession:
     """获取用户会话"""
     user = await get_or_create_user(session)
-    return UserSession(session, user)
+    return UserSession(session, user, subjects)
