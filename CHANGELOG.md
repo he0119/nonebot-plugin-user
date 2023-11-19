@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 ## [Unreleased]
 
+### Removed
+
+- 移除 foreignkey 约束
+- 移除不支持平台时的报错与提示
+
 ## [0.0.3] - 2023-10-22
 
 ### Added
