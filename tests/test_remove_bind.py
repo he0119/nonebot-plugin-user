@@ -15,16 +15,17 @@ async def test_remove_bind(app: App, patch_current_time, mocker: MockerFixture):
     from nonebot_plugin_user.models import Bind, User
 
     with patch_current_time("2023-09-14 10:46:10", tick=False):
-        async with get_session() as session:
+        async with get_session(expire_on_commit=False) as session:
             user = User(id=1, name="nickname")
             user2 = User(id=2, name="nickname2")
             session.add(user)
             session.add(user2)
+            await session.commit()
             bind = Bind(
-                platform_id=1, platform="qq", bind_user=user, original_user=user
+                platform_id=1, platform="qq", bind_id=user.id, original_id=user.id
             )
             bind2 = Bind(
-                platform_id=10, platform="qq", bind_user=user, original_user=user2
+                platform_id=10, platform="qq", bind_id=user.id, original_id=user2.id
             )
             session.add(bind)
             session.add(bind2)
