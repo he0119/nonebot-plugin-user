@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 ## [Unreleased]
 
+### Changed
+
+- 降低遇到不支持平台的日志等级
+
 ## [0.0.4] - 2023-11-19
 
 ### Removed
