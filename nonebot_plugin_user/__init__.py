@@ -26,10 +26,12 @@ __plugin_meta__ = PluginMetadata(
 /bind
 解除绑定
 /bind -r""",
+    type="application",
+    homepage="https://github.com/he0119/nonebot-plugin-user",
+    config=Config,
     supported_adapters=inherit_supported_adapters(
         "nonebot_plugin_alconna", "nonebot_plugin_session"
     ),
-    config=Config,
     extra={"orm_version_location": migrations},
 )
 
