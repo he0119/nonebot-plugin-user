@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 - 修复并发时报错的问题
 
+### Changed
+
+- 需要通过 -l 参数修改用户名
+
 ## [0.0.5] - 2023-11-20
 
 ### Changed
