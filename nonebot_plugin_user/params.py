@@ -1,28 +1,29 @@
-from nonebot import logger
 from nonebot.params import Depends
 from nonebot_plugin_session import Session, SessionLevel, extract_session
 
-from . import utils
 from .models import UserSession
+from .utils import get_user as _get_user
 
 
-async def get_or_create_user(session: Session = Depends(extract_session)):
+async def get_user(session: Session = Depends(extract_session)):
     """获取一个用户，如果不存在则创建"""
+
+    # 如果是未知平台，或者是 LEVEL0 会话，或者没有 id1，说明 session 没有适配此事件
+    # 直接返回空用户
     if (
         session.platform == "unknown"
         or session.level == SessionLevel.LEVEL0
         or not session.id1
     ):
-        logger.debug(f"用户相关功能暂不支持当前平台：{session.platform}-{session.level}-{session.id1}")
         return
 
-    user = await utils.get_or_create_user(session.id1, session.platform)
+    user = await _get_user(session.platform, session.id1)
 
     return user
 
 
 async def get_user_session(session: Session = Depends(extract_session)):
     """获取用户会话"""
-    user = await get_or_create_user(session)
+    user = await get_user(session)
     if user:
         return UserSession(session, user)
