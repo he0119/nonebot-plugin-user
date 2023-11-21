@@ -120,3 +120,26 @@ async def test_user_set_name(app: App, patch_current_time):
         await set_user_name("123", "qq", "not exist")
 
     assert str(e.value) == "找不到用户信息"
+
+
+async def test_user_session(app: App, patch_current_time):
+    """用户会话相关的测试"""
+    from nonebot import on_command
+
+    from nonebot_plugin_user import UserSession
+
+    test_matcher = on_command("test")
+
+    @test_matcher.handle()
+    async def _(session: UserSession):
+        await test_matcher.finish(session.group_session_id)
+
+    with patch_current_time("2023-09-14 10:46:10", tick=False):
+        async with app.test_matcher(test_matcher) as ctx:
+            adapter = get_adapter(Adapter)
+            bot = ctx.create_bot(base=Bot, adapter=adapter)
+            event = fake_group_message_event_v11(message=Message("/test"))
+
+            ctx.receive_event(bot, event)
+            ctx.should_call_send(event, "qq_10000", True)
+            ctx.should_finished(test_matcher)

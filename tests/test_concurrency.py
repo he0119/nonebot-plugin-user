@@ -1,13 +1,12 @@
+import asyncio
+import random
 from typing import List, Tuple
 
 from nonebug import App
 
 
 async def test_concurrency(app: App):
-    import asyncio
-    import random
-
-    from nonebot_plugin_user import get_or_create_user, get_user_by_id
+    from nonebot_plugin_user import get_user, get_user_by_id
 
     users: List[Tuple[str, str]] = [
         ("qq", "1"),
@@ -18,7 +17,7 @@ async def test_concurrency(app: App):
     async def do_check():
         platform, platform_id = random.choice(users)
 
-        user = await get_or_create_user(platform_id, platform)
+        user = await get_user(platform, platform_id)
         assert user.name == f"{platform}-{platform_id}"
 
         user_loaded = await get_user_by_id(user.id)
