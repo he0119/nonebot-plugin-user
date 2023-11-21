@@ -71,11 +71,16 @@ async def test_remove_bind_self(app: App, patch_current_time, mocker: MockerFixt
             ctx.should_finished(bind_cmd)
 
 
-async def test_remove_bind_not_exist(app: App):
-    """解除最初的绑定"""
-    from nonebot_plugin_user.utils import remove_bind
+async def test_bind_not_exist(app: App):
+    """不存在的账户"""
+    from nonebot_plugin_user.utils import remove_bind, set_bind
 
     with pytest.raises(ValueError) as e:
         await remove_bind("qq", "1")
+
+    assert str(e.value) == "找不到用户信息"
+
+    with pytest.raises(ValueError) as e:
+        await set_bind("qq", "1", 2)
 
     assert str(e.value) == "找不到用户信息"
