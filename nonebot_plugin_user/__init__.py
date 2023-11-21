@@ -9,6 +9,7 @@ from nonebot.plugin import PluginMetadata, inherit_supported_adapters
 from . import migrations
 from .annotated import User as User
 from .annotated import UserSession as UserSession
+from .config import Config
 from .utils import get_user as get_user
 from .utils import get_user_by_id as get_user_by_id
 
@@ -28,6 +29,7 @@ __plugin_meta__ = PluginMetadata(
     supported_adapters=inherit_supported_adapters(
         "nonebot_plugin_alconna", "nonebot_plugin_session"
     ),
+    config=Config,
     extra={"orm_version_location": migrations},
 )
 

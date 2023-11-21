@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 ## [Unreleased]
 
+### Added
+
+- 支持配置令牌前缀
+
 ## [0.0.5] - 2023-11-20
 
 ### Changed
