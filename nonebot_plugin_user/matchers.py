@@ -31,10 +31,7 @@ user_cmd = on_alconna(
 
 
 @user_cmd.handle()
-async def _(
-    session: UserSession,
-    name: Match[str],
-):
+async def _(session: UserSession, name: Match[str]):
     if name.available:
         try:
             await set_user_name(session.platform, session.platform_id, name.result)
