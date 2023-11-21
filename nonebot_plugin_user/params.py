@@ -15,7 +15,7 @@ async def get_user(session: Session = Depends(extract_session)):
         or session.level == SessionLevel.LEVEL0
         or not session.id1
     ):
-        return
+        return  # pragma: no cover
 
     user = await _get_user(session.platform, session.id1)
 

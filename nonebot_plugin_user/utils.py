@@ -68,7 +68,7 @@ async def get_user(platform: str, platform_id: str) -> User:
             ).one_or_none()
 
             if not user:
-                raise ValueError("创建用户失败")
+                raise ValueError("创建用户失败")  # pragma: no cover
 
             return user
 
