@@ -58,19 +58,20 @@ async def get_user(platform: str, platform_id: str) -> User:
                 await session.commit()
                 return user
         except exc.IntegrityError:
-            user = (
-                await session.scalars(
-                    select(User)
-                    .where(Bind.platform == platform)
-                    .where(Bind.platform_id == platform_id)
-                    .join(Bind, User.id == Bind.bind_id)
-                )
-            ).one_or_none()
+            async with get_session() as session:
+                user = (
+                    await session.scalars(
+                        select(User)
+                        .where(Bind.platform == platform)
+                        .where(Bind.platform_id == platform_id)
+                        .join(Bind, User.id == Bind.bind_id)
+                    )
+                ).one_or_none()
 
-            if not user:
-                raise ValueError("创建用户失败")  # pragma: no cover
+                if not user:
+                    raise ValueError("创建用户失败")  # pragma: no cover
 
-            return user
+                return user
 
 
 async def get_user_by_id(user_id: int) -> User:
