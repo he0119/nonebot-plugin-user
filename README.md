@@ -32,7 +32,7 @@ _✨ NoneBot 用户插件 ✨_
 
 ## 使用方式
 
-加载插件后发送 `/user` 或 `/bind`。
+加载插件后发送 `/user`、`/inspect` 或 `/bind`。
 
 ## 插件适配
 
@@ -50,7 +50,7 @@ from nonebot_plugin_user import User
 
 @matcher.handle()
 async def _(user: User):
-    print(user.id)
+    await matcher.finish(user.id)
 ```
 
 获取用户会话信息
@@ -60,12 +60,18 @@ from nonebot_plugin_user import UserSession
 
 @matcher.handle()
 async def _(session: UserSession):
-    print(session.user_id)
+    await matcher.finish(session.user_id)
 ```
 
 ## 配置项
 
 配置方式：直接在 `NoneBot` 全局配置文件中添加以下配置项即可。
+
+### user_token_prefix
+
+- 类型: `str`
+- 默认: `nonebot/`
+- 说明: 生成令牌的前缀
 
 ## 计划
 
