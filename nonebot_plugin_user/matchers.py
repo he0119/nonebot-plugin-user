@@ -15,6 +15,7 @@ from nonebot_plugin_session import SessionLevel
 from sqlalchemy.exc import IntegrityError
 
 from .annotated import UserSession as UserSession
+from .config import plugin_config
 from .utils import get_user as get_user
 from .utils import get_user_by_id as get_user_by_id
 from .utils import remove_bind, set_bind, set_user_name
@@ -77,6 +78,11 @@ tokens = cast(
     ExpiringDict(max_len=100, max_age_seconds=300),
 )
 
+
+def generate_token() -> str:
+    return f"{plugin_config.user_token_prefix}{random.randint(100000, 999999)}"
+
+
 bind_cmd = on_alconna(
     Alconna("bind", Option("-r"), Args["token?", str]), use_cmd_start=True
 )
@@ -97,7 +103,7 @@ async def _(
 
     # 生成令牌
     if not token:
-        token = f"nonebot/{random.randint(100000, 999999)}"
+        token = generate_token()
         tokens[token] = (
             session.platform_id,
             session.platform,
@@ -115,7 +121,7 @@ async def _(
         # 群内绑定的第一步，会在原始平台发送令牌
         # 此时 platform_id 和 platform 为目标平台的信息
         if level == SessionLevel.LEVEL2 or level == SessionLevel.LEVEL3:
-            token = f"nonebot/{random.randint(100000, 999999)}"
+            token = generate_token()
             tokens[token] = (session.platform_id, session.platform, user_id, None)
             await bind_cmd.finish(
                 f"令牌核验成功！下面将进行第二步操作。\n请在 5 分钟内使用你的账号在目标平台内向机器人发送以下文本：\n/bind {token}\n注意：当前平台是你的原始平台，这里的用户数据将覆盖目标平台的数据。"
