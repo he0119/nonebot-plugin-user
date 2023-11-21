@@ -10,6 +10,7 @@ from . import migrations
 from .annotated import User as User
 from .annotated import UserSession as UserSession
 from .config import Config
+from .utils import get_or_create_user as get_or_create_user
 from .utils import get_user as get_user
 from .utils import get_user_by_id as get_user_by_id
 
@@ -35,6 +36,7 @@ __plugin_meta__ = PluginMetadata(
 
 
 __all__ = [
+    "get_or_create_user",
     "get_user",
     "get_user_by_id",
     "User",

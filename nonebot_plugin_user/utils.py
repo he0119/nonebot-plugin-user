@@ -1,25 +1,51 @@
+import asyncio
+import sys
+from typing import Optional
+
 from nonebot_plugin_orm import get_session
-from sqlalchemy import select
+from sqlalchemy import exc, select
 
 from .models import Bind, User
 
+_insert_mutex: Optional[asyncio.Lock] = None
 
-async def create_user(platform_id: str, platform: str, name: str):
+
+def _get_insert_mutex():
+    # py3.10 以下，Lock 必须在 event_loop 内创建
+    global _insert_mutex
+
+    if _insert_mutex is None:
+        _insert_mutex = asyncio.Lock()
+    elif sys.version_info < (3, 10):
+        # 还需要判断 loop 是否与之前创建的一致
+        # 单测中不同的 test，loop 也不一样
+        # 但是 nonebot 里 loop 始终是一样的
+        if getattr(_insert_mutex, "_loop") != asyncio.get_running_loop():
+            _insert_mutex = asyncio.Lock()
+
+    return _insert_mutex
+
+
+async def create_user(platform_id: str, platform: str):
     """创建账号"""
-    async with get_session(expire_on_commit=False) as session:
-        user = User(name=name)
-        session.add(user)
-        await session.commit()
+    async with _get_insert_mutex():
+        try:
+            async with get_session(expire_on_commit=False) as session:
+                user = User(name=f"{platform}-{platform_id}")
+                session.add(user)
+                await session.commit()
 
-        bind = Bind(
-            platform_id=platform_id,
-            platform=platform,
-            bind_id=user.id,
-            original_id=user.id,
-        )
-        session.add(bind)
-        await session.commit()
-        return user
+                bind = Bind(
+                    platform_id=platform_id,
+                    platform=platform,
+                    bind_id=user.id,
+                    original_id=user.id,
+                )
+                session.add(bind)
+                await session.commit()
+                return user
+        except exc.IntegrityError:
+            return await get_user(platform_id, platform)
 
 
 async def get_user(platform_id: str, platform: str):
@@ -109,11 +135,11 @@ async def remove_bind(platform_id: str, platform: str):
             return True
 
 
-async def get_or_create_user(platform_id: str, platform: str, name: str):
+async def get_or_create_user(platform_id: str, platform: str):
     """获取一个用户，如果不存在则创建"""
     try:
         user = await get_user(platform_id, platform)
     except ValueError:
-        user = await create_user(platform_id, platform, name)
+        user = await create_user(platform_id, platform)
 
     return user
