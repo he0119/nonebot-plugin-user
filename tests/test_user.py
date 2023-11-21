@@ -80,7 +80,7 @@ async def test_user_set_name(app: App, patch_current_time):
         async with app.test_matcher(user_cmd) as ctx:
             adapter = get_adapter(Adapter)
             bot = ctx.create_bot(base=Bot, adapter=adapter)
-            event = fake_private_message_event_v11(message=Message("/user qq-1"))
+            event = fake_private_message_event_v11(message=Message("/user -l qq-1"))
 
             ctx.receive_event(bot, event)
             ctx.should_call_send(
@@ -93,7 +93,7 @@ async def test_user_set_name(app: App, patch_current_time):
         async with app.test_matcher(user_cmd) as ctx:
             adapter = get_adapter(Adapter)
             bot = ctx.create_bot(base=Bot, adapter=adapter)
-            event = fake_private_message_event_v11(message=Message("/user name"))
+            event = fake_private_message_event_v11(message=Message("/user -l name"))
 
             ctx.receive_event(bot, event)
             ctx.should_call_send(

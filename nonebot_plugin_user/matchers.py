@@ -7,6 +7,7 @@ from nonebot_plugin_alconna import (
     Alconna,
     AlconnaQuery,
     Args,
+    Match,
     Option,
     Query,
     on_alconna,
@@ -23,7 +24,7 @@ from .utils import remove_bind, set_bind, set_user_name
 user_cmd = on_alconna(
     Alconna(
         "user",
-        Args["name?", str],
+        Option("-l", Args["name", str]),
     ),
     use_cmd_start=True,
 )
@@ -32,11 +33,11 @@ user_cmd = on_alconna(
 @user_cmd.handle()
 async def _(
     session: UserSession,
-    name: Optional[str] = None,
+    name: Match[str],
 ):
-    if name:
+    if name.available:
         try:
-            await set_user_name(session.platform, session.platform_id, name)
+            await set_user_name(session.platform, session.platform_id, name.result)
         except IntegrityError:
             await user_cmd.finish("用户名修改失败，用户名已存在")
         else:

@@ -19,7 +19,7 @@ __plugin_meta__ = PluginMetadata(
     usage="""查看用户信息
 /user
 修改用户名
-/user [用户名]
+/user -l [用户名]
 查看会话信息
 /inspect
 绑定用户
