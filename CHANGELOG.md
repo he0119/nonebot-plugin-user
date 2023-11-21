@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 - 支持配置令牌前缀
 
+### Fixed
+
+- 修复并发时报错的问题
+
 ## [0.0.5] - 2023-11-20
 
 ### Changed

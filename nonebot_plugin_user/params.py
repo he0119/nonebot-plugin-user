@@ -16,11 +16,7 @@ async def get_or_create_user(session: Session = Depends(extract_session)):
         logger.debug(f"用户相关功能暂不支持当前平台：{session.platform}-{session.level}-{session.id1}")
         return
 
-    user = await utils.get_or_create_user(
-        session.id1,
-        session.platform,
-        f"{session.platform}-{session.id1}",
-    )
+    user = await utils.get_or_create_user(session.id1, session.platform)
 
     return user
 
