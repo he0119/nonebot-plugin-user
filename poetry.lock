@@ -59,13 +59,13 @@ trio = ["trio (<0.22)"]
 
 [[package]]
 name = "arclet-alconna"
-version = "1.7.37"
+version = "1.7.38"
 description = "A High-performance, Generality, Humane Command Line Arguments Parser Library."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "arclet_alconna-1.7.37-py3-none-any.whl", hash = "sha256:2a680acefdb63b3995c53ab0fdf70fa82d3a410705ff3993740554b73f5ce67f"},
-    {file = "arclet_alconna-1.7.37.tar.gz", hash = "sha256:ad54c297c1c76f4fe5741303ddcf0c2a7c9ecb3a14465103f42f1da4b23e6081"},
+    {file = "arclet_alconna-1.7.38-py3-none-any.whl", hash = "sha256:e2248605bb7425c69a9cbe1e5f797d50945f30f054aaa9af73a237d8307d3432"},
+    {file = "arclet_alconna-1.7.38.tar.gz", hash = "sha256:90af6498993e7bc21223259758a021d811329b341a9add7868b9497705af050b"},
 ]
 
 [package.dependencies]
@@ -1207,17 +1207,17 @@ nonebot2 = ">=2.1.0"
 
 [[package]]
 name = "nonebot-plugin-alconna"
-version = "0.33.6"
+version = "0.33.8"
 description = "Alconna Adapter for Nonebot"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "nonebot_plugin_alconna-0.33.6-py3-none-any.whl", hash = "sha256:89989dd6dc1bccd8a1603159b57e9e96da438eb0bbbdbbcd2bfcf747594e12c3"},
-    {file = "nonebot_plugin_alconna-0.33.6.tar.gz", hash = "sha256:54e761ef621c8285cd9ea2f81324f9f52f6fb6292d3ddb87387dbdcaeaa8dc1b"},
+    {file = "nonebot_plugin_alconna-0.33.8-py3-none-any.whl", hash = "sha256:e33e75a4c534810756e7d743ae6a16c1996af8f6f5bc51ba8fa8ab8618ca3b55"},
+    {file = "nonebot_plugin_alconna-0.33.8.tar.gz", hash = "sha256:27ebdd8309db9d934ef703f3a0f6c8608e773cb2435cba0da29ac4936c105e19"},
 ]
 
 [package.dependencies]
-arclet-alconna = ">=1.7.31,<2.0.0"
+arclet-alconna = ">=1.7.38,<2.0.0"
 arclet-alconna-tools = ">=0.6.7,<0.7.0"
 fleep = ">=1.0.1"
 nepattern = ">=0.5.14,<0.6.0"
@@ -1273,13 +1273,13 @@ sqlite = ["aiosqlite (>=0.19,<1.0)"]
 
 [[package]]
 name = "nonebot-plugin-session"
-version = "0.2.1"
+version = "0.2.2"
 description = "Nonebot2 会话信息提取与会话id定义"
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "nonebot_plugin_session-0.2.1-py3-none-any.whl", hash = "sha256:f23dca9f9d6ffcb8d556bf982843904bec6302e90fb6a19f2b333f349581d1f5"},
-    {file = "nonebot_plugin_session-0.2.1.tar.gz", hash = "sha256:f3cbf4f7b180fda35fc035da6f474f3a1d06581f7498d40f52badad5ebdee36e"},
+    {file = "nonebot_plugin_session-0.2.2-py3-none-any.whl", hash = "sha256:136944f25761fc289cb6598b52e3a37dc5408239fb9314292f73e69a80f216e2"},
+    {file = "nonebot_plugin_session-0.2.2.tar.gz", hash = "sha256:c131b3ec6bf9d877e9e312483e97e84c3711528fd10e058aba4f3ec7df21e68a"},
 ]
 
 [package.dependencies]
