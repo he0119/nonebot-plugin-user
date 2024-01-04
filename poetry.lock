@@ -508,13 +508,13 @@ files = [
 
 [[package]]
 name = "freezegun"
-version = "1.2.2"
+version = "1.4.0"
 description = "Let your Python tests travel through time"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 files = [
-    {file = "freezegun-1.2.2-py3-none-any.whl", hash = "sha256:ea1b963b993cb9ea195adbd893a48d573fda951b0da64f60883d7e988b606c9f"},
-    {file = "freezegun-1.2.2.tar.gz", hash = "sha256:cd22d1ba06941384410cd967d8a99d5ae2442f57dfafeff2fda5de8dc5c05446"},
+    {file = "freezegun-1.4.0-py3-none-any.whl", hash = "sha256:55e0fc3c84ebf0a96a5aa23ff8b53d70246479e9a68863f1fcac5a3e52f19dd6"},
+    {file = "freezegun-1.4.0.tar.gz", hash = "sha256:10939b0ba0ff5adaecf3b06a5c2f73071d9678e507c5eaedb23c761d56ac774b"},
 ]
 
 [package.dependencies]
@@ -1099,13 +1099,13 @@ files = [
 
 [[package]]
 name = "nb-cli"
-version = "1.2.6"
+version = "1.2.8"
 description = "CLI for nonebot2"
 optional = false
 python-versions = ">=3.8, <4.0"
 files = [
-    {file = "nb-cli-1.2.6.tar.gz", hash = "sha256:33ca8ffdb721ea50751c47788789c84cd7594afc888ccfb2439f06ff95cbbd7c"},
-    {file = "nb_cli-1.2.6-py3-none-any.whl", hash = "sha256:2aa52e0d21fb8a5a08662b691fa6cd521c99140aa0e24a81503264129f4b3045"},
+    {file = "nb-cli-1.2.8.tar.gz", hash = "sha256:8e17c73ca494ce16b3a18a18d4d611b5ffb27e37ee3de2c7a510c7e32b7df002"},
+    {file = "nb_cli-1.2.8-py3-none-any.whl", hash = "sha256:080a07c4bb94f93a662844d7f1fe8b9672cb61daf6a9c3ae74bbc42ed17a35a7"},
 ]
 
 [package.dependencies]
@@ -1158,13 +1158,13 @@ typing-extensions = ">=4.0.0,<5.0.0"
 
 [[package]]
 name = "nonebot-adapter-qq"
-version = "1.2.0"
+version = "1.3.5"
 description = "QQ adapter for nonebot2"
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "nonebot_adapter_qq-1.2.0-py3-none-any.whl", hash = "sha256:19f9535df19672ccc9cc2c4903cec25a882041202f27b653fe50a38055843fb0"},
-    {file = "nonebot_adapter_qq-1.2.0.tar.gz", hash = "sha256:caac94eef843a337a8ddd7e24577727aaac6e0f131b27a30514aae9633f7eac5"},
+    {file = "nonebot_adapter_qq-1.3.5-py3-none-any.whl", hash = "sha256:ebd34601d58939bd7453dc05e1e890179ed83072c6c65c5624e9c36df2139212"},
+    {file = "nonebot_adapter_qq-1.3.5.tar.gz", hash = "sha256:c8b1f8a3b4ecaf822e970bf7a59bcc5e64ff628de9e85d59c98a953d2e57f197"},
 ]
 
 [package.dependencies]
@@ -1175,13 +1175,13 @@ yarl = ">=1.9.0,<2.0.0"
 
 [[package]]
 name = "nonebot-adapter-red"
-version = "0.7.4"
+version = "0.8.0"
 description = "Red Protocol Adapter for Nonebot2"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "nonebot_adapter_red-0.7.4-py3-none-any.whl", hash = "sha256:f886c6615ba3333ea6391a03f3418f22043c7f94a69236d8b23dac8b8a2fea14"},
-    {file = "nonebot_adapter_red-0.7.4.tar.gz", hash = "sha256:22253bcb8f4ec188d1d9293b1d42f4f87c6034dd4a607919961890d062d27c1f"},
+    {file = "nonebot_adapter_red-0.8.0-py3-none-any.whl", hash = "sha256:9bce0810e67a2754ba68d8c942bec12deeacb55459329f8e7a4f0b6416641180"},
+    {file = "nonebot_adapter_red-0.8.0.tar.gz", hash = "sha256:577c0a286ed1f924339eb398ce1c5efd2cf727029116aff176b8715ab463c234"},
 ]
 
 [package.dependencies]
@@ -1193,13 +1193,13 @@ auto-detect = ["PyYAML"]
 
 [[package]]
 name = "nonebot-adapter-satori"
-version = "0.8.0"
+version = "0.8.1"
 description = "Satori Protocol Adapter for Nonebot2"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "nonebot_adapter_satori-0.8.0-py3-none-any.whl", hash = "sha256:25d9726a961b73b6900a4dba3a8ec4f5d228a6cb96078b542379c9d6c9d3cefe"},
-    {file = "nonebot_adapter_satori-0.8.0.tar.gz", hash = "sha256:267c5b708ec2dd77b405d3ec779e817506e6d6914cc06688b529b43fe4288727"},
+    {file = "nonebot_adapter_satori-0.8.1-py3-none-any.whl", hash = "sha256:7b668588dde0dcce0aa0029880adb0b5e6d4641b14bd0a61dcb916390e34bc33"},
+    {file = "nonebot_adapter_satori-0.8.1.tar.gz", hash = "sha256:1d9ee8882f680a90c86402f434c12986260e9126107f7772b5491f8588b1b4a3"},
 ]
 
 [package.dependencies]
@@ -1518,13 +1518,13 @@ testing = ["argcomplete", "attrs (>=19.2.0)", "hypothesis (>=3.56)", "mock", "no
 
 [[package]]
 name = "pytest-asyncio"
-version = "0.21.1"
+version = "0.23.3"
 description = "Pytest support for asyncio"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "pytest-asyncio-0.21.1.tar.gz", hash = "sha256:40a7eae6dded22c7b604986855ea48400ab15b069ae38116e8c01238e9eeb64d"},
-    {file = "pytest_asyncio-0.21.1-py3-none-any.whl", hash = "sha256:8666c1c8ac02631d7c51ba282e0c69a8a452b211ffedf2599099845da5c5c37b"},
+    {file = "pytest-asyncio-0.23.3.tar.gz", hash = "sha256:af313ce900a62fbe2b1aed18e37ad757f1ef9940c6b6a88e2954de38d6b1fb9f"},
+    {file = "pytest_asyncio-0.23.3-py3-none-any.whl", hash = "sha256:37a9d912e8338ee7b4a3e917381d1c95bfc8682048cb0fbc35baba316ec1faba"},
 ]
 
 [package.dependencies]
@@ -1532,7 +1532,7 @@ pytest = ">=7.0.0"
 
 [package.extras]
 docs = ["sphinx (>=5.3)", "sphinx-rtd-theme (>=1.0)"]
-testing = ["coverage (>=6.2)", "flaky (>=3.5.0)", "hypothesis (>=5.7.1)", "mypy (>=0.931)", "pytest-trio (>=0.7.0)"]
+testing = ["coverage (>=6.2)", "hypothesis (>=5.7.1)"]
 
 [[package]]
 name = "pytest-cov"
@@ -2401,4 +2401,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "ad10a4cea1fc61445ab4ba9b7b0d6208942de26e2db0b317935c5b410ce30af9"
+content-hash = "e598a2da214ed2823aee75e7ac4e870529394b208d9a0bc700eaad4c0223f4f9"
