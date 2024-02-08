@@ -59,13 +59,13 @@ trio = ["trio (<0.22)"]
 
 [[package]]
 name = "arclet-alconna"
-version = "1.7.38"
+version = "1.7.42"
 description = "A High-performance, Generality, Humane Command Line Arguments Parser Library."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "arclet_alconna-1.7.38-py3-none-any.whl", hash = "sha256:e2248605bb7425c69a9cbe1e5f797d50945f30f054aaa9af73a237d8307d3432"},
-    {file = "arclet_alconna-1.7.38.tar.gz", hash = "sha256:90af6498993e7bc21223259758a021d811329b341a9add7868b9497705af050b"},
+    {file = "arclet_alconna-1.7.42-py3-none-any.whl", hash = "sha256:fa78944121d4afa4e2c0247a98967ddb1e76cf63b94c8c3f4f393c52f6d23e75"},
+    {file = "arclet_alconna-1.7.42.tar.gz", hash = "sha256:a5a1cca37d0c3d58607ee22485e636fa0b01d40eb43194e542b2c3d6a5d2e70b"},
 ]
 
 [package.dependencies]
@@ -78,17 +78,17 @@ full = ["arclet-alconna-tools (>=0.2.0)"]
 
 [[package]]
 name = "arclet-alconna-tools"
-version = "0.6.8"
+version = "0.6.11"
 description = "Builtin Tools for Alconna"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "arclet-alconna-tools-0.6.8.tar.gz", hash = "sha256:a36ddc9c311cae3e1d9df0d6b11eb8d69c57304bbca744dc2c9532e53093cc6f"},
-    {file = "arclet_alconna_tools-0.6.8-py3-none-any.whl", hash = "sha256:eff5254e19b3fb24222164f419302f5f8849b8c14ddf8d96199747adc1916a13"},
+    {file = "arclet-alconna-tools-0.6.11.tar.gz", hash = "sha256:079f1ccd84120c65288e50014de2117a0dc7c52e5c2d2d718ad9fd95afb40232"},
+    {file = "arclet_alconna_tools-0.6.11-py3-none-any.whl", hash = "sha256:d3bc7d70040fbc1c0b44a9b751089f87c6c487161d7c930dd4018d7ef468d91f"},
 ]
 
 [package.dependencies]
-arclet-alconna = ">=1.7.33"
+arclet-alconna = ">=1.7.39"
 nepattern = ">=0.5.15"
 
 [[package]]
@@ -495,16 +495,6 @@ files = [
 docs = ["furo (>=2023.9.10)", "sphinx (>=7.2.6)", "sphinx-autodoc-typehints (>=1.24)"]
 testing = ["covdefaults (>=2.3)", "coverage (>=7.3.2)", "diff-cover (>=8)", "pytest (>=7.4.3)", "pytest-cov (>=4.1)", "pytest-mock (>=3.12)", "pytest-timeout (>=2.2)"]
 typing = ["typing-extensions (>=4.8)"]
-
-[[package]]
-name = "fleep"
-version = "1.0.1"
-description = "File format determination library"
-optional = false
-python-versions = ">=3.1"
-files = [
-    {file = "fleep-1.0.1.tar.gz", hash = "sha256:c8f62b258ee5364d7f6c1ed1f3f278e99020fc3f0a60a24ad1e10846e31d104c"},
-]
 
 [[package]]
 name = "freezegun"
@@ -1207,19 +1197,18 @@ nonebot2 = ">=2.1.0"
 
 [[package]]
 name = "nonebot-plugin-alconna"
-version = "0.35.1"
+version = "0.36.3"
 description = "Alconna Adapter for Nonebot"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "nonebot_plugin_alconna-0.35.1-py3-none-any.whl", hash = "sha256:70dd86b477642dc1d154aef1ceb142e5350475852f87f4b3413dfc0c7d929d87"},
-    {file = "nonebot_plugin_alconna-0.35.1.tar.gz", hash = "sha256:0940af2ddfd8cedde59123b2e3dc77aacb4efab1751d9744091d6baa69920e94"},
+    {file = "nonebot_plugin_alconna-0.36.3-py3-none-any.whl", hash = "sha256:8f26f96c711d3adadc538ebf40d51ba2249c18fe1689bf36baed0e4d1e05246a"},
+    {file = "nonebot_plugin_alconna-0.36.3.tar.gz", hash = "sha256:ed8e4f2fd845d0c3d8becdd68678c203ee76109b9104a3b1c18f63525e85c6d4"},
 ]
 
 [package.dependencies]
-arclet-alconna = ">=1.7.38,<2.0.0"
-arclet-alconna-tools = ">=0.6.7,<0.7.0"
-fleep = ">=1.0.1"
+arclet-alconna = ">=1.7.42,<2.0.0"
+arclet-alconna-tools = ">=0.6.11,<0.7.0"
 nepattern = ">=0.5.14,<0.6.0"
 nonebot2 = ">=2.1.0"
 
@@ -1240,13 +1229,13 @@ typing-extensions = ">=4.0.0"
 
 [[package]]
 name = "nonebot-plugin-orm"
-version = "0.6.2"
+version = "0.6.3"
 description = "SQLAlchemy ORM support for nonebot"
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "nonebot_plugin_orm-0.6.2-py3-none-any.whl", hash = "sha256:4cf0fe274e899bac5ee190ccf2d1d6ba9819570d74411d4927234bb3a6d79463"},
-    {file = "nonebot_plugin_orm-0.6.2.tar.gz", hash = "sha256:49c7fb66e4490390a46bfdf1566362fd6e68dc240080931a24978f5586f62147"},
+    {file = "nonebot_plugin_orm-0.6.3-py3-none-any.whl", hash = "sha256:51046578bf9cb29b28229ce8df02a7423706f56c57af573f43e3ac9420074eb6"},
+    {file = "nonebot_plugin_orm-0.6.3.tar.gz", hash = "sha256:7b64966243b02f979cf20e6d9877ef6213c55920daae5c8f3078f78f264b55a6"},
 ]
 
 [package.dependencies]
@@ -1659,6 +1648,7 @@ files = [
     {file = "PyYAML-6.0.1-cp311-cp311-win_amd64.whl", hash = "sha256:bf07ee2fef7014951eeb99f56f39c9bb4af143d8aa3c21b1677805985307da34"},
     {file = "PyYAML-6.0.1-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:855fb52b0dc35af121542a76b9a84f8d1cd886ea97c84703eaa6d88e37a2ad28"},
     {file = "PyYAML-6.0.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:40df9b996c2b73138957fe23a16a4f0ba614f4c0efce1e9406a184b6d07fa3a9"},
+    {file = "PyYAML-6.0.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:a08c6f0fe150303c1c6b71ebcd7213c2858041a7e01975da3a99aed1e7a378ef"},
     {file = "PyYAML-6.0.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6c22bec3fbe2524cde73d7ada88f6566758a8f7227bfbf93a408a9d86bcc12a0"},
     {file = "PyYAML-6.0.1-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:8d4e9c88387b0f5c7d5f281e55304de64cf7f9c0021a3525bd3b1c542da3b0e4"},
     {file = "PyYAML-6.0.1-cp312-cp312-win32.whl", hash = "sha256:d483d2cdf104e7c9fa60c544d92981f12ad66a457afae824d146093b8c294c54"},
