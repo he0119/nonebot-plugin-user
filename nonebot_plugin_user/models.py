@@ -30,7 +30,7 @@ class UserSession(BaseModel):
         model_config = ConfigDict(arbitrary_types_allowed=True)
     else:
 
-        class Config:
+        class Config:  # pragma: no cover
             arbitrary_types_allowed = True
 
     session: Session
