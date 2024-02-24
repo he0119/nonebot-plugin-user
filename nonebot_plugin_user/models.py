@@ -1,8 +1,9 @@
-from dataclasses import dataclass
 from datetime import datetime
 
+from nonebot.compat import PYDANTIC_V2, ConfigDict
 from nonebot_plugin_orm import Model
 from nonebot_plugin_session import Session, SessionIdType, SessionLevel
+from pydantic import BaseModel
 from sqlalchemy import DateTime, String
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -24,8 +25,14 @@ class Bind(Model):
     """初始时绑定的账号 ID"""
 
 
-@dataclass
-class UserSession:
+class UserSession(BaseModel):
+    if PYDANTIC_V2:
+        model_config = ConfigDict(arbitrary_types_allowed=True)
+    else:
+
+        class Config:  # pragma: no cover
+            arbitrary_types_allowed = True
+
     session: Session
     user: User
 

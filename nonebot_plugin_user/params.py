@@ -26,4 +26,4 @@ async def get_user_session(session: Session = Depends(extract_session)):
     """获取用户会话"""
     user = await get_user(session)
     if user:
-        return UserSession(session, user)
+        return UserSession(session=session, user=user)

@@ -6,29 +6,29 @@
   "configurations": [
     {
       "name": "ORM Upgrade",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
-      "module": "nb-cli",
+      "program": "${workspaceFolder}/bot.py",
       "args": ["orm", "upgrade"],
       "justMyCode": true
     },
     {
       "name": "Run",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
-      "module": "nb_cli",
+      "program": "${workspaceFolder}/bot.py",
       "args": ["run", "--reload"],
       "justMyCode": false
     },
     {
       "name": "Pytest",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "module": "pytest"
     },
     {
       "name": "Debug Unit Test",
-      "type": "python",
+      "type": "debugpy",
       "request": "test",
       "justMyCode": false
     }

@@ -145,3 +145,4 @@ dmypy.json
 !.vscode/launch.json
 
 data/
+bot.py
