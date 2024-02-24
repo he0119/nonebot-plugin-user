@@ -75,12 +75,8 @@ async def test_bind_not_exist(app: App):
     """不存在的账户"""
     from nonebot_plugin_user.utils import remove_bind, set_bind
 
-    with pytest.raises(ValueError) as e:
+    with pytest.raises(ValueError, match="找不到用户信息"):
         await remove_bind("qq", "1")
 
-    assert str(e.value) == "找不到用户信息"
-
-    with pytest.raises(ValueError) as e:
+    with pytest.raises(ValueError, match="找不到用户信息"):
         await set_bind("qq", "1", 2)
-
-    assert str(e.value) == "找不到用户信息"

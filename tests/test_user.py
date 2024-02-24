@@ -40,10 +40,8 @@ async def test_user(app: App, patch_current_time):
     user = await get_user_by_id(1)
     assert user.id == 1
 
-    with pytest.raises(ValueError) as e:
+    with pytest.raises(ValueError, match="找不到用户信息"):
         await get_user_by_id(2)
-
-    assert str(e.value) == "找不到用户信息"
 
 
 async def test_user_set_name(app: App, patch_current_time):
@@ -116,10 +114,8 @@ async def test_user_set_name(app: App, patch_current_time):
             )
             ctx.should_finished(user_cmd)
 
-    with pytest.raises(ValueError) as e:
+    with pytest.raises(ValueError, match="找不到用户信息"):
         await set_user_name("123", "qq", "not exist")
-
-    assert str(e.value) == "找不到用户信息"
 
 
 async def test_user_session(app: App, patch_current_time):

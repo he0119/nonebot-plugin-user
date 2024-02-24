@@ -48,7 +48,7 @@ async def test_bind_private(app: App, patch_current_time, mocker: MockerFixture)
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "命令 bind 可用于在多个平台间绑定用户数据。绑定过程中，原始平台的用户数据将完全保留，而目标平台的用户数据将被原始平台的数据所覆盖。\n请确认当前平台是你的目标平台，并在 5 分钟内使用你的账号在原始平台内向机器人发送以下文本：\n/bind nonebot/123456\n绑定完成后，你可以随时使用「bind -r」来解除绑定状态。",
+                "命令 bind 可用于在多个平台间绑定用户数据。绑定过程中，原始平台的用户数据将完全保留，而目标平台的用户数据将被原始平台的数据所覆盖。\n请确认当前平台是你的目标平台，并在 5 分钟内使用你的账号在原始平台内向机器人发送以下文本：\n/bind nonebot/123456\n绑定完成后，你可以随时使用「bind -r」来解除绑定状态。",  # noqa: E501
                 True,
             )
             ctx.should_finished(bind_cmd)
@@ -135,7 +135,7 @@ async def test_bind_private_invalid_token(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "命令 bind 可用于在多个平台间绑定用户数据。绑定过程中，原始平台的用户数据将完全保留，而目标平台的用户数据将被原始平台的数据所覆盖。\n请确认当前平台是你的目标平台，并在 5 分钟内使用你的账号在原始平台内向机器人发送以下文本：\n/bind nonebot/123456\n绑定完成后，你可以随时使用「bind -r」来解除绑定状态。",
+                "命令 bind 可用于在多个平台间绑定用户数据。绑定过程中，原始平台的用户数据将完全保留，而目标平台的用户数据将被原始平台的数据所覆盖。\n请确认当前平台是你的目标平台，并在 5 分钟内使用你的账号在原始平台内向机器人发送以下文本：\n/bind nonebot/123456\n绑定完成后，你可以随时使用「bind -r」来解除绑定状态。",  # noqa: E501
                 True,
             )
             ctx.should_finished(bind_cmd)
@@ -223,7 +223,7 @@ async def test_bind_private_prefix(app: App, patch_current_time, mocker: MockerF
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "命令 bind 可用于在多个平台间绑定用户数据。绑定过程中，原始平台的用户数据将完全保留，而目标平台的用户数据将被原始平台的数据所覆盖。\n请确认当前平台是你的目标平台，并在 5 分钟内使用你的账号在原始平台内向机器人发送以下文本：\n/bind test/123456\n绑定完成后，你可以随时使用「bind -r」来解除绑定状态。",
+                "命令 bind 可用于在多个平台间绑定用户数据。绑定过程中，原始平台的用户数据将完全保留，而目标平台的用户数据将被原始平台的数据所覆盖。\n请确认当前平台是你的目标平台，并在 5 分钟内使用你的账号在原始平台内向机器人发送以下文本：\n/bind test/123456\n绑定完成后，你可以随时使用「bind -r」来解除绑定状态。",  # noqa: E501
                 True,
             )
             ctx.should_finished(bind_cmd)
