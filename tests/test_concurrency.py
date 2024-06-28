@@ -1,6 +1,5 @@
 import asyncio
 import random
-from typing import List, Tuple
 
 from nonebug import App
 
@@ -8,7 +7,7 @@ from nonebug import App
 async def test_concurrency(app: App):
     from nonebot_plugin_user import get_user, get_user_by_id
 
-    users: List[Tuple[str, str]] = [
+    users: list[tuple[str, str]] = [
         ("qq", "1"),
         ("qq", "2"),
         ("qq", "3"),

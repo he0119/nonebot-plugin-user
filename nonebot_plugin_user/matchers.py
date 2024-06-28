@@ -1,5 +1,5 @@
 import random
-from typing import Dict, Optional, Tuple, cast
+from typing import Optional, cast
 
 from expiringdict import ExpiringDict
 from nonebot.adapters import Bot
@@ -72,7 +72,7 @@ async def _(bot: Bot, session: UserSession):
 
 
 tokens = cast(
-    Dict[str, Tuple[str, str, int, Optional[SessionLevel]]],
+    dict[str, tuple[str, str, int, Optional[SessionLevel]]],
     ExpiringDict(max_len=100, max_age_seconds=300),
 )
 
