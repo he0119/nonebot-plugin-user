@@ -9,8 +9,12 @@ homepage = "https://github.com/he0119/nonebot-plugin-user"
 repository = "https://github.com/he0119/nonebot-plugin-user"
 documentation = "https://github.com/he0119/nonebot-plugin-user#readme"
 
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.9"
 nonebot2 = "^2.2.0"
 nonebot-plugin-orm = ">=0.7.0"
 nonebot-plugin-alconna = ">=0.37.1"
@@ -36,18 +40,32 @@ freezegun = "^1.2.2"
 asyncio_mode = "auto"
 
 [tool.pyright]
-pythonVersion = "3.8"
+pythonVersion = "3.9"
 pythonPlatform = "All"
 typeCheckingMode = "basic"
 defineConstant = { PYDANTIC_V2 = true }
 
 [tool.ruff]
 line-length = 88
-target-version = "py38"
+target-version = "py39"
 
 [tool.ruff.lint]
-select = ["E", "W", "F", "UP", "C", "T", "PYI", "PT", "Q"]
-ignore = ["E402", "C901", "UP037"]
+select = [
+  "W",   # pycodestyle warnings
+  "E",   # pycodestyle errors
+  "F",   # Pyflakes
+  "UP",  # pyupgrade
+  "C4",  # flake8-comprehensions
+  "T10", # flake8-debugger
+  "T20", # flake8-print
+  "PYI", # flake8-pyi
+  "PT",  # flake8-pytest-style
+  "Q",   # flake8-quotes
+]
+ignore = [
+  "E402",  # module-import-not-at-top-of-file, Module level import not at top of cell
+  "UP037", # quoted-annotation, Remove quotes from type annotation
+]
 
 [tool.nonebot]
 adapters = [
@@ -68,7 +86,3 @@ exclude_lines = [
   "except ImportError:",
 ]
 omit = ["*/migrations/*"]
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
