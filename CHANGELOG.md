@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 ## [Unreleased]
 
+### Added
+
+- 添加 py.typed 文件
+
+### Removed
+
+- 移除 Python 3.8 支持
+
 ## [0.2.0] - 2024-02-24
 
 ### Added

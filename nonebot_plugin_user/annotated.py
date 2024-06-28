@@ -1,5 +1,5 @@
 from nonebot.params import Depends
-from typing_extensions import Annotated
+from typing import Annotated
 
 from .models import User as _User
 from .params import UserSession as _UserSession
