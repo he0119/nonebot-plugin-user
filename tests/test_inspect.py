@@ -27,13 +27,13 @@ async def test_inspect(app: App):
 
     async with app.test_matcher() as ctx:
         adapter = get_adapter(AdapterV12)
-        bot = ctx.create_bot(base=BotV12, adapter=adapter, impl="test", platform="test")
+        bot = ctx.create_bot(base=BotV12, adapter=adapter, impl="test", platform="qq")
         event = fake_channel_message_event_v12(message=MessageV12("/inspect"))
 
         ctx.receive_event(bot, event)
         ctx.should_call_send(
             event,
-            "平台名：test\n平台 ID：10\n自身 ID：test\n频道 ID：10000\n群组 ID：100000",
+            "平台名：qq\n平台 ID：10\n自身 ID：test\n频道 ID：10000\n群组 ID：100000",
             True,
         )
         ctx.should_finished(inspect_cmd)
