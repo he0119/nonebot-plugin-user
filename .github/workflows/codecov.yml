@@ -29,7 +29,7 @@ jobs:
         uses: he0119/setup-rye@feat/windows
         with:
           enable-cache: true
-          cache-prefix: ${{ runner.os }}-${{ env.PYTHON_VERSION }}
+          cache-prefix: ${{ env.PYTHON_VERSION }}
       - name: Install prerequisites
         run: |
           rye pin ${{ env.PYTHON_VERSION }}
