@@ -50,6 +50,9 @@ dnspython==2.6.1
     # via email-validator
 email-validator==2.2.0
     # via fastapi
+exceptiongroup==1.2.1 ; python_version < '3.11'
+    # via anyio
+    # via pytest
 execnet==2.1.1
     # via pytest-xdist
 expiringdict==1.2.2
@@ -83,8 +86,11 @@ idna==3.7
     # via httpx
     # via requests
     # via yarl
-importlib-metadata==8.0.0
+importlib-metadata==7.2.1
     # via nonebot-plugin-alconna
+    # via nonebot-plugin-orm
+importlib-resources==6.4.0 ; python_version < '3.12'
+    # via nonebot-plugin-orm
 iniconfig==2.0.0
     # via pytest
 jinja2==3.1.4
@@ -193,24 +199,33 @@ tarina==0.5.4
     # via arclet-alconna
     # via nepattern
     # via nonebot-plugin-alconna
+tomli==2.0.1 ; python_full_version <= '3.11.0a6' or python_version < '3.11'
+    # via coverage
+    # via nonebot2
+    # via pytest
 typer==0.12.3
     # via fastapi-cli
 typing-extensions==4.12.2
     # via aiosqlite
     # via alembic
+    # via anyio
     # via arclet-alconna
+    # via asgiref
     # via fastapi
     # via nepattern
     # via nonebot-adapter-onebot
     # via nonebot-adapter-qq
     # via nonebot-plugin-localstore
+    # via nonebot-plugin-orm
     # via nonebot2
     # via nonebug
     # via pydantic
     # via pydantic-core
     # via sqlalchemy
+    # via starlette
     # via tarina
     # via typer
+    # via uvicorn
 ujson==5.10.0
     # via fastapi
 urllib3==2.2.2
@@ -232,3 +247,4 @@ yarl==1.9.4
     # via nonebot2
 zipp==3.19.2
     # via importlib-metadata
+    # via importlib-resources
