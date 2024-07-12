@@ -1,48 +1,62 @@
-[tool.poetry]
+[project]
 name = "nonebot-plugin-user"
 version = "0.3.0"
 description = "适用于 Nonebot2 的用户插件"
-authors = ["hemengyang <hmy0119@gmail.com>"]
-license = "MIT"
+authors = [{ name = "uy_sun", email = "hmy0119@gmail.com" }]
+dependencies = [
+    "nonebot2>=2.2.0",
+    "nonebot-plugin-orm>=0.7.0",
+    "nonebot-plugin-alconna>=0.37.1",
+    "nonebot-plugin-session>=0.3.0",
+    "expiringdict>=1.2.2",
+]
 readme = "README.md"
-homepage = "https://github.com/he0119/nonebot-plugin-user"
-repository = "https://github.com/he0119/nonebot-plugin-user"
-documentation = "https://github.com/he0119/nonebot-plugin-user#readme"
+license = { file = "LICENSE" }
+requires-python = ">= 3.9"
+
+[project.urls]
+Homepage = "https://github.com/he0119/nonebot-plugin-user"
+Repository = "https://github.com/he0119/nonebot-plugin-user.git"
+Issues = "https://github.com/he0119/nonebot-plugin-user/issues"
+Changelog = "https://github.com/he0119/nonebot-plugin-user/blob/main/CHANGELOG.md"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.poetry.dependencies]
-python = "^3.9"
-nonebot2 = "^2.2.0"
-nonebot-plugin-orm = ">=0.7.0"
-nonebot-plugin-alconna = ">=0.37.1"
-nonebot-plugin-session = "^0.3.0"
-expiringdict = "^1.2.2"
+[tool.hatch.metadata]
+allow-direct-references = true
 
-[tool.poetry.group.dev.dependencies]
-nonebot-plugin-orm = { extras = ["default"], version = ">=0.7.0" }
-nonebot-adapter-onebot = ">=2.2.3"
-nonebot-adapter-qq = ">=1.1.1"
-nonebot-adapter-satori = ">=0.8.0"
-nonebot2 = { extras = ["fastapi", "httpx", "websockets"], version = "^2.2.0" }
+[tool.hatch.build.targets.wheel]
+packages = ["nonebot_plugin_user"]
 
-[tool.poetry.group.test.dependencies]
-nonebug = "^0.3.1"
-pytest-cov = ">=4,<6"
-pytest-xdist = "^3.0.2"
-pytest-mock = "^3.10.0"
-pytest-asyncio = "^0.23.5"
-freezegun = "^1.2.2"
+[tool.hatch.build.targets.sdist]
+only-include = ["nonebot_plugin_user"]
 
-[tool.pytest.ini_options]
-asyncio_mode = "auto"
+[tool.rye]
+managed = true
+universal = true
+dev-dependencies = [
+    "nonebug>=0.3.7",
+    "pytest-cov>=5.0.0",
+    "pytest-xdist>=3.6.1",
+    "pytest-mock>=3.14.0",
+    "pytest-asyncio>=0.23.7",
+    "freezegun>=1.5.1",
+    "nonebot2[fastapi,httpx,websockets]>=2.3.2",
+    "nonebot-plugin-orm[default]>=0.7.4",
+    "nonebot-adapter-onebot>=2.4.4",
+    "nonebot-adapter-qq>=1.4.4",
+    "nonebot-adapter-satori>=0.12.3",
+]
+
+[tool.rye.scripts]
+test = "pytest --cov=nonebot_plugin_user --cov-report xml -n auto"
 
 [tool.pyright]
 pythonVersion = "3.9"
 pythonPlatform = "All"
-typeCheckingMode = "basic"
+typeCheckingMode = "standard"
 defineConstant = { PYDANTIC_V2 = true }
 
 [tool.ruff]
@@ -51,38 +65,41 @@ target-version = "py39"
 
 [tool.ruff.lint]
 select = [
-  "W",   # pycodestyle warnings
-  "E",   # pycodestyle errors
-  "F",   # Pyflakes
-  "UP",  # pyupgrade
-  "C4",  # flake8-comprehensions
-  "T10", # flake8-debugger
-  "T20", # flake8-print
-  "PYI", # flake8-pyi
-  "PT",  # flake8-pytest-style
-  "Q",   # flake8-quotes
+    "W",   # pycodestyle warnings
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "UP",  # pyupgrade
+    "C4",  # flake8-comprehensions
+    "T10", # flake8-debugger
+    "T20", # flake8-print
+    "PYI", # flake8-pyi
+    "PT",  # flake8-pytest-style
+    "Q",   # flake8-quotes
 ]
 ignore = [
-  "E402",  # module-import-not-at-top-of-file, Module level import not at top of cell
-  "UP037", # quoted-annotation, Remove quotes from type annotation
+    "E402", # module-import-not-at-top-of-file
 ]
 
 [tool.nonebot]
 adapters = [
-  { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" },
-  { name = "OneBot V12", module_name = "nonebot.adapters.onebot.v12" },
-  { name = "QQ", module_name = "nonebot.adapters.qq" },
-  { name = "Satori", module_name = "nonebot.adapters.satori" },
+    { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" },
+    { name = "OneBot V12", module_name = "nonebot.adapters.onebot.v12" },
+    { name = "QQ", module_name = "nonebot.adapters.qq" },
+    { name = "Satori", module_name = "nonebot.adapters.satori" },
 ]
 plugins = ["nonebot_plugin_user"]
 
 [tool.coverage.report]
 exclude_lines = [
-  "pragma: no cover",
-  "raise NotImplementedError",
-  "if __name__ == .__main__.:",
-  "if TYPE_CHECKING:",
-  "@overload",
-  "except ImportError:",
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "@overload",
+    "except ImportError:",
 ]
 omit = ["*/migrations/*"]
+
+[tool.pytest.ini_options]
+addopts = ["--import-mode=importlib"]
+asyncio_mode = "auto"
