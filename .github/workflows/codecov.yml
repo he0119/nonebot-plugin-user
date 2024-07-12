@@ -26,7 +26,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Setup rye
-        uses: eifinger/setup-rye@v4
+        uses: he0119/setup-rye@feat/windows
         with:
           enable-cache: true
           cache-prefix: ${{ runner.os }}-${{ env.PYTHON_VERSION }}
