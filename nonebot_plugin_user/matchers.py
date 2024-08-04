@@ -27,6 +27,7 @@ user_cmd = on_alconna(
         Option("-l", Args["name", str]),
     ),
     use_cmd_start=True,
+    block=True,
 )
 
 
@@ -52,7 +53,11 @@ async def _(session: UserSession, name: Match[str]):
     )
 
 
-inspect_cmd = on_alconna(Alconna("inspect"), use_cmd_start=True)
+inspect_cmd = on_alconna(
+    Alconna("inspect"),
+    use_cmd_start=True,
+    block=True,
+)
 
 
 @inspect_cmd.handle()
@@ -82,7 +87,9 @@ def generate_token() -> str:
 
 
 bind_cmd = on_alconna(
-    Alconna("bind", Option("-r"), Args["token?", str]), use_cmd_start=True
+    Alconna("bind", Option("-r"), Args["token?", str]),
+    use_cmd_start=True,
+    block=True,
 )
 
 
