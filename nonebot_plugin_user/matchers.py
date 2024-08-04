@@ -1,7 +1,7 @@
 import random
-from typing import Optional, cast
+from typing import Optional
 
-from expiringdict import ExpiringDict
+from expiringdictx import ExpiringDict
 from nonebot.adapters import Bot
 from nonebot_plugin_alconna import (
     Alconna,
@@ -76,9 +76,8 @@ async def _(bot: Bot, session: UserSession):
     await inspect_cmd.finish("\n".join(msgs))
 
 
-tokens = cast(
-    dict[str, tuple[str, str, int, Optional[SessionLevel]]],
-    ExpiringDict(max_len=100, max_age_seconds=300),
+tokens = ExpiringDict[str, tuple[str, str, int, Optional[SessionLevel]]](
+    capacity=100, default_age=300
 )
 
 
@@ -120,32 +119,33 @@ async def _(
         )
 
     # 绑定流程
-    if token in tokens:
-        # 平台的相关信息
-        platform, platform_id, user_id, level = tokens.pop(token)
-        # 群内绑定的第一步，会在原始平台发送令牌
-        # 此时 platform_id 和 platform 为目标平台的信息
-        if level == SessionLevel.LEVEL2 or level == SessionLevel.LEVEL3:
-            token = generate_token()
-            tokens[token] = (session.platform, session.platform_id, user_id, None)
-            await bind_cmd.finish(
-                f"令牌核验成功！下面将进行第二步操作。\n请在 5 分钟内使用你的账号在目标平台内向机器人发送以下文本：\n/bind {token}\n注意：当前平台是你的原始平台，这里的用户数据将覆盖目标平台的数据。"  # noqa: E501
-            )
-        # 群内绑定的第二步，会在目标平台发送令牌
-        # 此时 platform_id 和 platform 为原始平台的信息
-        # 需要重新获取其用户信息，然后将目标平台绑定至原始平台
-        elif level is None:
-            if session.user_id != user_id:
-                await bind_cmd.finish("请使用最开始要绑定账号进行操作")
-
-            user = await get_user(platform, platform_id)
-            await set_bind(session.platform, session.platform_id, user.id)
-            await bind_cmd.finish("绑定成功")
-        # 私聊绑定时，会在原始平台发送令牌
-        # 此时 platform_id 和 platform 为目标平台的信息
-        # 直接将目标平台绑定至原始平台
-        elif level == SessionLevel.LEVEL1:
-            await set_bind(platform, platform_id, session.user_id)
-            await bind_cmd.finish("绑定成功")
-    else:
+    bind_info = tokens.pop(token)
+    if bind_info is None:
         await bind_cmd.finish("令牌不存在或已过期")
+
+    # 平台的相关信息
+    platform, platform_id, user_id, level = bind_info
+    # 群内绑定的第一步，会在原始平台发送令牌
+    # 此时 platform_id 和 platform 为目标平台的信息
+    if level == SessionLevel.LEVEL2 or level == SessionLevel.LEVEL3:
+        token = generate_token()
+        tokens[token] = (session.platform, session.platform_id, user_id, None)
+        await bind_cmd.finish(
+            f"令牌核验成功！下面将进行第二步操作。\n请在 5 分钟内使用你的账号在目标平台内向机器人发送以下文本：\n/bind {token}\n注意：当前平台是你的原始平台，这里的用户数据将覆盖目标平台的数据。"  # noqa: E501
+        )
+    # 群内绑定的第二步，会在目标平台发送令牌
+    # 此时 platform_id 和 platform 为原始平台的信息
+    # 需要重新获取其用户信息，然后将目标平台绑定至原始平台
+    elif level is None:
+        if session.user_id != user_id:
+            await bind_cmd.finish("请使用最开始要绑定账号进行操作")
+
+        user = await get_user(platform, platform_id)
+        await set_bind(session.platform, session.platform_id, user.id)
+        await bind_cmd.finish("绑定成功")
+    # 私聊绑定时，会在原始平台发送令牌
+    # 此时 platform_id 和 platform 为目标平台的信息
+    # 直接将目标平台绑定至原始平台
+    elif level == SessionLevel.LEVEL1:
+        await set_bind(platform, platform_id, session.user_id)
+        await bind_cmd.finish("绑定成功")
