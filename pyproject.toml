@@ -8,7 +8,7 @@ dependencies = [
   "nonebot-plugin-orm>=0.7.0",
   "nonebot-plugin-alconna>=0.37.1",
   "nonebot-plugin-session>=0.3.0",
-  "expiringdict>=1.2.2",
+  "expiringdictx>=1.1.0",
 ]
 readme = "README.md"
 license = { file = "LICENSE" }
