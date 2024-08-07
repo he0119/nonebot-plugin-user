@@ -1,3 +1,4 @@
+# ruff: noqa: E501
 from nonebot import get_adapter
 from nonebot.adapters.onebot.v11 import Adapter, Bot, Message
 from nonebug import App
@@ -22,7 +23,7 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -35,7 +36,7 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -48,7 +49,7 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "命令 bind 可用于在多个平台间绑定用户数据。绑定过程中，原始平台的用户数据将完全保留，而目标平台的用户数据将被原始平台的数据所覆盖。\n请确认当前平台是你的目标平台，并在 5 分钟内使用你的账号在原始平台内向机器人发送以下文本：\n/bind nonebot/123456\n绑定完成后，你可以随时使用「bind -r」来解除绑定状态。",  # noqa: E501
+                "命令 bind 可用于在多个平台间绑定用户数据。绑定过程中，原始平台的用户数据将完全保留，而目标平台的用户数据将被原始平台的数据所覆盖。\n请确认当前平台是你的目标平台，并在 5 分钟内使用你的账号在原始平台内向机器人发送以下文本：\n/bind nonebot/123456\n绑定完成后，你可以随时使用「bind -r」来解除绑定状态。",
                 True,
             )
             ctx.should_finished(bind_cmd)
@@ -63,7 +64,7 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "令牌核验成功！下面将进行第二步操作。\n请在 5 分钟内使用你的账号在目标平台内向机器人发送以下文本：\n/bind nonebot/123456\n注意：当前平台是你的原始平台，这里的用户数据将覆盖目标平台的数据。",  # noqa: E501
+                "令牌核验成功！下面将进行第二步操作。\n请在 5 分钟内使用你的账号在目标平台内向机器人发送以下文本：\n/bind nonebot/123456\n注意：当前平台是你的原始平台，这里的用户数据将覆盖目标平台的数据。",
                 True,
             )
             ctx.should_finished(bind_cmd)
@@ -87,7 +88,7 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-1\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：10\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -100,7 +101,7 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -124,7 +125,7 @@ async def test_bind_group_different_user(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -137,7 +138,7 @@ async def test_bind_group_different_user(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -150,7 +151,7 @@ async def test_bind_group_different_user(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "命令 bind 可用于在多个平台间绑定用户数据。绑定过程中，原始平台的用户数据将完全保留，而目标平台的用户数据将被原始平台的数据所覆盖。\n请确认当前平台是你的目标平台，并在 5 分钟内使用你的账号在原始平台内向机器人发送以下文本：\n/bind nonebot/123456\n绑定完成后，你可以随时使用「bind -r」来解除绑定状态。",  # noqa: E501
+                "命令 bind 可用于在多个平台间绑定用户数据。绑定过程中，原始平台的用户数据将完全保留，而目标平台的用户数据将被原始平台的数据所覆盖。\n请确认当前平台是你的目标平台，并在 5 分钟内使用你的账号在原始平台内向机器人发送以下文本：\n/bind nonebot/123456\n绑定完成后，你可以随时使用「bind -r」来解除绑定状态。",
                 True,
             )
             ctx.should_finished(bind_cmd)
@@ -165,7 +166,7 @@ async def test_bind_group_different_user(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "令牌核验成功！下面将进行第二步操作。\n请在 5 分钟内使用你的账号在目标平台内向机器人发送以下文本：\n/bind nonebot/123456\n注意：当前平台是你的原始平台，这里的用户数据将覆盖目标平台的数据。",  # noqa: E501
+                "令牌核验成功！下面将进行第二步操作。\n请在 5 分钟内使用你的账号在目标平台内向机器人发送以下文本：\n/bind nonebot/123456\n注意：当前平台是你的原始平台，这里的用户数据将覆盖目标平台的数据。",
                 True,
             )
             ctx.should_finished(bind_cmd)
@@ -189,7 +190,7 @@ async def test_bind_group_different_user(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -202,7 +203,7 @@ async def test_bind_group_different_user(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)

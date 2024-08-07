@@ -47,7 +47,7 @@ async def _(session: UserSession, name: Match[str]):
                 f"平台名：{session.platform}",
                 f"平台 ID：{session.platform_id}",
                 f"用户名：{session.user_name}",
-                f"创建日期：{session.created_at.strftime('%Y-%m-%d %H:%M:%S')}",
+                f"创建日期：{session.created_at.astimezone()}",
             ]
         )
     )

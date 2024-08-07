@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from nonebot.compat import PYDANTIC_V2, ConfigDict
 from nonebot_plugin_orm import Model
@@ -49,7 +49,9 @@ class UserSession(BaseModel):
     @property
     def created_at(self) -> datetime:
         """用户创建日期"""
-        return self.user.created_at.astimezone()
+
+        # 数据库中使用 UTC 保存时间
+        return self.user.created_at.replace(tzinfo=timezone.utc)
 
     @property
     def platform_id(self) -> str:

@@ -1,3 +1,4 @@
+# ruff: noqa: E501
 import pytest
 from nonebot import get_adapter
 from nonebot.adapters.onebot.v11 import Adapter, Bot, Message
@@ -19,7 +20,7 @@ async def test_user(app: App, patch_current_time):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -32,7 +33,7 @@ async def test_user(app: App, patch_current_time):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -57,7 +58,7 @@ async def test_user_set_name(app: App, patch_current_time):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -70,7 +71,7 @@ async def test_user_set_name(app: App, patch_current_time):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -109,7 +110,7 @@ async def test_user_set_name(app: App, patch_current_time):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：name\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：10\n用户名：name\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
