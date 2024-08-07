@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 ## [Unreleased]
 
+## [0.4.0] - 2024-08-07
+
 ### Fixed
 
 - 修复用户创建日期的时区问题
@@ -94,7 +96,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 - 可以使用的版本。
 
-[unreleased]: https://github.com/he0119/nonebot-plugin-user/compare/v0.3.0...HEAD
+[unreleased]: https://github.com/he0119/nonebot-plugin-user/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/he0119/nonebot-plugin-user/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/he0119/nonebot-plugin-user/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/he0119/nonebot-plugin-user/compare/v0.1.2...v0.2.0
 [0.1.2]: https://github.com/he0119/nonebot-plugin-user/compare/v0.1.1...v0.1.2
