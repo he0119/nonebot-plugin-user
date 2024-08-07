@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 ## [Unreleased]
 
+### Fixed
+
+- 修复用户创建日期的时区问题
+
 ### Changed
 
 - 事件响应器现在将阻断事件的传播

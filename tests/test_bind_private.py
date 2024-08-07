@@ -1,3 +1,4 @@
+# ruff: noqa: E501
 from nonebot import get_adapter
 from nonebot.adapters.onebot.v11 import Adapter, Bot, Message
 from nonebug import App
@@ -22,7 +23,7 @@ async def test_bind_private(app: App, patch_current_time, mocker: MockerFixture)
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -35,7 +36,7 @@ async def test_bind_private(app: App, patch_current_time, mocker: MockerFixture)
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -72,7 +73,7 @@ async def test_bind_private(app: App, patch_current_time, mocker: MockerFixture)
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -85,7 +86,7 @@ async def test_bind_private(app: App, patch_current_time, mocker: MockerFixture)
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-1\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：10\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -109,7 +110,7 @@ async def test_bind_private_invalid_token(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -122,7 +123,7 @@ async def test_bind_private_invalid_token(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -159,7 +160,7 @@ async def test_bind_private_invalid_token(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -172,7 +173,7 @@ async def test_bind_private_invalid_token(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -188,7 +189,7 @@ async def test_bind_private_prefix(app: App, patch_current_time, mocker: MockerF
     mocked_random = mocker.patch("nonebot_plugin_user.matchers.random.randint")
     mocked_random.return_value = 123456
 
-    with patch_current_time("2023-09-14 10:46:10", tick=False):
+    with patch_current_time("2023-09-14 18:46:10+08:00", tick=False):
         async with app.test_matcher(user_cmd) as ctx:
             adapter = get_adapter(Adapter)
             bot = ctx.create_bot(base=Bot, adapter=adapter)
@@ -197,7 +198,7 @@ async def test_bind_private_prefix(app: App, patch_current_time, mocker: MockerF
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -210,7 +211,7 @@ async def test_bind_private_prefix(app: App, patch_current_time, mocker: MockerF
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -247,7 +248,7 @@ async def test_bind_private_prefix(app: App, patch_current_time, mocker: MockerF
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -260,7 +261,7 @@ async def test_bind_private_prefix(app: App, patch_current_time, mocker: MockerF
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-1\n创建日期：2023-09-14 10:46:10",
+                "平台名：qq\n平台 ID：10\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
