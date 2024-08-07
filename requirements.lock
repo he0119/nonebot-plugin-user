@@ -14,23 +14,23 @@ alembic==1.13.2
     # via nonebot-plugin-orm
 annotated-types==0.7.0
     # via pydantic
-arclet-alconna==1.8.18
+arclet-alconna==1.8.23
     # via arclet-alconna-tools
     # via nonebot-plugin-alconna
-arclet-alconna-tools==0.7.6
+arclet-alconna-tools==0.7.9
     # via nonebot-plugin-alconna
 click==8.1.7
     # via nonebot-plugin-orm
 colorama==0.4.6 ; platform_system == 'Windows' or sys_platform == 'win32'
     # via click
     # via loguru
-expiringdictx==1.0.1
+expiringdictx==1.1.0
     # via nonebot-plugin-user
 greenlet==3.0.3 ; python_version < '3.13' and (platform_machine == 'AMD64' or platform_machine == 'WIN32' or platform_machine == 'aarch64' or platform_machine == 'amd64' or platform_machine == 'ppc64le' or platform_machine == 'win32' or platform_machine == 'x86_64')
     # via sqlalchemy
 idna==3.7
     # via yarl
-importlib-metadata==7.2.1
+importlib-metadata==8.2.0
     # via nonebot-plugin-alconna
 loguru==0.7.2
     # via nonebot2
@@ -42,19 +42,19 @@ markupsafe==2.1.5
     # via mako
 multidict==6.0.5
     # via yarl
-nepattern==0.7.4
+nepattern==0.7.6
     # via arclet-alconna
     # via arclet-alconna-tools
     # via nonebot-plugin-alconna
-nonebot-plugin-alconna==0.49.0
+nonebot-plugin-alconna==0.51.1
     # via nonebot-plugin-user
-nonebot-plugin-localstore==0.7.0
+nonebot-plugin-localstore==0.7.1
     # via nonebot-plugin-orm
-nonebot-plugin-orm==0.7.4
+nonebot-plugin-orm==0.7.5
     # via nonebot-plugin-user
-nonebot-plugin-session==0.3.1
+nonebot-plugin-session==0.3.2
     # via nonebot-plugin-user
-nonebot-plugin-waiter==0.6.2
+nonebot-plugin-waiter==0.7.1
     # via nonebot-plugin-alconna
 nonebot2==2.3.2
     # via nonebot-plugin-alconna
@@ -72,12 +72,12 @@ pygtrie==2.5.0
     # via nonebot2
 python-dotenv==1.0.1
     # via nonebot2
-sqlalchemy==2.0.31
+sqlalchemy==2.0.32
     # via alembic
     # via nonebot-plugin-orm
 strenum==0.4.15
     # via nonebot-plugin-session
-tarina==0.5.4
+tarina==0.5.5
     # via arclet-alconna
     # via nepattern
     # via nonebot-plugin-alconna
