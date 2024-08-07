@@ -48,7 +48,7 @@ dev-dependencies = [
   "nonebot-adapter-onebot>=2.4.4",
   "nonebot-adapter-qq>=1.4.4",
   "nonebot-adapter-satori>=0.12.3",
-  "bump-my-version>=0.25.0",
+  "bump-my-version==0.24.3",
 ]
 
 [tool.rye.scripts]
