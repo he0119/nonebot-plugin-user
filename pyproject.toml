@@ -4,11 +4,11 @@ version = "0.3.0"
 description = "适用于 Nonebot2 的用户插件"
 authors = [{ name = "uy_sun", email = "hmy0119@gmail.com" }]
 dependencies = [
-    "nonebot2>=2.2.0",
-    "nonebot-plugin-orm>=0.7.0",
-    "nonebot-plugin-alconna>=0.37.1",
-    "nonebot-plugin-session>=0.3.0",
-    "expiringdict>=1.2.2",
+  "nonebot2>=2.2.0",
+  "nonebot-plugin-orm>=0.7.0",
+  "nonebot-plugin-alconna>=0.37.1",
+  "nonebot-plugin-session>=0.3.0",
+  "expiringdict>=1.2.2",
 ]
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -37,21 +37,24 @@ only-include = ["nonebot_plugin_user"]
 managed = true
 universal = true
 dev-dependencies = [
-    "nonebug>=0.3.7",
-    "pytest-cov>=5.0.0",
-    "pytest-xdist>=3.6.1",
-    "pytest-mock>=3.14.0",
-    "pytest-asyncio>=0.23.7",
-    "freezegun>=1.5.1",
-    "nonebot2[fastapi,httpx,websockets]>=2.3.2",
-    "nonebot-plugin-orm[default]>=0.7.4",
-    "nonebot-adapter-onebot>=2.4.4",
-    "nonebot-adapter-qq>=1.4.4",
-    "nonebot-adapter-satori>=0.12.3",
+  "nonebug>=0.3.7",
+  "pytest-cov>=5.0.0",
+  "pytest-xdist>=3.6.1",
+  "pytest-mock>=3.14.0",
+  "pytest-asyncio>=0.23.7",
+  "freezegun>=1.5.1",
+  "nonebot2[fastapi,httpx,websockets]>=2.3.2",
+  "nonebot-plugin-orm[default]>=0.7.4",
+  "nonebot-adapter-onebot>=2.4.4",
+  "nonebot-adapter-qq>=1.4.4",
+  "nonebot-adapter-satori>=0.12.3",
+  "bump-my-version>=0.25.0",
 ]
 
 [tool.rye.scripts]
 test = "pytest --cov=nonebot_plugin_user --cov-report xml -n auto"
+bump = "bump-my-version bump"
+show-bump = "bump-my-version show-bump"
 
 [tool.pyright]
 pythonVersion = "3.9"
@@ -65,41 +68,62 @@ target-version = "py39"
 
 [tool.ruff.lint]
 select = [
-    "W",   # pycodestyle warnings
-    "E",   # pycodestyle errors
-    "F",   # pyflakes
-    "UP",  # pyupgrade
-    "C4",  # flake8-comprehensions
-    "T10", # flake8-debugger
-    "T20", # flake8-print
-    "PYI", # flake8-pyi
-    "PT",  # flake8-pytest-style
-    "Q",   # flake8-quotes
+  "W",   # pycodestyle warnings
+  "E",   # pycodestyle errors
+  "F",   # pyflakes
+  "UP",  # pyupgrade
+  "C4",  # flake8-comprehensions
+  "T10", # flake8-debugger
+  "T20", # flake8-print
+  "PYI", # flake8-pyi
+  "PT",  # flake8-pytest-style
+  "Q",   # flake8-quotes
 ]
 ignore = [
-    "E402", # module-import-not-at-top-of-file
+  "E402", # module-import-not-at-top-of-file
 ]
 
 [tool.nonebot]
 adapters = [
-    { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" },
-    { name = "OneBot V12", module_name = "nonebot.adapters.onebot.v12" },
-    { name = "QQ", module_name = "nonebot.adapters.qq" },
-    { name = "Satori", module_name = "nonebot.adapters.satori" },
+  { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" },
+  { name = "OneBot V12", module_name = "nonebot.adapters.onebot.v12" },
+  { name = "QQ", module_name = "nonebot.adapters.qq" },
+  { name = "Satori", module_name = "nonebot.adapters.satori" },
 ]
 plugins = ["nonebot_plugin_user"]
 
 [tool.coverage.report]
 exclude_lines = [
-    "pragma: no cover",
-    "raise NotImplementedError",
-    "if __name__ == .__main__.:",
-    "if TYPE_CHECKING:",
-    "@overload",
-    "except ImportError:",
+  "pragma: no cover",
+  "raise NotImplementedError",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+  "@overload",
+  "except ImportError:",
 ]
 omit = ["*/migrations/*"]
 
 [tool.pytest.ini_options]
 addopts = ["--import-mode=importlib"]
 asyncio_mode = "auto"
+
+[tool.bumpversion]
+current_version = "0.3.0"
+commit = true
+message = "chore(release): {new_version}"
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = "version = \"{current_version}\""
+replace = "version = \"{new_version}\""
+
+[[tool.bumpversion.files]]
+filename = "CHANGELOG.md"
+search = "[Unreleased]"
+replace = "[Unreleased]\n\n## [{new_version}] - {now:%Y-%m-%d}"
+
+[[tool.bumpversion.files]]
+filename = "CHANGELOG.md"
+regex = true
+search = "\\[unreleased\\]: (https://.+?)v{current_version}\\.\\.\\.HEAD"
+replace = "[unreleased]: \\1v{new_version}...HEAD\n[{new_version}]: \\1v{current_version}...v{new_version}"

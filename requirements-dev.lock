@@ -29,6 +29,9 @@ asgiref==3.8.1
     # via nonebug
 async-asgi-testclient==1.4.11
     # via nonebug
+bracex==2.5
+    # via wcmatch
+bump-my-version==0.25.0
 certifi==2024.7.4
     # via httpcore
     # via httpx
@@ -36,7 +39,9 @@ certifi==2024.7.4
 charset-normalizer==3.3.2
     # via requests
 click==8.1.7
+    # via bump-my-version
     # via nonebot-plugin-orm
+    # via rich-click
     # via typer
     # via uvicorn
 colorama==0.4.6 ; platform_system == 'Windows' or sys_platform == 'win32'
@@ -50,9 +55,6 @@ dnspython==2.6.1
     # via email-validator
 email-validator==2.2.0
     # via fastapi
-exceptiongroup==1.2.1 ; python_version < '3.11'
-    # via anyio
-    # via pytest
 execnet==2.1.1
     # via pytest-xdist
 expiringdict==1.2.2
@@ -88,9 +90,6 @@ idna==3.7
     # via yarl
 importlib-metadata==7.2.1
     # via nonebot-plugin-alconna
-    # via nonebot-plugin-orm
-importlib-resources==6.4.0 ; python_version < '3.12'
-    # via nonebot-plugin-orm
 iniconfig==2.0.0
     # via pytest
 jinja2==3.1.4
@@ -146,14 +145,20 @@ packaging==24.1
     # via pytest
 pluggy==1.5.0
     # via pytest
+prompt-toolkit==3.0.36
+    # via questionary
 pydantic==2.8.2
+    # via bump-my-version
     # via fastapi
     # via nonebot-adapter-onebot
     # via nonebot-adapter-qq
     # via nonebot-plugin-localstore
     # via nonebot2
+    # via pydantic-settings
 pydantic-core==2.20.1
     # via pydantic
+pydantic-settings==2.4.0
+    # via bump-my-version
 pygments==2.18.0
     # via rich
 pygtrie==2.5.0
@@ -172,15 +177,22 @@ python-dateutil==2.9.0.post0
     # via freezegun
 python-dotenv==1.0.1
     # via nonebot2
+    # via pydantic-settings
     # via uvicorn
 python-multipart==0.0.9
     # via fastapi
 pyyaml==6.0.1
     # via uvicorn
+questionary==2.0.1
+    # via bump-my-version
 requests==2.32.3
     # via async-asgi-testclient
 rich==13.7.1
+    # via bump-my-version
+    # via rich-click
     # via typer
+rich-click==1.8.3
+    # via bump-my-version
 shellingham==1.5.4
     # via typer
 six==1.16.0
@@ -199,33 +211,27 @@ tarina==0.5.4
     # via arclet-alconna
     # via nepattern
     # via nonebot-plugin-alconna
-tomli==2.0.1 ; python_full_version <= '3.11.0a6' or python_version < '3.11'
-    # via coverage
-    # via nonebot2
-    # via pytest
+tomlkit==0.13.0
+    # via bump-my-version
 typer==0.12.3
     # via fastapi-cli
 typing-extensions==4.12.2
     # via aiosqlite
     # via alembic
-    # via anyio
     # via arclet-alconna
-    # via asgiref
     # via fastapi
     # via nepattern
     # via nonebot-adapter-onebot
     # via nonebot-adapter-qq
     # via nonebot-plugin-localstore
-    # via nonebot-plugin-orm
     # via nonebot2
     # via nonebug
     # via pydantic
     # via pydantic-core
+    # via rich-click
     # via sqlalchemy
-    # via starlette
     # via tarina
     # via typer
-    # via uvicorn
 ujson==5.10.0
     # via fastapi
 urllib3==2.2.2
@@ -233,10 +239,14 @@ urllib3==2.2.2
 uvicorn==0.30.1
     # via fastapi
     # via nonebot2
-uvloop==0.19.0 ; sys_platform != 'win32' and (platform_python_implementation != 'PyPy' and sys_platform != 'cygwin')
+uvloop==0.19.0 ; platform_python_implementation != 'PyPy' and sys_platform != 'cygwin' and sys_platform != 'win32'
     # via uvicorn
 watchfiles==0.22.0
     # via uvicorn
+wcmatch==9.0
+    # via bump-my-version
+wcwidth==0.2.13
+    # via prompt-toolkit
 websockets==12.0
     # via nonebot2
     # via uvicorn
@@ -247,4 +257,3 @@ yarl==1.9.4
     # via nonebot2
 zipp==3.19.2
     # via importlib-metadata
-    # via importlib-resources
