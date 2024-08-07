@@ -25,17 +25,28 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Set timezone
+        uses: szenius/set-timezone@1f9716b0f7120e344f0c62bb7b1ee98819aefd42
+        with:
+          timezoneLinux: "Asia/Shanghai"
+          timezoneMacos: "Asia/Shanghai"
+          timezoneWindows: "China Standard Time"
+
       - name: Setup rye
         uses: eifinger/setup-rye@77afcf35e64d9b0e210a77e85176c9165a9bf668
         with:
           enable-cache: true
           cache-prefix: ${{ env.PYTHON_VERSION }}
+
       - name: Install prerequisites
         run: |
           rye pin ${{ env.PYTHON_VERSION }}
           rye sync
+
       - name: Run tests
         run: rye run test
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
