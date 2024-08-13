@@ -84,7 +84,7 @@ async def test_user_set_name(app: App, patch_current_time):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "用户名修改失败，用户名已存在",
+                "用户名修改失败，该用户名已被使用",
                 True,
             )
             ctx.should_finished(user_cmd)
