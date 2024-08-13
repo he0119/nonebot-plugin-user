@@ -28,7 +28,7 @@ user_cmd = on_alconna(
         Option("-l", Args["name", str], help_text="修改用户名"),
         meta=CommandMeta(
             description="查看或修改用户信息",
-            usage="查看用户信息\n/user\n修改用户名\n/user -l [用户名]",
+            example="查看用户信息\n/user\n修改用户名\n/user -l [用户名]",
         ),
     ),
     use_cmd_start=True,
@@ -96,7 +96,7 @@ bind_cmd = on_alconna(
         Option("-r", help_text="解除绑定"),
         Args["token?", str],
         meta=CommandMeta(
-            description="绑定用户", usage="绑定用户\n/bind\n解除绑定\n/bind -r"
+            description="绑定用户", example="绑定用户\n/bind\n解除绑定\n/bind -r"
         ),
     ),
     use_cmd_start=True,
