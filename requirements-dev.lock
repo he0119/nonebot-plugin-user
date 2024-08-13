@@ -20,7 +20,7 @@ anyio==4.4.0
     # via httpx
     # via starlette
     # via watchfiles
-arclet-alconna==1.8.23
+arclet-alconna==1.8.25
     # via arclet-alconna-tools
     # via nonebot-plugin-alconna
 arclet-alconna-tools==0.7.9
@@ -107,11 +107,11 @@ nepattern==0.7.6
 nonebot-adapter-onebot==2.4.4
 nonebot-adapter-qq==1.5.0
 nonebot-adapter-satori==0.12.3
-nonebot-plugin-alconna==0.51.1
+nonebot-plugin-alconna==0.51.3
     # via nonebot-plugin-user
 nonebot-plugin-localstore==0.7.1
     # via nonebot-plugin-orm
-nonebot-plugin-orm==0.7.5
+nonebot-plugin-orm==0.7.6
     # via nonebot-plugin-user
 nonebot-plugin-session==0.3.2
     # via nonebot-plugin-user
@@ -232,5 +232,5 @@ win32-setctime==1.1.0 ; sys_platform == 'win32'
 yarl==1.9.4
     # via nonebot-adapter-qq
     # via nonebot2
-zipp==3.19.2
+zipp==3.20.0
     # via importlib-metadata

@@ -14,7 +14,7 @@ alembic==1.13.2
     # via nonebot-plugin-orm
 annotated-types==0.7.0
     # via pydantic
-arclet-alconna==1.8.23
+arclet-alconna==1.8.25
     # via arclet-alconna-tools
     # via nonebot-plugin-alconna
 arclet-alconna-tools==0.7.9
@@ -46,11 +46,11 @@ nepattern==0.7.6
     # via arclet-alconna
     # via arclet-alconna-tools
     # via nonebot-plugin-alconna
-nonebot-plugin-alconna==0.51.1
+nonebot-plugin-alconna==0.51.3
     # via nonebot-plugin-user
 nonebot-plugin-localstore==0.7.1
     # via nonebot-plugin-orm
-nonebot-plugin-orm==0.7.5
+nonebot-plugin-orm==0.7.6
     # via nonebot-plugin-user
 nonebot-plugin-session==0.3.2
     # via nonebot-plugin-user
@@ -95,5 +95,5 @@ win32-setctime==1.1.0 ; sys_platform == 'win32'
     # via loguru
 yarl==1.9.4
     # via nonebot2
-zipp==3.19.2
+zipp==3.20.0
     # via importlib-metadata

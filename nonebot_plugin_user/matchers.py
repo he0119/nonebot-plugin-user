@@ -7,6 +7,7 @@ from nonebot_plugin_alconna import (
     Alconna,
     AlconnaQuery,
     Args,
+    CommandMeta,
     Match,
     Option,
     Query,
@@ -24,7 +25,11 @@ from .utils import remove_bind, set_bind, set_user_name
 user_cmd = on_alconna(
     Alconna(
         "user",
-        Option("-l", Args["name", str]),
+        Option("-l", Args["name", str], help_text="修改用户名"),
+        meta=CommandMeta(
+            description="查看或修改用户信息",
+            example="查看用户信息\n/user\n修改用户名\n/user -l [用户名]",
+        ),
     ),
     use_cmd_start=True,
     block=True,
@@ -37,7 +42,7 @@ async def _(session: UserSession, name: Match[str]):
         try:
             await set_user_name(session.platform, session.platform_id, name.result)
         except IntegrityError:
-            await user_cmd.finish("用户名修改失败，用户名已存在")
+            await user_cmd.finish("用户名修改失败，该用户名已被使用")
         else:
             await user_cmd.finish("用户名修改成功")
 
@@ -54,7 +59,7 @@ async def _(session: UserSession, name: Match[str]):
 
 
 inspect_cmd = on_alconna(
-    Alconna("inspect"),
+    Alconna("inspect", meta=CommandMeta(description="查看会话信息")),
     use_cmd_start=True,
     block=True,
 )
@@ -86,7 +91,14 @@ def generate_token() -> str:
 
 
 bind_cmd = on_alconna(
-    Alconna("bind", Option("-r"), Args["token?", str]),
+    Alconna(
+        "bind",
+        Option("-r", help_text="解除绑定"),
+        Args["token?", str],
+        meta=CommandMeta(
+            description="绑定用户", example="绑定用户\n/bind\n解除绑定\n/bind -r"
+        ),
+    ),
     use_cmd_start=True,
     block=True,
 )
