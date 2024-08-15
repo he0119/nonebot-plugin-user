@@ -27,7 +27,7 @@ def _get_insert_mutex():
 
 
 async def get_user(platform: str, platform_id: str) -> User:
-    """创建账号"""
+    """获取或创建账号"""
     async with get_session() as session:
         user = (
             await session.scalars(
