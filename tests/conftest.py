@@ -26,7 +26,7 @@ def _load_adapters(nonebug_init: None):
     driver.register_adapter(OnebotV12Adapter)
 
 
-@pytest.fixture()
+@pytest.fixture
 async def app(app: App, mocker: MockerFixture, tmp_path: Path):
     # 加载插件
     nonebot.require("nonebot_plugin_user")
@@ -47,7 +47,7 @@ async def app(app: App, mocker: MockerFixture, tmp_path: Path):
         await session.execute(delete(User))
 
 
-@pytest.fixture()
+@pytest.fixture
 async def session(app: App):
     from nonebot_plugin_orm import get_session
 
@@ -72,6 +72,6 @@ def patch_time(time_to_freeze, tick=True):
         event.remove(User, "before_insert", set_timestamp)
 
 
-@pytest.fixture()
+@pytest.fixture
 def patch_current_time():
     return patch_time
