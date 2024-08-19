@@ -10,6 +10,7 @@ from tests.fake import fake_group_message_event_v11
 
 
 async def test_concurrency(app: App):
+    """测试并发"""
     from nonebot_plugin_user import get_user, get_user_by_id
 
     users: list[tuple[str, str]] = [
@@ -33,10 +34,18 @@ async def test_concurrency(app: App):
     await asyncio.gather(*tasks)
 
 
-async def test_permission(app: App):
+async def test_permission_concurrency(app: App):
+    """测试权限和其他响应器同时访问数据库"""
     from nonebot_plugin_orm import get_session
 
     from tests.plugins.orm import orm_cmd
+
+    async with get_session() as session:
+        from tests.plugins.orm import Test
+
+        test = await session.scalars(select(Test))
+
+        assert len(test.all()) == 0
 
     async with app.test_matcher() as ctx:
         adapter = get_adapter(Adapter)
