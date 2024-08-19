@@ -1,8 +1,7 @@
 import asyncio
-import sys
 from typing import Optional
 
-from nonebot_plugin_orm import get_session
+from nonebot_plugin_orm import get_scoped_session, get_session
 from sqlalchemy import exc, select
 
 from .models import Bind, User
@@ -11,36 +10,28 @@ _insert_mutex: Optional[asyncio.Lock] = None
 
 
 def _get_insert_mutex():
-    # py3.10 以下，Lock 必须在 event_loop 内创建
     global _insert_mutex
 
-    if _insert_mutex is None:
+    if _insert_mutex is None:  # pragma: no cover
         _insert_mutex = asyncio.Lock()
-    elif sys.version_info < (3, 10):
-        # 还需要判断 loop 是否与之前创建的一致
-        # 单测中不同的 test，loop 也不一样
-        # 但是 nonebot 里 loop 始终是一样的
-        if getattr(_insert_mutex, "_loop") != asyncio.get_running_loop():
-            _insert_mutex = asyncio.Lock()
 
     return _insert_mutex
 
 
-async def get_user(platform: str, platform_id: str) -> User:
-    """获取或创建账号"""
-    async with get_session() as session:
-        user = (
-            await session.scalars(
-                select(User)
-                .where(Bind.platform_id == platform_id)
-                .where(Bind.platform == platform)
-                .join(Bind, User.id == Bind.bind_id)
-            )
-        ).one_or_none()
+async def _get_user(session, platform: str, platform_id: str) -> Optional[User]:
+    """获取账号"""
+    return (
+        await session.scalars(
+            select(User)
+            .where(Bind.platform_id == platform_id)
+            .where(Bind.platform == platform)
+            .join(Bind, User.id == Bind.bind_id)
+        )
+    ).one_or_none()
 
-        if user:
-            return user
 
+async def create_user(platform: str, platform_id: str) -> User:
+    """创建账号"""
     async with _get_insert_mutex():
         try:
             async with get_session(expire_on_commit=False) as session:
@@ -56,7 +47,6 @@ async def get_user(platform: str, platform_id: str) -> User:
                 )
                 session.add(bind)
                 await session.commit()
-                return user
         except exc.IntegrityError:
             async with get_session() as session:
                 user = (
@@ -70,8 +60,35 @@ async def get_user(platform: str, platform_id: str) -> User:
 
                 if not user:
                     raise ValueError("创建用户失败")  # pragma: no cover
+    return user
 
-                return user
+
+async def get_user(platform: str, platform_id: str) -> User:
+    """获取或创建账号"""
+    async with get_session() as session:
+        user = await _get_user(session, platform, platform_id)
+
+    if not user:
+        user = await create_user(platform, platform_id)
+
+    return user
+
+
+async def get_user_depends(platform: str, platform_id: str) -> User:
+    """获取或创建账号（依赖注入专用）
+
+    使用 scoped_session 来进行数据库操作
+    """
+    scoped_session = get_scoped_session()
+
+    user = await _get_user(scoped_session, platform, platform_id)
+
+    if not user:
+        user = await create_user(platform, platform_id)
+        # 当前 user 是在新的 session 中创建的，需要 merge 到 scoped_session 中
+        user = await scoped_session.merge(user)
+
+    return user
 
 
 async def get_user_by_id(user_id: int) -> User:

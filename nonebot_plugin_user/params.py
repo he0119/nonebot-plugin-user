@@ -2,7 +2,7 @@ from nonebot.params import Depends
 from nonebot_plugin_session import Session, SessionLevel, extract_session
 
 from .models import UserSession
-from .utils import get_user as _get_user
+from .utils import get_user_depends
 
 
 async def get_user(session: Session = Depends(extract_session)):
@@ -17,7 +17,7 @@ async def get_user(session: Session = Depends(extract_session)):
     ):
         return  # pragma: no cover
 
-    user = await _get_user(session.platform, session.id1)
+    user = await get_user_depends(session.platform, session.id1)
 
     return user
 
