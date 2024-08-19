@@ -26,60 +26,9 @@ def _get_insert_mutex():
     return _insert_mutex
 
 
-async def get_user(platform: str, platform_id: str) -> User:
-    """获取或创建账号"""
-    async with get_session() as session:
-        user = (
-            await session.scalars(
-                select(User)
-                .where(Bind.platform_id == platform_id)
-                .where(Bind.platform == platform)
-                .join(Bind, User.id == Bind.bind_id)
-            )
-        ).one_or_none()
-
-        if user:
-            return user
-
-    async with _get_insert_mutex():
-        try:
-            async with get_session(expire_on_commit=False) as session:
-                user = User(name=f"{platform}-{platform_id}")
-                session.add(user)
-                await session.commit()
-
-                bind = Bind(
-                    platform_id=platform_id,
-                    platform=platform,
-                    bind_id=user.id,
-                    original_id=user.id,
-                )
-                session.add(bind)
-                await session.commit()
-                return user
-        except exc.IntegrityError:
-            async with get_session() as session:
-                user = (
-                    await session.scalars(
-                        select(User)
-                        .where(Bind.platform == platform)
-                        .where(Bind.platform_id == platform_id)
-                        .join(Bind, User.id == Bind.bind_id)
-                    )
-                ).one_or_none()
-
-                if not user:
-                    raise ValueError("创建用户失败")  # pragma: no cover
-
-                return user
-
-
-async def get_user_depends(platform: str, platform_id: str) -> User:
-    """获取或创建账号"""
-    scoped_session = get_scoped_session()
-
-    user = (
-        await scoped_session.scalars(
+async def _get_user(session, platform: str, platform_id: str) -> Optional[User]:
+    return (
+        await session.scalars(
             select(User)
             .where(Bind.platform_id == platform_id)
             .where(Bind.platform == platform)
@@ -87,9 +36,8 @@ async def get_user_depends(platform: str, platform_id: str) -> User:
         )
     ).one_or_none()
 
-    if user:
-        return user
 
+async def create_user(platform: str, platform_id: str) -> User:
     async with _get_insert_mutex():
         try:
             async with get_session(expire_on_commit=False) as session:
@@ -105,7 +53,6 @@ async def get_user_depends(platform: str, platform_id: str) -> User:
                 )
                 session.add(bind)
                 await session.commit()
-                return await scoped_session.merge(user)
         except exc.IntegrityError:
             async with get_session() as session:
                 user = (
@@ -119,8 +66,34 @@ async def get_user_depends(platform: str, platform_id: str) -> User:
 
                 if not user:
                     raise ValueError("创建用户失败")  # pragma: no cover
+    return user
 
-                return await scoped_session.merge(user)
+
+async def get_user(platform: str, platform_id: str) -> User:
+    """获取或创建账号"""
+    async with get_session() as session:
+        user = await _get_user(session, platform, platform_id)
+
+    if not user:
+        user = await create_user(platform, platform_id)
+
+    return user
+
+
+async def get_user_depends(platform: str, platform_id: str) -> User:
+    """获取或创建账号（依赖注入专用）
+
+    使用 scoped_session 来进行数据库操作
+    """
+    scoped_session = get_scoped_session()
+
+    user = await _get_user(scoped_session, platform, platform_id)
+
+    if not user:
+        user = await create_user(platform, platform_id)
+
+    # 当前 user 是在新的 session 中创建的，需要 merge 到 scoped_session 中
+    return await scoped_session.merge(user)
 
 
 async def get_user_by_id(user_id: int) -> User:
