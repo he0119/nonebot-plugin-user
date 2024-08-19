@@ -4,6 +4,7 @@ from typing import Optional
 
 from nonebot_plugin_orm import get_session
 from sqlalchemy import exc, select
+from sqlalchemy.ext.asyncio import async_scoped_session
 
 from .models import Bind, User
 
@@ -40,6 +41,55 @@ async def get_user(platform: str, platform_id: str) -> User:
 
         if user:
             return user
+
+    async with _get_insert_mutex():
+        try:
+            async with get_session(expire_on_commit=False) as session:
+                user = User(name=f"{platform}-{platform_id}")
+                session.add(user)
+                await session.commit()
+
+                bind = Bind(
+                    platform_id=platform_id,
+                    platform=platform,
+                    bind_id=user.id,
+                    original_id=user.id,
+                )
+                session.add(bind)
+                await session.commit()
+                return user
+        except exc.IntegrityError:
+            async with get_session() as session:
+                user = (
+                    await session.scalars(
+                        select(User)
+                        .where(Bind.platform == platform)
+                        .where(Bind.platform_id == platform_id)
+                        .join(Bind, User.id == Bind.bind_id)
+                    )
+                ).one_or_none()
+
+                if not user:
+                    raise ValueError("创建用户失败")  # pragma: no cover
+
+                return user
+
+
+async def get_user_depends(
+    scoped_session: async_scoped_session, platform: str, platform_id: str
+) -> User:
+    """获取或创建账号"""
+    user = (
+        await scoped_session.scalars(
+            select(User)
+            .where(Bind.platform_id == platform_id)
+            .where(Bind.platform == platform)
+            .join(Bind, User.id == Bind.bind_id)
+        )
+    ).one_or_none()
+
+    if user:
+        return user
 
     async with _get_insert_mutex():
         try:
