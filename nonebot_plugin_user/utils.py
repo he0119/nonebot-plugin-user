@@ -85,9 +85,10 @@ async def get_user_depends(platform: str, platform_id: str) -> User:
 
     if not user:
         user = await create_user(platform, platform_id)
+        # 当前 user 是在新的 session 中创建的，需要 merge 到 scoped_session 中
+        user = await scoped_session.merge(user)
 
-    # 当前 user 是在新的 session 中创建的，需要 merge 到 scoped_session 中
-    return await scoped_session.merge(user)
+    return user
 
 
 async def get_user_by_id(user_id: int) -> User:
