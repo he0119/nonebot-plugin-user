@@ -106,6 +106,7 @@ async def get_user_depends(
                 )
                 session.add(bind)
                 await session.commit()
+                await scoped_session.merge(user)
                 return user
         except exc.IntegrityError:
             async with get_session() as session:
@@ -121,6 +122,7 @@ async def get_user_depends(
                 if not user:
                     raise ValueError("创建用户失败")  # pragma: no cover
 
+                await scoped_session.merge(user)
                 return user
 
 
