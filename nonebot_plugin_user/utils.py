@@ -27,6 +27,7 @@ def _get_insert_mutex():
 
 
 async def _get_user(session, platform: str, platform_id: str) -> Optional[User]:
+    """获取账号"""
     return (
         await session.scalars(
             select(User)
@@ -38,6 +39,7 @@ async def _get_user(session, platform: str, platform_id: str) -> Optional[User]:
 
 
 async def create_user(platform: str, platform_id: str) -> User:
+    """创建账号"""
     async with _get_insert_mutex():
         try:
             async with get_session(expire_on_commit=False) as session:
