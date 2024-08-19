@@ -2,9 +2,8 @@ import asyncio
 import sys
 from typing import Optional
 
-from nonebot_plugin_orm import get_session
+from nonebot_plugin_orm import get_scoped_session, get_session
 from sqlalchemy import exc, select
-from sqlalchemy.ext.asyncio import async_scoped_session
 
 from .models import Bind, User
 
@@ -75,10 +74,10 @@ async def get_user(platform: str, platform_id: str) -> User:
                 return user
 
 
-async def get_user_depends(
-    scoped_session: async_scoped_session, platform: str, platform_id: str
-) -> User:
+async def get_user_depends(platform: str, platform_id: str) -> User:
     """获取或创建账号"""
+    scoped_session = get_scoped_session()
+
     user = (
         await scoped_session.scalars(
             select(User)
