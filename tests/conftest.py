@@ -1,3 +1,4 @@
+import asyncio
 import datetime
 from contextlib import contextmanager
 from pathlib import Path
@@ -35,6 +36,8 @@ async def app(app: App, mocker: MockerFixture, tmp_path: Path):
     from nonebot_plugin_orm import get_session, init_orm
 
     mocker.patch("nonebot_plugin_orm._data_dir", tmp_path / "orm")
+    # 确保 _insert_mutex 是在当前事件循环中创建的
+    mocker.patch("nonebot_plugin_user.utils._insert_mutex", asyncio.Lock())
 
     await init_orm()
 

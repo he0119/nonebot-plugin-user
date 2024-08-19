@@ -4,6 +4,7 @@ import random
 from nonebot import get_adapter
 from nonebot.adapters.onebot.v11 import Adapter, Bot, Message
 from nonebug import App
+from sqlalchemy import select
 
 from tests.fake import fake_group_message_event_v11
 
@@ -34,7 +35,8 @@ async def test_concurrency(app: App):
 
 async def test_permission(app: App):
     from nonebot_plugin_orm import get_session
-    from sqlalchemy import select
+
+    from tests.plugins.orm import orm_cmd
 
     async with app.test_matcher() as ctx:
         adapter = get_adapter(Adapter)
@@ -43,7 +45,7 @@ async def test_permission(app: App):
         event = fake_group_message_event_v11(message=Message("/orm"))
         ctx.receive_event(bot, event)
         ctx.should_call_send(event, "已提交！", None)
-        ctx.should_finished()
+        ctx.should_finished(orm_cmd)
 
     async with get_session() as session:
         from tests.plugins.orm import Test
@@ -59,7 +61,7 @@ async def test_permission(app: App):
         event = fake_group_message_event_v11(message=Message("/orm"))
         ctx.receive_event(bot, event)
         ctx.should_call_send(event, "已提交！", None)
-        ctx.should_finished()
+        ctx.should_finished(orm_cmd)
 
     async with get_session() as session:
         from tests.plugins.orm import Test

@@ -1,5 +1,4 @@
 import asyncio
-import sys
 from typing import Optional
 
 from nonebot_plugin_orm import get_scoped_session, get_session
@@ -11,17 +10,10 @@ _insert_mutex: Optional[asyncio.Lock] = None
 
 
 def _get_insert_mutex():
-    # py3.10 以下，Lock 必须在 event_loop 内创建
     global _insert_mutex
 
     if _insert_mutex is None:
         _insert_mutex = asyncio.Lock()
-    elif sys.version_info < (3, 10):
-        # 还需要判断 loop 是否与之前创建的一致
-        # 单测中不同的 test，loop 也不一样
-        # 但是 nonebot 里 loop 始终是一样的
-        if getattr(_insert_mutex, "_loop") != asyncio.get_running_loop():
-            _insert_mutex = asyncio.Lock()
 
     return _insert_mutex
 
