@@ -12,7 +12,7 @@ _insert_mutex: Optional[asyncio.Lock] = None
 def _get_insert_mutex():
     global _insert_mutex
 
-    if _insert_mutex is None:
+    if _insert_mutex is None:  # pragma: no cover
         _insert_mutex = asyncio.Lock()
 
     return _insert_mutex
