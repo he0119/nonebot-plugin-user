@@ -30,6 +30,8 @@ def _load_adapters(nonebug_init: None):
 async def app(app: App, mocker: MockerFixture, tmp_path: Path):
     # 加载插件
     nonebot.require("nonebot_plugin_user")
+    nonebot.require("tests.plugins.admin")
+    nonebot.require("tests.plugins.orm")
     from nonebot_plugin_orm import get_session, init_orm
 
     mocker.patch("nonebot_plugin_orm._data_dir", tmp_path / "orm")
