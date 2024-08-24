@@ -11,6 +11,8 @@ from __future__ import annotations
 from collections.abc import Sequence
 
 from alembic import op
+from nonebot import logger
+from sqlalchemy.exc import IdentifierError
 
 revision: str = "9492159f98f7"
 down_revision: str | Sequence[str] | None = "ac57f7074e58"
@@ -35,8 +37,9 @@ def upgrade(name: str = "") -> None:
                 "fk_nonebot_plugin_user_bind_bind_id_nonebot_plugin_user_user",
                 type_="foreignkey",
             )
-    except ValueError:
-        pass
+        logger.info("[user] 已成功删除外键约束")
+    except (ValueError, IdentifierError):
+        logger.debug("[user] 未找到外键约束，跳过删除")
     # ### end Alembic commands ###
 
 
