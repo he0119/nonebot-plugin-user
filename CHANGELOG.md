@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 ## [Unreleased]
 
+### Fixed
+
+- 修复 postgresql 下关系名过长的问题
+
 ## [0.4.2] - 2024-08-19
 
 ### Fixed

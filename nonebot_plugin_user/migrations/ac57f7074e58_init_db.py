@@ -37,18 +37,6 @@ def upgrade(name: str = "") -> None:
         sa.Column("platform_id", sa.String(length=64), nullable=False),
         sa.Column("bind_id", sa.Integer(), nullable=False),
         sa.Column("original_id", sa.Integer(), nullable=False),
-        sa.ForeignKeyConstraint(
-            ["bind_id"],
-            ["nonebot_plugin_user_user.id"],
-            name=op.f("fk_nonebot_plugin_user_bind_bind_id_nonebot_plugin_user_user"),
-        ),
-        sa.ForeignKeyConstraint(
-            ["original_id"],
-            ["nonebot_plugin_user_user.id"],
-            name=op.f(
-                "fk_nonebot_plugin_user_bind_original_id_nonebot_plugin_user_user"
-            ),
-        ),
         sa.PrimaryKeyConstraint(
             "platform", "platform_id", name=op.f("pk_nonebot_plugin_user_bind")
         ),
