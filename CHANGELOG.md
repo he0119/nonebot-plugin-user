@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 ## [Unreleased]
 
+## [0.4.3] - 2024-08-29
+
 ### Fixed
 
 - 修复 postgresql 下关系名过长的问题
@@ -112,7 +114,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 - 可以使用的版本。
 
-[unreleased]: https://github.com/he0119/nonebot-plugin-user/compare/v0.4.2...HEAD
+[unreleased]: https://github.com/he0119/nonebot-plugin-user/compare/v0.4.3...HEAD
+[0.4.3]: https://github.com/he0119/nonebot-plugin-user/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/he0119/nonebot-plugin-user/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/he0119/nonebot-plugin-user/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/he0119/nonebot-plugin-user/compare/v0.3.0...v0.4.0
