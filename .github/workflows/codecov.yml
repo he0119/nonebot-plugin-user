@@ -45,7 +45,7 @@ jobs:
           uv sync
 
       - name: Run tests
-        run: uv run test
+        run: uv run poe test
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
