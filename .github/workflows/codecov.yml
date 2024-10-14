@@ -33,19 +33,19 @@ jobs:
           timezoneMacos: "Asia/Shanghai"
           timezoneWindows: "China Standard Time"
 
-      - name: Setup rye
-        uses: eifinger/setup-rye@a64bd427414a77fd506d9a85a590ab36d71cf86a
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v3
         with:
           enable-cache: true
-          cache-prefix: ${{ env.PYTHON_VERSION }}
+          cache-suffix: ${{ env.PYTHON_VERSION }}
 
       - name: Install prerequisites
         run: |
-          rye pin ${{ env.PYTHON_VERSION }}
-          rye sync
+          uv python pin ${{ env.PYTHON_VERSION }}
+          uv sync
 
       - name: Run tests
-        run: rye run test
+        run: uv run poe test
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
