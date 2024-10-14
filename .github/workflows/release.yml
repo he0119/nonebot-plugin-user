@@ -17,18 +17,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup rye
-        uses: eifinger/setup-rye@a64bd427414a77fd506d9a85a590ab36d71cf86a
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v3
         with:
           enable-cache: true
 
       - name: Install prerequisites
-        run: rye sync
+        run: uv sync
 
       - name: Get Version
         id: version
         run: |
-          echo "VERSION=$(rye version)" >> $GITHUB_OUTPUT
+          echo "VERSION=$(uv tree -d0 | grep -oP 'v\K[0-9]+\.[0-9]+\.[0-9]+')" >> $GITHUB_OUTPUT
           echo "TAG_VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
           echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
 
@@ -37,7 +37,7 @@ jobs:
         run: exit 1
 
       - name: Build
-        run: rye build
+        run: uv build
 
       - name: Publish a Python distribution to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
