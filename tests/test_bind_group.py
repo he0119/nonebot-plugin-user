@@ -21,9 +21,19 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
             event = fake_group_message_event_v11(message=Message("/user"), user_id=1)
 
             ctx.receive_event(bot, event)
+            ctx.should_call_api(
+                "get_group_info",
+                {"group_id": 10000},
+                {}
+            )
+            ctx.should_call_api(
+                "get_group_member_info",
+                {'group_id': 10000, 'user_id': 1, 'no_cache': True},
+                {}
+            )
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
+                "平台名：QQClient\n平台 ID：1\n用户名：QQClient-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -34,9 +44,19 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
             event = fake_group_message_event_v11(message=Message("/user"))
 
             ctx.receive_event(bot, event)
+            ctx.should_call_api(
+                "get_group_info",
+                {"group_id": 10000},
+                {}
+            )
+            ctx.should_call_api(
+                "get_group_member_info",
+                {'group_id': 10000, 'user_id': 10, 'no_cache': True},
+                {}
+            )
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 18:46:10+08:00",
+                "平台名：QQClient\n平台 ID：10\n用户名：QQClient-10\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -88,7 +108,7 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
+                "平台名：QQClient\n平台 ID：10\n用户名：QQClient-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -101,7 +121,7 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
+                "平台名：QQClient\n平台 ID：1\n用户名：QQClient-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -123,9 +143,19 @@ async def test_bind_group_different_user(
             event = fake_group_message_event_v11(message=Message("/user"), user_id=1)
 
             ctx.receive_event(bot, event)
+            ctx.should_call_api(
+                "get_group_info",
+                {"group_id": 10000},
+                {}
+            )
+            ctx.should_call_api(
+                "get_group_member_info",
+                {'group_id': 10000, 'user_id': 1, 'no_cache': True},
+                {}
+            )
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
+                "平台名：QQClient\n平台 ID：1\n用户名：QQClient-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -136,9 +166,19 @@ async def test_bind_group_different_user(
             event = fake_group_message_event_v11(message=Message("/user"))
 
             ctx.receive_event(bot, event)
+            ctx.should_call_api(
+                "get_group_info",
+                {"group_id": 10000},
+                {}
+            )
+            ctx.should_call_api(
+                "get_group_member_info",
+                {'group_id': 10000, 'user_id': 10, 'no_cache': True},
+                {}
+            )
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 18:46:10+08:00",
+                "平台名：QQClient\n平台 ID：10\n用户名：QQClient-10\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -190,7 +230,7 @@ async def test_bind_group_different_user(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
+                "平台名：QQClient\n平台 ID：1\n用户名：QQClient-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -203,7 +243,7 @@ async def test_bind_group_different_user(
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 18:46:10+08:00",
+                "平台名：QQClient\n平台 ID：10\n用户名：QQClient-10\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)

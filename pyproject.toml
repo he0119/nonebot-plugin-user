@@ -59,7 +59,7 @@ dev-dependencies = [
 universal = true
 
 [tool.poe.tasks]
-test = "pytest --cov=nonebot_plugin_user --cov-report xml -n auto"
+test = "pytest --cov=nonebot_plugin_user --cov-report xml -n auto -v"
 bump = "bump-my-version bump"
 show-bump = "bump-my-version show-bump"
 
@@ -113,6 +113,7 @@ omit = ["*/migrations/*"]
 [tool.pytest.ini_options]
 addopts = ["--import-mode=importlib"]
 asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "session"
 
 [tool.bumpversion]
 current_version = "0.4.4"

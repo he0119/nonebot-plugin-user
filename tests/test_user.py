@@ -18,9 +18,19 @@ async def test_user(app: App, patch_current_time):
             event = fake_group_message_event_v11(message=Message("/user"))
 
             ctx.receive_event(bot, event)
+            ctx.should_call_api(
+                "get_group_info",
+                {"group_id": 10000},
+                {}
+            )
+            ctx.should_call_api(
+                "get_group_member_info",
+                {'group_id': 10000, 'user_id': 10, 'no_cache': True},
+                {}
+            )
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 18:46:10+08:00",
+                "平台名：QQClient\n平台 ID：10\n用户名：QQClient-10\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -33,7 +43,7 @@ async def test_user(app: App, patch_current_time):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 18:46:10+08:00",
+                "平台名：QQClient\n平台 ID：10\n用户名：QQClient-10\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -56,9 +66,19 @@ async def test_user_set_name(app: App, patch_current_time):
             event = fake_group_message_event_v11(message=Message("/user"))
 
             ctx.receive_event(bot, event)
+            ctx.should_call_api(
+                "get_group_info",
+                {"group_id": 10000},
+                {}
+            )
+            ctx.should_call_api(
+                "get_group_member_info",
+                {'group_id': 10000, 'user_id': 10, 'no_cache': True},
+                {}
+            )
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：qq-10\n创建日期：2023-09-14 18:46:10+08:00",
+                "平台名：QQClient\n平台 ID：10\n用户名：QQClient-10\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -69,9 +89,19 @@ async def test_user_set_name(app: App, patch_current_time):
             event = fake_group_message_event_v11(message=Message("/user"), user_id=1)
 
             ctx.receive_event(bot, event)
+            ctx.should_call_api(
+                "get_group_info",
+                {"group_id": 10000},
+                {}
+            )
+            ctx.should_call_api(
+                "get_group_member_info",
+                {'group_id': 10000, 'user_id': 1, 'no_cache': True},
+                {}
+            )
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：1\n用户名：qq-1\n创建日期：2023-09-14 18:46:10+08:00",
+                "平台名：QQClient\n平台 ID：1\n用户名：QQClient-1\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -79,7 +109,7 @@ async def test_user_set_name(app: App, patch_current_time):
         async with app.test_matcher(user_cmd) as ctx:
             adapter = get_adapter(Adapter)
             bot = ctx.create_bot(base=Bot, adapter=adapter)
-            event = fake_private_message_event_v11(message=Message("/user -l qq-1"))
+            event = fake_private_message_event_v11(message=Message("/user -l QQClient-1"))
 
             ctx.receive_event(bot, event)
             ctx.should_call_send(
@@ -110,7 +140,7 @@ async def test_user_set_name(app: App, patch_current_time):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：qq\n平台 ID：10\n用户名：name\n创建日期：2023-09-14 18:46:10+08:00",
+                "平台名：QQClient\n平台 ID：10\n用户名：name\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -129,7 +159,7 @@ async def test_user_session(app: App, patch_current_time):
 
     @test_matcher.handle()
     async def _(session: UserSession):
-        await test_matcher.finish(session.group_session_id)
+        await test_matcher.finish(session.session_id)
 
     with patch_current_time("2023-09-14 10:46:10", tick=False):
         async with app.test_matcher(test_matcher) as ctx:
@@ -138,5 +168,15 @@ async def test_user_session(app: App, patch_current_time):
             event = fake_group_message_event_v11(message=Message("/test"))
 
             ctx.receive_event(bot, event)
-            ctx.should_call_send(event, "qq_10000", True)
+            ctx.should_call_api(
+                "get_group_info",
+                {"group_id": 10000},
+                {}
+            )
+            ctx.should_call_api(
+                "get_group_member_info",
+                {'group_id': 10000, 'user_id': 10, 'no_cache': True},
+                {}
+            )
+            ctx.should_call_send(event, "QQClient_10000", True)
             ctx.should_finished(test_matcher)
