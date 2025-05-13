@@ -25,7 +25,7 @@ async def test_user(app: App, patch_current_time):
             )
             ctx.should_call_api(
                 "get_group_member_info",
-                {'group_id': 10000, 'user_id': 10, 'no_cache': True},
+                {"group_id": 10000, "user_id": 10, "no_cache": True},
                 {}
             )
             ctx.should_call_send(
@@ -73,7 +73,7 @@ async def test_user_set_name(app: App, patch_current_time):
             )
             ctx.should_call_api(
                 "get_group_member_info",
-                {'group_id': 10000, 'user_id': 10, 'no_cache': True},
+                {"group_id": 10000, "user_id": 10, "no_cache": True},
                 {}
             )
             ctx.should_call_send(
@@ -96,7 +96,7 @@ async def test_user_set_name(app: App, patch_current_time):
             )
             ctx.should_call_api(
                 "get_group_member_info",
-                {'group_id': 10000, 'user_id': 1, 'no_cache': True},
+                {"group_id": 10000, "user_id": 1, "no_cache": True},
                 {}
             )
             ctx.should_call_send(
@@ -175,7 +175,7 @@ async def test_user_session(app: App, patch_current_time):
             )
             ctx.should_call_api(
                 "get_group_member_info",
-                {'group_id': 10000, 'user_id': 10, 'no_cache': True},
+                {"group_id": 10000, "user_id": 10, "no_cache": True},
                 {}
             )
             ctx.should_call_send(event, "QQClient_10000", True)

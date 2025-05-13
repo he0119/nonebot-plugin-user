@@ -20,8 +20,8 @@ if TYPE_CHECKING:
     from nonebot_plugin_user.models import Bind as BindModel
 
 
-revision: str = 'd6e05e49f79f'
-down_revision: str | Sequence[str] | None = '9492159f98f7'
+revision: str = "d6e05e49f79f"
+down_revision: str | Sequence[str] | None = "9492159f98f7"
 branch_labels: str | Sequence[str] | None = None
 depends_on: str | Sequence[str] | None = None
 

@@ -28,7 +28,7 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
             )
             ctx.should_call_api(
                 "get_group_member_info",
-                {'group_id': 10000, 'user_id': 1, 'no_cache': True},
+                {"group_id": 10000, "user_id": 1, "no_cache": True},
                 {}
             )
             ctx.should_call_send(
@@ -51,7 +51,7 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
             )
             ctx.should_call_api(
                 "get_group_member_info",
-                {'group_id': 10000, 'user_id': 10, 'no_cache': True},
+                {"group_id": 10000, "user_id": 10, "no_cache": True},
                 {}
             )
             ctx.should_call_send(
@@ -150,7 +150,7 @@ async def test_bind_group_different_user(
             )
             ctx.should_call_api(
                 "get_group_member_info",
-                {'group_id': 10000, 'user_id': 1, 'no_cache': True},
+                {"group_id": 10000, "user_id": 1, "no_cache": True},
                 {}
             )
             ctx.should_call_send(
@@ -173,7 +173,7 @@ async def test_bind_group_different_user(
             )
             ctx.should_call_api(
                 "get_group_member_info",
-                {'group_id': 10000, 'user_id': 10, 'no_cache': True},
+                {"group_id": 10000, "user_id": 10, "no_cache": True},
                 {}
             )
             ctx.should_call_send(

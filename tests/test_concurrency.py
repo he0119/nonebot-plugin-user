@@ -60,7 +60,7 @@ async def test_permission_concurrency(app: App):
         )
         ctx.should_call_api(
             "get_group_member_info",
-            {'group_id': 10000, 'user_id': 10, 'no_cache': True},
+            {"group_id": 10000, "user_id": 10, "no_cache": True},
             {}
         )
         ctx.should_call_send(event, "已提交！", None)
