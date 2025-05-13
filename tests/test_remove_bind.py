@@ -22,12 +22,8 @@ async def test_remove_bind(app: App, patch_current_time, mocker: MockerFixture):
             session.add(user)
             session.add(user2)
             await session.commit()
-            bind = Bind(
-                platform_id="1", platform="QQClient", bind_id=user.id, original_id=user.id
-            )
-            bind2 = Bind(
-                platform_id="10", platform="QQClient", bind_id=user.id, original_id=user2.id
-            )
+            bind = Bind(platform_id="1", platform="QQClient", bind_id=user.id, original_id=user.id)
+            bind2 = Bind(platform_id="10", platform="QQClient", bind_id=user.id, original_id=user2.id)
             session.add(bind)
             session.add(bind2)
             await session.commit()
@@ -46,9 +42,7 @@ async def test_remove_bind(app: App, patch_current_time, mocker: MockerFixture):
             ctx.should_finished(bind_cmd)
 
         async with get_session() as session:
-            bind = (
-                await session.scalars(select(Bind).where(Bind.platform_id == 10))
-            ).one()
+            bind = (await session.scalars(select(Bind).where(Bind.platform_id == 10))).one()
             assert bind.bind_id == 2
 
 

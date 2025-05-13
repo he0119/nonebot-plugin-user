@@ -57,9 +57,7 @@ async def test_bind_private(app: App, patch_current_time, mocker: MockerFixture)
         async with app.test_matcher(bind_cmd) as ctx:
             adapter = get_adapter(Adapter)
             bot = ctx.create_bot(base=Bot, adapter=adapter)
-            event = fake_private_message_event_v11(
-                message=Message("/bind nonebot/123456"), user_id=1
-            )
+            event = fake_private_message_event_v11(message=Message("/bind nonebot/123456"), user_id=1)
 
             ctx.receive_event(bot, event)
             ctx.should_call_send(event, "绑定成功", True)
@@ -92,9 +90,7 @@ async def test_bind_private(app: App, patch_current_time, mocker: MockerFixture)
             ctx.should_finished(user_cmd)
 
 
-async def test_bind_private_invalid_token(
-    app: App, patch_current_time, mocker: MockerFixture
-):
+async def test_bind_private_invalid_token(app: App, patch_current_time, mocker: MockerFixture):
     """私聊绑定用户，无效的令牌"""
     from nonebot_plugin_user.matchers import bind_cmd, user_cmd
 
@@ -144,9 +140,7 @@ async def test_bind_private_invalid_token(
         async with app.test_matcher(bind_cmd) as ctx:
             adapter = get_adapter(Adapter)
             bot = ctx.create_bot(base=Bot, adapter=adapter)
-            event = fake_private_message_event_v11(
-                message=Message("/bind nonebot/1"), user_id=1
-            )
+            event = fake_private_message_event_v11(message=Message("/bind nonebot/1"), user_id=1)
 
             ctx.receive_event(bot, event)
             ctx.should_call_send(event, "令牌不存在或已过期", True)
@@ -232,9 +226,7 @@ async def test_bind_private_prefix(app: App, patch_current_time, mocker: MockerF
         async with app.test_matcher(bind_cmd) as ctx:
             adapter = get_adapter(Adapter)
             bot = ctx.create_bot(base=Bot, adapter=adapter)
-            event = fake_private_message_event_v11(
-                message=Message("/bind test/123456"), user_id=1
-            )
+            event = fake_private_message_event_v11(message=Message("/bind test/123456"), user_id=1)
 
             ctx.receive_event(bot, event)
             ctx.should_call_send(event, "绑定成功", True)

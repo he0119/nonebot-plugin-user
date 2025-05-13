@@ -96,9 +96,7 @@ async def get_user_depends(platform: Union[str, SupportScope], user_id: str) -> 
 async def get_user_by_id(uid: int) -> User:
     """通过 user_id 获取账号"""
     async with get_session() as session:
-        user = (
-            await session.scalars(select(User).where(User.id == uid))
-        ).one_or_none()
+        user = (await session.scalars(select(User).where(User.id == uid))).one_or_none()
 
         if not user:
             raise ValueError("找不到用户信息")
@@ -111,9 +109,7 @@ async def set_bind(platform: Union[str, SupportScope], user_id: str, aid: int) -
     async with get_session() as session:
         bind = (
             await session.scalars(
-                select(Bind)
-                .where(Bind.platform == str(platform))
-                .where(Bind.platform_id == user_id)
+                select(Bind).where(Bind.platform == str(platform)).where(Bind.platform_id == user_id)
             )
         ).one_or_none()
 
@@ -148,9 +144,7 @@ async def remove_bind(platform: Union[str, SupportScope], user_id: str) -> bool:
     async with get_session() as db_session:
         bind = (
             await db_session.scalars(
-                select(Bind)
-                .where(Bind.platform == str(platform))
-                .where(Bind.platform_id == user_id)
+                select(Bind).where(Bind.platform == str(platform)).where(Bind.platform_id == user_id)
             )
         ).one_or_none()
 

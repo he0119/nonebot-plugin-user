@@ -37,9 +37,7 @@ def upgrade(name: str = "") -> None:
         sa.Column("platform_id", sa.String(length=64), nullable=False),
         sa.Column("bind_id", sa.Integer(), nullable=False),
         sa.Column("original_id", sa.Integer(), nullable=False),
-        sa.PrimaryKeyConstraint(
-            "platform", "platform_id", name=op.f("pk_nonebot_plugin_user_bind")
-        ),
+        sa.PrimaryKeyConstraint("platform", "platform_id", name=op.f("pk_nonebot_plugin_user_bind")),
     )
     # ### end Alembic commands ###
 

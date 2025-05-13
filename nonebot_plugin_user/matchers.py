@@ -56,9 +56,8 @@ async def _(session: UserSession, name: Match[str]):
         )
     )
 
-tokens = ExpiringDict[str, tuple[str, str, int, Optional[SceneType]]](
-    capacity=100, default_age=300
-)
+
+tokens = ExpiringDict[str, tuple[str, str, int, Optional[SceneType]]](capacity=100, default_age=300)
 
 
 def generate_token() -> str:
@@ -70,9 +69,7 @@ bind_cmd = on_alconna(
         "bind",
         Option("-r", help_text="解除绑定"),
         Args["token?", str],
-        meta=CommandMeta(
-            description="绑定用户", example="绑定用户\n/bind\n解除绑定\n/bind -r"
-        ),
+        meta=CommandMeta(description="绑定用户", example="绑定用户\n/bind\n解除绑定\n/bind -r"),
     ),
     use_cmd_start=True,
     block=True,

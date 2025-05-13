@@ -21,15 +21,9 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
             event = fake_group_message_event_v11(message=Message("/user"), user_id=1)
 
             ctx.receive_event(bot, event)
+            ctx.should_call_api("get_group_info", {"group_id": 10000}, {})
             ctx.should_call_api(
-                "get_group_info",
-                {"group_id": 10000},
-                {}
-            )
-            ctx.should_call_api(
-                "get_group_member_info",
-                {"group_id": 10000, "user_id": 1, "no_cache": True},
-                {}
+                "get_group_member_info", {"group_id": 10000, "user_id": 1, "no_cache": True}, {}
             )
             ctx.should_call_send(
                 event,
@@ -44,15 +38,9 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
             event = fake_group_message_event_v11(message=Message("/user"))
 
             ctx.receive_event(bot, event)
+            ctx.should_call_api("get_group_info", {"group_id": 10000}, {})
             ctx.should_call_api(
-                "get_group_info",
-                {"group_id": 10000},
-                {}
-            )
-            ctx.should_call_api(
-                "get_group_member_info",
-                {"group_id": 10000, "user_id": 10, "no_cache": True},
-                {}
+                "get_group_member_info", {"group_id": 10000, "user_id": 10, "no_cache": True}, {}
             )
             ctx.should_call_send(
                 event,
@@ -77,9 +65,7 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
         async with app.test_matcher(bind_cmd) as ctx:
             adapter = get_adapter(Adapter)
             bot = ctx.create_bot(base=Bot, adapter=adapter)
-            event = fake_group_message_event_v11(
-                message=Message("/bind nonebot/123456"), user_id=1
-            )
+            event = fake_group_message_event_v11(message=Message("/bind nonebot/123456"), user_id=1)
 
             ctx.receive_event(bot, event)
             ctx.should_call_send(
@@ -92,9 +78,7 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
         async with app.test_matcher(bind_cmd) as ctx:
             adapter = get_adapter(Adapter)
             bot = ctx.create_bot(base=Bot, adapter=adapter)
-            event = fake_group_message_event_v11(
-                message=Message("/bind nonebot/123456")
-            )
+            event = fake_group_message_event_v11(message=Message("/bind nonebot/123456"))
 
             ctx.receive_event(bot, event)
             ctx.should_call_send(event, "绑定成功", True)
@@ -127,9 +111,7 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
             ctx.should_finished(user_cmd)
 
 
-async def test_bind_group_different_user(
-    app: App, patch_current_time, mocker: MockerFixture
-):
+async def test_bind_group_different_user(app: App, patch_current_time, mocker: MockerFixture):
     """群聊绑定用户，不是最开始发送绑定命令的用户"""
     from nonebot_plugin_user.matchers import bind_cmd, user_cmd
 
@@ -143,15 +125,9 @@ async def test_bind_group_different_user(
             event = fake_group_message_event_v11(message=Message("/user"), user_id=1)
 
             ctx.receive_event(bot, event)
+            ctx.should_call_api("get_group_info", {"group_id": 10000}, {})
             ctx.should_call_api(
-                "get_group_info",
-                {"group_id": 10000},
-                {}
-            )
-            ctx.should_call_api(
-                "get_group_member_info",
-                {"group_id": 10000, "user_id": 1, "no_cache": True},
-                {}
+                "get_group_member_info", {"group_id": 10000, "user_id": 1, "no_cache": True}, {}
             )
             ctx.should_call_send(
                 event,
@@ -166,15 +142,9 @@ async def test_bind_group_different_user(
             event = fake_group_message_event_v11(message=Message("/user"))
 
             ctx.receive_event(bot, event)
+            ctx.should_call_api("get_group_info", {"group_id": 10000}, {})
             ctx.should_call_api(
-                "get_group_info",
-                {"group_id": 10000},
-                {}
-            )
-            ctx.should_call_api(
-                "get_group_member_info",
-                {"group_id": 10000, "user_id": 10, "no_cache": True},
-                {}
+                "get_group_member_info", {"group_id": 10000, "user_id": 10, "no_cache": True}, {}
             )
             ctx.should_call_send(
                 event,
@@ -199,9 +169,7 @@ async def test_bind_group_different_user(
         async with app.test_matcher(bind_cmd) as ctx:
             adapter = get_adapter(Adapter)
             bot = ctx.create_bot(base=Bot, adapter=adapter)
-            event = fake_group_message_event_v11(
-                message=Message("/bind nonebot/123456"), user_id=1
-            )
+            event = fake_group_message_event_v11(message=Message("/bind nonebot/123456"), user_id=1)
 
             ctx.receive_event(bot, event)
             ctx.should_call_send(
@@ -214,9 +182,7 @@ async def test_bind_group_different_user(
         async with app.test_matcher(bind_cmd) as ctx:
             adapter = get_adapter(Adapter)
             bot = ctx.create_bot(base=Bot, adapter=adapter)
-            event = fake_group_message_event_v11(
-                message=Message("/bind nonebot/123456"), user_id=1
-            )
+            event = fake_group_message_event_v11(message=Message("/bind nonebot/123456"), user_id=1)
 
             ctx.receive_event(bot, event)
             ctx.should_call_send(event, "请使用最开始要绑定账号进行操作", True)

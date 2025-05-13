@@ -27,9 +27,7 @@ __plugin_meta__ = PluginMetadata(
     type="application",
     homepage="https://github.com/he0119/nonebot-plugin-user",
     config=Config,
-    supported_adapters=inherit_supported_adapters(
-        "nonebot_plugin_alconna", "nonebot_plugin_uninfo"
-    ),
+    supported_adapters=inherit_supported_adapters("nonebot_plugin_alconna", "nonebot_plugin_uninfo"),
     extra={"orm_version_location": migrations},
 )
 
