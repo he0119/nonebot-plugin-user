@@ -39,7 +39,7 @@ user_cmd = on_alconna(
 async def _(session: UserSession, name: Match[str]):
     if name.available:
         try:
-            await set_user_name(session.platform, session.platform_id, name.result)
+            await set_user_name(session.platform, session.platform_user.id, name.result)
         except IntegrityError:
             await user_cmd.finish("用户名修改失败，该用户名已被使用")
         else:
@@ -49,7 +49,7 @@ async def _(session: UserSession, name: Match[str]):
         "\n".join(
             [
                 f"平台名：{session.platform}",
-                f"平台 ID：{session.platform_id}",
+                f"平台 ID：{session.platform_user.id}",
                 f"用户名：{session.user_name}",
                 f"创建日期：{session.created_at.astimezone()}",
             ]
