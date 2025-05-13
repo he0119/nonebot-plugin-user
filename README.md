@@ -32,7 +32,7 @@ _✨ NoneBot 用户插件 ✨_
 
 ## 使用方式
 
-加载插件后发送 `/user`、`/inspect` 或 `/bind`。
+加载插件后发送 `/user` 或 `/bind`。
 
 ### 查看用户信息
 
@@ -43,17 +43,6 @@ _✨ NoneBot 用户插件 ✨_
 平台 ID：10000
 用户名：uy/sun
 创建日期：2023-11-02 04:52:42
-```
-
-### 查看会话信息
-
-通过 inspect 命令可查看当前会话信息:
-
-```text
-平台名：qq
-平台 ID：10000
-自身 ID：20000
-群组 ID：30000
 ```
 
 ### 绑定用户
@@ -114,3 +103,4 @@ async def _(session: UserSession):
 
 - [Koishi](https://github.com/koishijs/koishi): 本项目直接参考
 - [nonebot-plugin-session](https://github.com/noneplugin/nonebot-plugin-session): 获取用户信息
+- [nonebot-plugin-uninfo](https://github.com/RF-Tar-Railt/nonebot-plugin-uninfo): 通用的会话信息插件
