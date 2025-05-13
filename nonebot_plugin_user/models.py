@@ -3,7 +3,7 @@ from typing_extensions import deprecated
 
 from nonebot.compat import PYDANTIC_V2, ConfigDict
 from nonebot_plugin_orm import Model
-from nonebot_plugin_uninfo import Session, SceneType, SupportScope
+from nonebot_plugin_uninfo import Session, SceneType
 from nonebot_plugin_uninfo import User as UninfoUser
 from pydantic import BaseModel
 from sqlalchemy import DateTime, String
@@ -20,7 +20,7 @@ class Bind(Model):
     platform: Mapped[str] = mapped_column(String(32), primary_key=True)
     """平台名称"""
     platform_id: Mapped[str] = mapped_column(String(64), primary_key=True)
-    """平台 ID"""
+    """平台用户 ID"""
     bind_id: Mapped[int]
     """当前绑定的账号 ID"""
     original_id: Mapped[int]
@@ -61,9 +61,11 @@ class UserSession(BaseModel):
         return self.session.adapter
 
     @property
-    def platform(self) -> SupportScope:
+    def platform(self) -> str:
         """平台名称"""
-        return SupportScope(self.session.scope)
+        return str(self.session.scope)
+
+    scope = platform
 
     @deprecated("`UserSession.platform_id` is deprecated, use `UserSession.platform_user.id` instead")
     @property
@@ -92,12 +94,11 @@ class UserSession(BaseModel):
             return 3
         return 0
 
-
     @property
     def session_id(self) -> str:
         """用户会话 ID
 
-        ID 由平台名称和会话场景 ID 组成，例如 `qq_client_123456789`。
+        ID 由平台名称和会话场景 ID 组成，例如 `QQClient_123456789`。
         """
         return f"{self.session.scope}_{self.session.scene_path}"
 
@@ -106,7 +107,7 @@ class UserSession(BaseModel):
     def group_session_id(self) -> str:
         """用户所在群组会话 ID
 
-        ID 由平台名称和平台的群组 ID 组成，例如 `qq_123456789`。
+        ID 由平台名称和平台的群组 ID 组成，例如 `QQClient_123456789`。
         """
         if self.session.group:
             return self.session_id

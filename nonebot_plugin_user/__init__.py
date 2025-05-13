@@ -1,7 +1,7 @@
 from nonebot import require
 
 require("nonebot_plugin_alconna")
-require("nonebot_plugin_session")
+require("nonebot_plugin_uninfo")
 require("nonebot_plugin_orm")
 
 from nonebot.plugin import PluginMetadata, inherit_supported_adapters
@@ -20,8 +20,6 @@ __plugin_meta__ = PluginMetadata(
 /user
 修改用户名
 /user -l [用户名]
-查看会话信息
-/inspect
 绑定用户
 /bind
 解除绑定
@@ -30,7 +28,7 @@ __plugin_meta__ = PluginMetadata(
     homepage="https://github.com/he0119/nonebot-plugin-user",
     config=Config,
     supported_adapters=inherit_supported_adapters(
-        "nonebot_plugin_alconna", "nonebot_plugin_session"
+        "nonebot_plugin_alconna", "nonebot_plugin_uninfo"
     ),
     extra={"orm_version_location": migrations},
 )
