@@ -67,8 +67,8 @@ class UserSession(BaseModel):
 
     scope = platform
 
-    @deprecated("`UserSession.platform_id` is deprecated, use `UserSession.platform_user.id` instead")
     @property
+    @deprecated("`UserSession.platform_id` is deprecated, use `UserSession.platform_user.id` instead")
     def platform_id(self) -> str:
         """用户所在平台 ID"""
         return self.session.user.id
@@ -82,8 +82,8 @@ class UserSession(BaseModel):
     def type(self) -> SceneType:
         return self.session.scene.type
 
-    @deprecated("`UserSession.level` is deprecated, use `UserSession.type` instead")
     @property
+    @deprecated("`UserSession.level` is deprecated, use `UserSession.type` instead")
     def level(self):
         """用户会话级别"""
         if self.session.scene.is_private:
@@ -102,8 +102,8 @@ class UserSession(BaseModel):
         """
         return f"{self.session.scope}_{self.session.scene_path}"
 
-    @deprecated("`UserSession.group_session_id` is deprecated, use `UserSession.session_id` instead")
     @property
+    @deprecated("`UserSession.group_session_id` is deprecated, use `UserSession.session_id` instead")
     def group_session_id(self) -> str:
         """用户所在群组会话 ID
 
