@@ -1,4 +1,5 @@
 from datetime import datetime
+from nonebot.compat import ConfigDict, PYDANTIC_V2
 from typing import TYPE_CHECKING, Literal
 
 if TYPE_CHECKING:
@@ -41,8 +42,12 @@ def fake_group_message_event_v11(**field) -> "GroupMessageEventV11":
         )
         to_me: bool = False
 
-        class Config:
-            extra = "forbid"
+        if PYDANTIC_V2:
+            model_config = ConfigDict(extra="forbid")
+        else:  # pragma: no cover
+
+            class Config:
+                extra = "forbid"
 
     return FakeEvent(**field)
 
@@ -68,8 +73,12 @@ def fake_private_message_event_v11(**field) -> "PrivateMessageEventV11":
         sender: Sender = Sender(nickname="test")
         to_me: bool = False
 
-        class Config:
-            extra = "forbid"
+        if PYDANTIC_V2:
+            model_config = ConfigDict(extra="forbid")
+        else:  # pragma: no cover
+
+            class Config:
+                extra = "forbid"
 
     return FakeEvent(**field)
 
@@ -96,8 +105,12 @@ def fake_group_message_event_v12(**field) -> "GroupMessageEventV12":
         group_id: str = "10000"
         to_me: bool = False
 
-        class Config:
-            extra = "forbid"
+        if PYDANTIC_V2:
+            model_config = ConfigDict(extra="forbid")
+        else:  # pragma: no cover
+
+            class Config:
+                extra = "forbid"
 
     return FakeEvent(**field)
 
@@ -123,8 +136,12 @@ def fake_private_message_event_v12(**field) -> "PrivateMessageEventV12":
         user_id: str = "100"
         to_me: bool = False
 
-        class Config:
-            extra = "forbid"
+        if PYDANTIC_V2:
+            model_config = ConfigDict(extra="forbid")
+        else:  # pragma: no cover
+
+            class Config:
+                extra = "forbid"
 
     return FakeEvent(**field)
 
@@ -152,7 +169,11 @@ def fake_channel_message_event_v12(**field) -> "ChannelMessageEventV12":
         channel_id: str = "100000"
         to_me: bool = False
 
-        class Config:
-            extra = "forbid"
+        if PYDANTIC_V2:
+            model_config = ConfigDict(extra="forbid")
+        else:  # pragma: no cover
+
+            class Config:
+                extra = "forbid"
 
     return FakeEvent(**field)

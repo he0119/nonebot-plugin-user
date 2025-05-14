@@ -10,8 +10,8 @@ dependencies = [
   "nonebot2>=2.2.0",
   "nonebot-plugin-orm>=0.7.0",
   "nonebot-plugin-alconna>=0.37.1",
-  "nonebot-plugin-session>=0.3.0",
   "expiringdictx>=1.1.0",
+  "nonebot-plugin-uninfo>=0.7.3",
 ]
 
 [project.urls]
@@ -19,6 +19,11 @@ Homepage = "https://github.com/he0119/nonebot-plugin-user"
 Repository = "https://github.com/he0119/nonebot-plugin-user.git"
 Issues = "https://github.com/he0119/nonebot-plugin-user/issues"
 Changelog = "https://github.com/he0119/nonebot-plugin-user/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+inspect = [
+    "nonebot-plugin-inspect>=0.2.0",
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -54,7 +59,7 @@ dev-dependencies = [
 universal = true
 
 [tool.poe.tasks]
-test = "pytest --cov=nonebot_plugin_user --cov-report xml -n auto"
+test = "pytest --cov=nonebot_plugin_user --cov-report xml -n auto -v"
 bump = "bump-my-version bump"
 show-bump = "bump-my-version show-bump"
 
@@ -65,7 +70,7 @@ typeCheckingMode = "standard"
 defineConstant = { PYDANTIC_V2 = true }
 
 [tool.ruff]
-line-length = 88
+line-length = 110
 target-version = "py39"
 
 [tool.ruff.lint]

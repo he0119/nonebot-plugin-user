@@ -14,9 +14,9 @@ async def test_concurrency(app: App):
     from nonebot_plugin_user import get_user, get_user_by_id
 
     users: list[tuple[str, str]] = [
-        ("qq", "1"),
-        ("qq", "2"),
-        ("qq", "3"),
+        ("QQClient", "1"),
+        ("QQClient", "2"),
+        ("QQClient", "3"),
     ]
 
     async def do_check():
@@ -53,6 +53,8 @@ async def test_permission_concurrency(app: App):
 
         event = fake_group_message_event_v11(message=Message("/orm"))
         ctx.receive_event(bot, event)
+        ctx.should_call_api("get_group_info", {"group_id": 10000}, {})
+        ctx.should_call_api("get_group_member_info", {"group_id": 10000, "user_id": 10, "no_cache": True}, {})
         ctx.should_call_send(event, "已提交！", None)
         ctx.should_finished(orm_cmd)
 

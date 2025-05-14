@@ -22,12 +22,8 @@ async def test_remove_bind(app: App, patch_current_time, mocker: MockerFixture):
             session.add(user)
             session.add(user2)
             await session.commit()
-            bind = Bind(
-                platform_id=1, platform="qq", bind_id=user.id, original_id=user.id
-            )
-            bind2 = Bind(
-                platform_id=10, platform="qq", bind_id=user.id, original_id=user2.id
-            )
+            bind = Bind(platform_id="1", platform="QQClient", bind_id=user.id, original_id=user.id)
+            bind2 = Bind(platform_id="10", platform="QQClient", bind_id=user.id, original_id=user2.id)
             session.add(bind)
             session.add(bind2)
             await session.commit()
@@ -46,9 +42,7 @@ async def test_remove_bind(app: App, patch_current_time, mocker: MockerFixture):
             ctx.should_finished(bind_cmd)
 
         async with get_session() as session:
-            bind = (
-                await session.scalars(select(Bind).where(Bind.platform_id == 10))
-            ).one()
+            bind = (await session.scalars(select(Bind).where(Bind.platform_id == 10))).one()
             assert bind.bind_id == 2
 
 
@@ -76,7 +70,7 @@ async def test_bind_not_exist(app: App):
     from nonebot_plugin_user.utils import remove_bind, set_bind
 
     with pytest.raises(ValueError, match="找不到用户信息"):
-        await remove_bind("qq", "1")
+        await remove_bind("QQClient", "1")
 
     with pytest.raises(ValueError, match="找不到用户信息"):
-        await set_bind("qq", "1", 2)
+        await set_bind("QQClient", "1", 2)
