@@ -21,9 +21,7 @@ Issues = "https://github.com/he0119/nonebot-plugin-user/issues"
 Changelog = "https://github.com/he0119/nonebot-plugin-user/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
-inspect = [
-    "nonebot-plugin-inspect>=0.2.0",
-]
+inspect = ["nonebot-plugin-inspect>=0.2.0"]
 
 [build-system]
 requires = ["hatchling"]
@@ -49,9 +47,9 @@ dev-dependencies = [
   "nonebot2[fastapi,httpx,websockets]>=2.3.2",
   "nonebot-plugin-orm[default]>=0.7.4",
   "nonebot-adapter-onebot>=2.4.4",
-  "nonebot-adapter-qq>=1.4.4",
+  "nonebot-adapter-qq>=1.6.3",
   "nonebot-adapter-satori>=0.12.3",
-  "bump-my-version==0.24.3",
+  "bump-my-version>=1.1.2",
   "poethepoet>=0.29.0",
 ]
 
