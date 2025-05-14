@@ -14,9 +14,9 @@ async def test_concurrency(app: App):
     from nonebot_plugin_user import get_user, get_user_by_id
 
     users: list[tuple[str, str]] = [
-        ("qq", "1"),
-        ("qq", "2"),
-        ("qq", "3"),
+        ("QQClient", "1"),
+        ("QQClient", "2"),
+        ("QQClient", "3"),
     ]
 
     async def do_check():
