@@ -60,7 +60,7 @@ async def create_user(platform: Union[str, SupportScope], user_id: str) -> User:
                     )
                 ).one_or_none()
 
-                if not user:   # pragma: no cover
+                if not user:  # pragma: no cover
                     raise ValueError("创建用户失败")
     return user
 

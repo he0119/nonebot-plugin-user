@@ -45,6 +45,7 @@ def fake_group_message_event_v11(**field) -> "GroupMessageEventV11":
         if PYDANTIC_V2:
             model_config = ConfigDict(extra="forbid")
         else:  # pragma: no cover
+
             class Config:
                 extra = "forbid"
 
@@ -75,6 +76,7 @@ def fake_private_message_event_v11(**field) -> "PrivateMessageEventV11":
         if PYDANTIC_V2:
             model_config = ConfigDict(extra="forbid")
         else:  # pragma: no cover
+
             class Config:
                 extra = "forbid"
 
@@ -106,6 +108,7 @@ def fake_group_message_event_v12(**field) -> "GroupMessageEventV12":
         if PYDANTIC_V2:
             model_config = ConfigDict(extra="forbid")
         else:  # pragma: no cover
+
             class Config:
                 extra = "forbid"
 
@@ -136,6 +139,7 @@ def fake_private_message_event_v12(**field) -> "PrivateMessageEventV12":
         if PYDANTIC_V2:
             model_config = ConfigDict(extra="forbid")
         else:  # pragma: no cover
+
             class Config:
                 extra = "forbid"
 
@@ -168,6 +172,7 @@ def fake_channel_message_event_v12(**field) -> "ChannelMessageEventV12":
         if PYDANTIC_V2:
             model_config = ConfigDict(extra="forbid")
         else:  # pragma: no cover
+
             class Config:
                 extra = "forbid"
 
