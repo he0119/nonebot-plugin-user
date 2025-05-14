@@ -83,7 +83,7 @@ from nonebot_plugin_user import UserSession
 
 @matcher.handle()
 async def _(session: UserSession):
-  await matcher.finish(session.platform_id)
+  await matcher.finish(session.platform_user.id)
 ```
 
 ## 配置项

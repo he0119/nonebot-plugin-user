@@ -69,7 +69,7 @@ class UserSession(BaseModel):
 
     @property
     @deprecated("`UserSession.platform_id` is deprecated, use `UserSession.platform_user.id` instead")
-    def platform_id(self) -> str:
+    def platform_id(self) -> str:  # pragma: no cover
         """用户所在平台 ID"""
         return self.session.user.id
 
@@ -84,7 +84,7 @@ class UserSession(BaseModel):
 
     @property
     @deprecated("`UserSession.level` is deprecated, use `UserSession.type` instead")
-    def level(self):
+    def level(self):  # pragma: no cover
         """用户会话级别"""
         if self.session.scene.is_private:
             return 1
@@ -104,7 +104,7 @@ class UserSession(BaseModel):
 
     @property
     @deprecated("`UserSession.group_session_id` is deprecated, use `UserSession.session_id` instead")
-    def group_session_id(self) -> str:
+    def group_session_id(self) -> str:  # pragma: no cover
         """用户所在群组会话 ID
 
         ID 由平台名称和平台的群组 ID 组成，例如 `QQClient_123456789`。

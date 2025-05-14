@@ -141,6 +141,7 @@ async def test_user_session(app: App, patch_current_time):
 
     @test_matcher.handle()
     async def _(session: UserSession):
+        assert session.adapter == "OneBot V11"
         await test_matcher.finish(session.session_id)
 
     with patch_current_time("2023-09-14 10:46:10", tick=False):

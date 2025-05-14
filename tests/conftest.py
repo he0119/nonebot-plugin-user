@@ -43,6 +43,13 @@ async def app(app: App, mocker: MockerFixture, tmp_path: Path):
 
     yield app
 
+    # 清理 uninfo 缓存
+
+    from nonebot_plugin_uninfo.adapters import INFO_FETCHER_MAPPING
+
+    for fetcher in INFO_FETCHER_MAPPING.values():
+        fetcher.session_cache.clear()
+
     # 清理数据库
 
     from nonebot_plugin_user.models import Bind, User

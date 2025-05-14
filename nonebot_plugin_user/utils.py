@@ -60,8 +60,8 @@ async def create_user(platform: Union[str, SupportScope], user_id: str) -> User:
                     )
                 ).one_or_none()
 
-                if not user:
-                    raise ValueError("创建用户失败")  # pragma: no cover
+                if not user:   # pragma: no cover
+                    raise ValueError("创建用户失败")
     return user
 
 
@@ -115,9 +115,9 @@ async def set_bind(platform: Union[str, SupportScope], user_id: str, aid: int) -
 
         if not bind:
             raise ValueError("找不到用户信息")
-
-        bind.bind_id = aid
-        await session.commit()
+        else:
+            bind.bind_id = aid
+            await session.commit()
 
 
 async def set_user_name(platform: Union[str, SupportScope], user_id: str, name: str) -> None:
