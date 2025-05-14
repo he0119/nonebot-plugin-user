@@ -33,7 +33,6 @@ async def _get_user(session, platform: str, user_id: str) -> Optional[User]:
 
 async def create_user(platform: Union[str, SupportScope], user_id: str) -> User:
     """创建账号"""
-    platform = str(platform)
     async with _get_insert_mutex():
         try:
             async with get_session(expire_on_commit=False) as session:
@@ -43,7 +42,7 @@ async def create_user(platform: Union[str, SupportScope], user_id: str) -> User:
 
                 bind = Bind(
                     platform_id=user_id,
-                    platform=platform,
+                    platform=f"{platform}",
                     bind_id=user.id,
                     original_id=user.id,
                 )
@@ -54,7 +53,7 @@ async def create_user(platform: Union[str, SupportScope], user_id: str) -> User:
                 user = (
                     await session.scalars(
                         select(User)
-                        .where(Bind.platform == platform)
+                        .where(Bind.platform == f"{platform}")
                         .where(Bind.platform_id == user_id)
                         .join(Bind, User.id == Bind.bind_id)
                     )
@@ -68,7 +67,7 @@ async def create_user(platform: Union[str, SupportScope], user_id: str) -> User:
 async def get_user(platform: Union[str, SupportScope], user_id: str) -> User:
     """获取或创建账号"""
     async with get_session() as session:
-        user = await _get_user(session, str(platform), user_id)
+        user = await _get_user(session, f"{platform}", user_id)
 
     if not user:
         user = await create_user(platform, user_id)
@@ -83,7 +82,7 @@ async def get_user_depends(platform: Union[str, SupportScope], user_id: str) -> 
     """
     scoped_session = get_scoped_session()
 
-    user = await _get_user(scoped_session, str(platform), user_id)
+    user = await _get_user(scoped_session, f"{platform}", user_id)
 
     if not user:
         user = await create_user(platform, user_id)
@@ -109,7 +108,7 @@ async def set_bind(platform: Union[str, SupportScope], user_id: str, aid: int) -
     async with get_session() as session:
         bind = (
             await session.scalars(
-                select(Bind).where(Bind.platform == str(platform)).where(Bind.platform_id == user_id)
+                select(Bind).where(Bind.platform == f"{platform}").where(Bind.platform_id == user_id)
             )
         ).one_or_none()
 
@@ -126,7 +125,7 @@ async def set_user_name(platform: Union[str, SupportScope], user_id: str, name: 
         user = (
             await session.scalars(
                 select(User)
-                .where(Bind.platform == str(platform))
+                .where(Bind.platform == f"{platform}")
                 .where(Bind.platform_id == user_id)
                 .join(Bind, User.id == Bind.bind_id)
             )
@@ -144,7 +143,7 @@ async def remove_bind(platform: Union[str, SupportScope], user_id: str) -> bool:
     async with get_session() as db_session:
         bind = (
             await db_session.scalars(
-                select(Bind).where(Bind.platform == str(platform)).where(Bind.platform_id == user_id)
+                select(Bind).where(Bind.platform == f"{platform}").where(Bind.platform_id == user_id)
             )
         ).one_or_none()
 

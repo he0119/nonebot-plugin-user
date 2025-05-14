@@ -10,6 +10,19 @@ from sqlalchemy import DateTime, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 
+REV_MAPPING = {
+    "Console": "console",
+    "Discord": "discord",
+    "DoDo": "dodo",
+    "Feishu": "feishu",
+    "Kaiheila": "kaiheila",
+    "QQClient": "qq",
+    "QQAPI": "qqguild",
+    "Telegram": "telegram",
+    "Unknown": "unknown",
+}
+
+
 class User(Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(255), unique=True)
@@ -63,7 +76,7 @@ class UserSession(BaseModel):
     @property
     def platform(self) -> str:
         """平台名称"""
-        return str(self.session.scope)
+        return f"{self.session.scope}"
 
     scope = platform
 
@@ -107,8 +120,8 @@ class UserSession(BaseModel):
     def group_session_id(self) -> str:  # pragma: no cover
         """用户所在群组会话 ID
 
-        ID 由平台名称和平台的群组 ID 组成，例如 `QQClient_123456789`。
+        ID 由平台名称和平台的群组 ID 组成，例如 `qq_123456789`。
         """
         if self.session.group:
-            return self.session_id
+            return f"{REV_MAPPING.get(str(self.session.scope), 'unknown')}_{self.session.group.id}"
         return ""
