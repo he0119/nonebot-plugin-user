@@ -1,4 +1,5 @@
 import asyncio
+import logging
 import random
 
 from nonebot import get_adapter
@@ -36,9 +37,13 @@ async def test_concurrency(app: App):
 
 async def test_permission_concurrency(app: App):
     """测试权限和其他响应器同时访问数据库"""
-    from nonebot_plugin_orm import get_session
+    from nonebot_plugin_orm import _engines, get_session
 
     from tests.plugins.orm import orm_cmd
+
+    engine = _engines[""].sync_engine
+
+    engine.logger.info("test_permission_concurrency-查询 Test 表 0")
 
     async with get_session() as session:
         from tests.plugins.orm import Test
@@ -46,6 +51,8 @@ async def test_permission_concurrency(app: App):
         test = await session.scalars(select(Test))
 
         assert len(test.all()) == 0
+
+    engine.logger.info("test_permission_concurrency-提交 Test 表")
 
     async with app.test_matcher() as ctx:
         adapter = get_adapter(Adapter)
@@ -58,12 +65,16 @@ async def test_permission_concurrency(app: App):
         ctx.should_call_send(event, "已提交！", None)
         ctx.should_finished(orm_cmd)
 
+    engine.logger.info("test_permission_concurrency-查询 Test 表 1")
+
     async with get_session() as session:
         from tests.plugins.orm import Test
 
         test = await session.scalars(select(Test))
 
         assert len(test.all()) == 1
+
+    engine.logger.info("test_permission_concurrency-提交 Test 表")
 
     async with app.test_matcher() as ctx:
         adapter = get_adapter(Adapter)
@@ -73,6 +84,8 @@ async def test_permission_concurrency(app: App):
         ctx.receive_event(bot, event)
         ctx.should_call_send(event, "已提交！", None)
         ctx.should_finished(orm_cmd)
+
+    logging.info("test_permission_concurrency-查询 Test 表 2")
 
     async with get_session() as session:
         from tests.plugins.orm import Test

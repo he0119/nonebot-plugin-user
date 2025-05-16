@@ -25,6 +25,8 @@ def pytest_configure(config: pytest.Config) -> None:
     config.stash[NONEBOT_INIT_KWARGS] = {
         "sqlalchemy_database_url": "sqlite+aiosqlite:///:memory:",
         "alembic_startup_check": False,
+        "sqlalchemy_echo": True,
+        "log_level": "DEBUG",
     }
 
 

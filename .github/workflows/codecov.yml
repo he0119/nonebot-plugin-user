@@ -16,7 +16,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
         os: [ubuntu-latest, windows-latest, macos-latest]
       fail-fast: false
     env:
@@ -46,6 +46,13 @@ jobs:
 
       - name: Run tests
         run: uv run poe test
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          env_vars: OS,PYTHON_VERSION
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
