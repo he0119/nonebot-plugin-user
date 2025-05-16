@@ -111,6 +111,7 @@ omit = ["*/migrations/*"]
 [tool.pytest.ini_options]
 addopts = ["--import-mode=importlib"]
 asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "session"
 
 [tool.bumpversion]
 current_version = "0.4.4"
