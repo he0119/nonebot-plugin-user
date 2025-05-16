@@ -1,6 +1,7 @@
 from datetime import datetime
-from nonebot.compat import ConfigDict, PYDANTIC_V2
 from typing import TYPE_CHECKING, Literal
+
+from nonebot.compat import PYDANTIC_V2, ConfigDict
 
 if TYPE_CHECKING:
     from nonebot.adapters.onebot.v11 import GroupMessageEvent as GroupMessageEventV11
@@ -14,6 +15,12 @@ if TYPE_CHECKING:
     from nonebot.adapters.onebot.v12 import (
         PrivateMessageEvent as PrivateMessageEventV12,
     )
+
+_msg_ids = iter(range(1000000))
+
+
+def get_msg_id() -> int:
+    return next(_msg_ids)
 
 
 def fake_group_message_event_v11(**field) -> "GroupMessageEventV11":
@@ -49,7 +56,7 @@ def fake_group_message_event_v11(**field) -> "GroupMessageEventV11":
             class Config:
                 extra = "forbid"
 
-    return FakeEvent(**field)
+    return FakeEvent(message_id=get_msg_id(), **field)
 
 
 def fake_private_message_event_v11(**field) -> "PrivateMessageEventV11":
@@ -80,7 +87,7 @@ def fake_private_message_event_v11(**field) -> "PrivateMessageEventV11":
             class Config:
                 extra = "forbid"
 
-    return FakeEvent(**field)
+    return FakeEvent(message_id=get_msg_id(), **field)
 
 
 def fake_group_message_event_v12(**field) -> "GroupMessageEventV12":
@@ -112,7 +119,7 @@ def fake_group_message_event_v12(**field) -> "GroupMessageEventV12":
             class Config:
                 extra = "forbid"
 
-    return FakeEvent(**field)
+    return FakeEvent(message_id=str(get_msg_id()), **field)
 
 
 def fake_private_message_event_v12(**field) -> "PrivateMessageEventV12":
@@ -143,7 +150,7 @@ def fake_private_message_event_v12(**field) -> "PrivateMessageEventV12":
             class Config:
                 extra = "forbid"
 
-    return FakeEvent(**field)
+    return FakeEvent(message_id=str(get_msg_id()), **field)
 
 
 def fake_channel_message_event_v12(**field) -> "ChannelMessageEventV12":
@@ -176,4 +183,4 @@ def fake_channel_message_event_v12(**field) -> "ChannelMessageEventV12":
             class Config:
                 extra = "forbid"
 
-    return FakeEvent(**field)
+    return FakeEvent(message_id=str(get_msg_id()), **field)
