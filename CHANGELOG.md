@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 ## [Unreleased]
 
+### Added
+
+- 使用 nonebot-plugin-uninfo 来获取用户信息
+
 ## [0.4.4] - 2024-10-19
 
 ### Fixed
