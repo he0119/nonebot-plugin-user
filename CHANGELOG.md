@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 ## [Unreleased]
 
+## [0.5.0] - 2025-05-21
+
 ### Added
 
 - 使用 nonebot-plugin-uninfo 来获取用户信息
@@ -124,7 +126,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 - 可以使用的版本。
 
-[Unreleased]: https://github.com/he0119/nonebot-plugin-user/compare/v0.4.4...HEAD
+[Unreleased]: https://github.com/he0119/nonebot-plugin-user/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/he0119/nonebot-plugin-user/compare/v0.4.4...v0.5.0
 [0.4.4]: https://github.com/he0119/nonebot-plugin-user/compare/v0.4.3...v0.4.4
 [0.4.3]: https://github.com/he0119/nonebot-plugin-user/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/he0119/nonebot-plugin-user/compare/v0.4.1...v0.4.2
