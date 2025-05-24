@@ -38,7 +38,6 @@ async def test_permission_concurrency(app: App):
     """测试权限和其他响应器同时访问数据库"""
     from nonebot_plugin_orm import get_session
 
-    from nonebot_plugin_user import get_user
     from tests.plugins.orm import orm_cmd
 
     async with get_session() as session:
