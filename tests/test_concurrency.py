@@ -41,9 +41,6 @@ async def test_permission_concurrency(app: App):
     from nonebot_plugin_user import get_user
     from tests.plugins.orm import orm_cmd
 
-    # FIXME: 不这样做的话，现在这个测试会随机报错
-    await get_user("QQClient", "10")
-
     async with get_session() as session:
         from tests.plugins.orm import Test
 

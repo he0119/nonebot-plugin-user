@@ -23,7 +23,6 @@ def pytest_collection_modifyitems(items: list[pytest.Item]):
 
 def pytest_configure(config: pytest.Config) -> None:
     config.stash[NONEBOT_INIT_KWARGS] = {
-        "sqlalchemy_database_url": "sqlite+aiosqlite:///:memory:",
         "alembic_startup_check": False,
     }
 
@@ -43,7 +42,7 @@ async def app(app: App, mocker: MockerFixture, tmp_path: Path):
     nonebot.require("tests.plugins.orm")
     from nonebot_plugin_orm import get_session, init_orm
 
-    mocker.patch("nonebot_plugin_orm._data_dir", tmp_path / "orm")
+    mocker.patch("nonebot_plugin_orm._data_dir", tmp_path)
     # 确保 _insert_mutex 是在当前事件循环中创建的
     mocker.patch("nonebot_plugin_user.utils._insert_mutex", asyncio.Lock())
 
