@@ -1,14 +1,13 @@
 from datetime import datetime, timezone
-from typing_extensions import deprecated
 
 from nonebot.compat import PYDANTIC_V2, ConfigDict
 from nonebot_plugin_orm import Model
-from nonebot_plugin_uninfo import Session, SceneType
+from nonebot_plugin_uninfo import SceneType, Session
 from nonebot_plugin_uninfo import User as UninfoUser
 from pydantic import BaseModel
 from sqlalchemy import DateTime, String
 from sqlalchemy.orm import Mapped, mapped_column
-
+from typing_extensions import deprecated
 
 REV_MAPPING = {
     "Console": "console",
@@ -123,5 +122,12 @@ class UserSession(BaseModel):
         ID 由平台名称和平台的群组 ID 组成，例如 `qq_123456789`。
         """
         if self.session.group:
-            return f"{REV_MAPPING.get(str(self.session.scope), 'unknown')}_{self.session.group.id}"
+            if self.session.scope == "QQAPI":
+                # QQ 频道的 ID 看起来都是数字，尝试用这个区分
+                if self.session.group.id.isdigit():
+                    return f"qqguild_{self.session.group.id}"
+                else:
+                    return f"qq_{self.session.group.id}"
+            else:
+                return f"{REV_MAPPING.get(str(self.session.scope), 'unknown')}_{self.session.group.id}"
         return ""

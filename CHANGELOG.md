@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 ## [Unreleased]
 
+### Fixed
+
+- 修复迁移后 QQ 官方 API 在群组中 platform 不正确的问题
+
 ## [0.5.0] - 2025-05-21
 
 ### Added
