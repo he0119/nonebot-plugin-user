@@ -8,14 +8,14 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
 from collections.abc import Sequence
+from typing import TYPE_CHECKING
 
-from alembic import op
 import sqlalchemy as sa
+from alembic import op
+from nonebot import logger
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
-from nonebot import logger
 
 if TYPE_CHECKING:
     from nonebot_plugin_user.models import Bind as BindModel
@@ -54,7 +54,13 @@ def upgrade(name: str = "") -> None:
     with Session(op.get_bind()) as sess:
         binds = sess.scalars(sa.select(Bind)).all()
         for bind in binds:
-            bind.platform = MAPPING.get(bind.platform, "Unknown")
+            if bind.platform == "qq":
+                if bind.platform_id.isdigit():
+                    bind.platform = "QQClient"
+                else:
+                    bind.platform = "QQAPI"
+            else:
+                bind.platform = MAPPING.get(bind.platform, "Unknown")
         sess.add_all(binds)
         sess.commit()
 
