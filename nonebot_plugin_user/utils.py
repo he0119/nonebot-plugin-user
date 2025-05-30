@@ -1,4 +1,5 @@
 import asyncio
+from collections.abc import Sequence
 from typing import Optional, Union
 
 from nonebot_plugin_orm import get_scoped_session, get_session
@@ -175,3 +176,15 @@ async def remove_bind(platform: Union[str, SupportScope], user_id: str) -> bool:
             bind.bind_id = bind.original_id
             await db_session.commit()
             return True
+
+
+async def get_user_platform_id(platform: Union[str, SupportScope], uid: int) -> Sequence[str]:
+    """获取用户在指定平台的 ID 列表"""
+    async with get_session() as session:
+        binds = (
+            await session.scalars(
+                select(Bind.platform_id).where(Bind.bind_id == uid).where(Bind.platform == f"{platform}")
+            )
+        ).all()
+
+        return binds
