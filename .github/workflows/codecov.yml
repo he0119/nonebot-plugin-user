@@ -74,6 +74,9 @@ jobs:
           uv python pin ${{ env.PYTHON_VERSION }}
           uv sync
 
+      - name: Run migrations
+        run: uvx --from nb-cli nb orm upgrade
+
       - name: Run tests
         shell: bash
         run: |
