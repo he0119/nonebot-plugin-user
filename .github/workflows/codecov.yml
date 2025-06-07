@@ -18,7 +18,7 @@ jobs:
       matrix:
         python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
         os: [ubuntu-latest, windows-latest, macos-latest]
-        db: ["sqlite+aiosqlite:///db.sqlite3"]
+        db: [""]
         include:
           - os: ubuntu-latest
             python-version: "3.12"
