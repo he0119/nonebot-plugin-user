@@ -75,7 +75,10 @@ jobs:
           uv sync
 
       - name: Run tests
-        run: uv run poe test
+        shell: bash
+        run: |
+          sed -ie "s#\"db\"#\"${SQLALCHEMY_DATABASE_URL}\"#g" tests/conftest.py
+          uv run poe test
 
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
