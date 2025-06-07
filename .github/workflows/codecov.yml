@@ -74,14 +74,17 @@ jobs:
           uv python pin ${{ env.PYTHON_VERSION }}
           uv sync
 
+      - name: Setup env
+        shell: bash
+        run: |
+          echo "SQLALCHEMY_DATABASE_URL=${SQLALCHEMY_DATABASE_URL}" > .env
+          sed -ie "s#\"db\"#\"${SQLALCHEMY_DATABASE_URL}\"#g" tests/conftest.py
+
       - name: Run migrations
         run: uvx --from nb-cli nb orm upgrade
 
       - name: Run tests
-        shell: bash
-        run: |
-          sed -ie "s#\"db\"#\"${SQLALCHEMY_DATABASE_URL}\"#g" tests/conftest.py
-          uv run poe test
+        run: uv run poe test
 
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
