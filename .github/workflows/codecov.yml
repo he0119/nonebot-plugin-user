@@ -80,7 +80,7 @@ jobs:
           echo "LOG_LEVEL=DEBUG" > .env
           echo "DRIVER=~fastapi+~httpx+~websockets" >> .env
           echo "SQLALCHEMY_DATABASE_URL=${SQLALCHEMY_DATABASE_URL}" >> .env
-          sed -ie "s#\"db\"#\"${SQLALCHEMY_DATABASE_URL}\"#g" tests/conftest.py
+          sed -ie "s/\"sqlalchemy_database_url\": \"\",/\"sqlalchemy_database_url\": \"$SQLALCHEMY_DATABASE_URL\",/g" tests/conftest.py
 
       - name: Run migrations
         run: uvx --from nb-cli nb orm upgrade

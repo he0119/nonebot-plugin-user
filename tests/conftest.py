@@ -24,7 +24,7 @@ def pytest_collection_modifyitems(items: list[pytest.Item]):
 def pytest_configure(config: pytest.Config) -> None:
     config.stash[NONEBOT_INIT_KWARGS] = {
         "alembic_startup_check": False,
-        "sqlalchemy_database_url": "db",
+        "sqlalchemy_database_url": "",
     }
 
 
