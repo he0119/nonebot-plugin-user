@@ -78,6 +78,7 @@ jobs:
         shell: bash
         run: |
           echo "SQLALCHEMY_DATABASE_URL=${SQLALCHEMY_DATABASE_URL}" > .env
+          echo "LOG_LEVEL=DEBUG" >> .env
           sed -ie "s#\"db\"#\"${SQLALCHEMY_DATABASE_URL}\"#g" tests/conftest.py
 
       - name: Run migrations
