@@ -22,7 +22,7 @@ jobs:
         include:
           - os: ubuntu-latest
             python-version: "3.12"
-            db: postgresql+psycopg://postgres:postgres@localhost:5432/postgres
+            db: postgresql+asyncpg://postgres:postgres@localhost:5432/postgres
           - os: ubuntu-latest
             python-version: "3.12"
             db: mysql+aiomysql://mysql:mysql@localhost:3306/mymysql

@@ -1,12 +1,25 @@
 import asyncio
 import random
 
+import pytest
 from nonebot import get_adapter
 from nonebot.adapters.onebot.v11 import Adapter, Bot, Message
 from nonebug import App
-from sqlalchemy import select
+from sqlalchemy import delete, select
 
 from tests.fake import fake_group_message_event_v11
+
+
+@pytest.fixture
+async def app(app: App):
+    yield app
+
+    from nonebot_plugin_orm import get_session
+
+    from tests.plugins.orm import Test
+
+    async with get_session() as session, session.begin():
+        await session.execute(delete(Test))
 
 
 async def test_concurrency(app: App):
@@ -38,11 +51,9 @@ async def test_permission_concurrency(app: App):
     """测试权限和其他响应器同时访问数据库"""
     from nonebot_plugin_orm import get_session
 
-    from tests.plugins.orm import orm_cmd
+    from tests.plugins.orm import Test, orm_cmd
 
     async with get_session() as session:
-        from tests.plugins.orm import Test
-
         test = await session.scalars(select(Test))
 
         assert len(test.all()) == 0
@@ -59,8 +70,6 @@ async def test_permission_concurrency(app: App):
         ctx.should_finished(orm_cmd)
 
     async with get_session() as session:
-        from tests.plugins.orm import Test
-
         test = await session.scalars(select(Test))
 
         assert len(test.all()) == 1
@@ -75,8 +84,6 @@ async def test_permission_concurrency(app: App):
         ctx.should_finished(orm_cmd)
 
     async with get_session() as session:
-        from tests.plugins.orm import Test
-
         test = await session.scalars(select(Test))
 
         assert len(test.all()) == 2
