@@ -88,7 +88,7 @@ jobs:
       - name: Run tests
         shell: bash
         run: |
-          if [[ "${SQLALCHEMY_DATABASE_URL}" != ""]]; then
+          if [[ -n "${SQLALCHEMY_DATABASE_URL}" ]]; then
             uv run poe test:single
           else
             uv run poe test
