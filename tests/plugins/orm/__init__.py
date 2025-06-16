@@ -1,5 +1,5 @@
 from nonebot import require
-from sqlalchemy import select
+from sqlalchemy import String, select
 
 require("nonebot_plugin_alconna")
 require("nonebot_plugin_orm")
@@ -12,7 +12,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 
 class Test(Model):
     id: Mapped[int] = mapped_column(primary_key=True)
-    bot_id: Mapped[str]
+    bot_id: Mapped[str] = mapped_column(String(64))
 
 
 orm_cmd = on_alconna(
