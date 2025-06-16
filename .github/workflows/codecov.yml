@@ -86,7 +86,13 @@ jobs:
         run: uvx --from nb-cli nb orm upgrade
 
       - name: Run tests
-        run: uv run poe test
+        shell: bash
+        run: |
+          if [[ "${SQLALCHEMY_DATABASE_URL}" != ""]]; then
+            uv run poe test:single
+          else
+            uv run poe test
+          fi
 
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
