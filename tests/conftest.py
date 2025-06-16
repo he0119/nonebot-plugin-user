@@ -11,7 +11,7 @@ from nonebot.adapters.onebot.v12 import Adapter as OnebotV12Adapter
 from nonebug import NONEBOT_INIT_KWARGS, App
 from pytest_asyncio import is_async_test
 from pytest_mock import MockerFixture
-from sqlalchemy import delete, event
+from sqlalchemy import delete, event, text
 
 
 def pytest_collection_modifyitems(items: list[pytest.Item]):
@@ -65,6 +65,9 @@ async def app(app: App, mocker: MockerFixture, tmp_path: Path):
     async with get_session() as session, session.begin():
         await session.execute(delete(Bind))
         await session.execute(delete(User))
+        # PostgreSQL 还需要重置序列
+        if session.bind.dialect.name == "postgresql":
+            await session.execute(text("ALTER SEQUENCE nonebot_plugin_user_user_id_seq RESTART WITH 1"))
 
 
 @pytest.fixture
