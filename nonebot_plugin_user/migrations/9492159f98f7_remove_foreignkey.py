@@ -28,7 +28,8 @@ def upgrade(name: str = "") -> None:
     # 老的数据库中还有约束，但是新的没有，所以这里可能会报错
     try:
         with op.get_context().autocommit_block():
-            # 危险操作放在独立事务中
+            # 删除操作放在独立事务中，因为可能会报错
+            # 不独立事务会导致 Alembic 在执行时出错
             with op.batch_alter_table("nonebot_plugin_user_bind", schema=None) as batch_op:
                 batch_op.drop_constraint(
                     "fk_nonebot_plugin_user_bind_original_id_nonebot_plugin_user_user",

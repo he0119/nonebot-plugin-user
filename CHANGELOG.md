@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 ## [Unreleased]
 
+### Fixed
+
+- 修复 postgresql 迁移错误
+
 ## [0.5.1] - 2025-05-26
 
 ### Fixed
