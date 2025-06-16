@@ -18,10 +18,40 @@ jobs:
       matrix:
         python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
         os: [ubuntu-latest, windows-latest, macos-latest]
+        db: [""]
+        include:
+          - os: ubuntu-latest
+            python-version: "3.12"
+            db: postgresql+asyncpg://postgres:postgres@localhost:5432/postgres
+          - os: ubuntu-latest
+            python-version: "3.12"
+            db: mysql+aiomysql://mysql:mysql@localhost:3306/mymysql
       fail-fast: false
     env:
       OS: ${{ matrix.os }}
       PYTHON_VERSION: ${{ matrix.python-version }}
+      SQLALCHEMY_DATABASE_URL: ${{ matrix.db }}
+
+    services:
+      postgresql:
+        image: ${{ startsWith(matrix.db, 'postgresql') && 'postgres' || '' }}
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+
+      mysql:
+        image: ${{ startsWith(matrix.db, 'mysql') && 'mysql' || '' }}
+        env:
+          MYSQL_ROOT_PASSWORD: mysql
+          MYSQL_USER: mysql
+          MYSQL_PASSWORD: mysql
+          MYSQL_DATABASE: mymysql
+        ports:
+          - 3306:3306
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -44,8 +74,25 @@ jobs:
           uv python pin ${{ env.PYTHON_VERSION }}
           uv sync
 
+      - name: Setup env
+        shell: bash
+        run: |
+          echo "LOG_LEVEL=DEBUG" > .env
+          echo "DRIVER=~fastapi+~httpx+~websockets" >> .env
+          echo "SQLALCHEMY_DATABASE_URL=${SQLALCHEMY_DATABASE_URL}" >> .env
+          sed -ie "s|\"sqlalchemy_database_url\": \"\",|\"sqlalchemy_database_url\": \"$SQLALCHEMY_DATABASE_URL\",|g" tests/conftest.py
+
+      - name: Run migrations
+        run: uvx --from nb-cli nb orm upgrade
+
       - name: Run tests
-        run: uv run poe test
+        shell: bash
+        run: |
+          if [[ -n "${SQLALCHEMY_DATABASE_URL}" ]]; then
+            uv run poe test:single
+          else
+            uv run poe test
+          fi
 
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}

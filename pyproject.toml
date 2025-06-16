@@ -51,13 +51,16 @@ dev = [
   "nonebot-adapter-satori>=0.13.6",
   "bump-my-version>=1.1.2",
   "poethepoet>=0.34.0",
+  "aiomysql>=0.2.0",
+  "asyncpg>=0.30.0",
 ]
 
 [tool.uv.pip]
 universal = true
 
 [tool.poe.tasks]
-test = "pytest --cov=nonebot_plugin_user --cov-report xml --junitxml=./junit.xml -n auto -v"
+test = "pytest --cov=nonebot_plugin_user --cov-report xml --junitxml=./junit.xml -n auto"
+"test:single" = "pytest --cov=nonebot_plugin_user --cov-report xml --junitxml=./junit.xml"
 bump = "bump-my-version bump"
 show-bump = "bump-my-version show-bump"
 

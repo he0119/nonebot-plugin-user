@@ -42,7 +42,7 @@ async def test_remove_bind(app: App, patch_current_time, mocker: MockerFixture):
             ctx.should_finished(bind_cmd)
 
         async with get_session() as session:
-            bind = (await session.scalars(select(Bind).where(Bind.platform_id == 10))).one()
+            bind = (await session.scalars(select(Bind).where(Bind.platform_id == "10"))).one()
             assert bind.bind_id == 2
 
 
