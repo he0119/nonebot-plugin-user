@@ -65,9 +65,14 @@ async def app(app: App, mocker: MockerFixture, tmp_path: Path):
     async with get_session() as session, session.begin():
         await session.execute(delete(Bind))
         await session.execute(delete(User))
-        # PostgreSQL 还需要重置序列
+
+        # 重置序列/自增ID
         if session.bind.dialect.name == "postgresql":
+            # PostgreSQL 重置序列
             await session.execute(text("ALTER SEQUENCE nonebot_plugin_user_user_id_seq RESTART WITH 1"))
+        elif session.bind.dialect.name == "mysql":
+            # MySQL 重置自增序列
+            await session.execute(text("ALTER TABLE nonebot_plugin_user_user AUTO_INCREMENT = 1"))
 
 
 @pytest.fixture
