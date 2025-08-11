@@ -54,7 +54,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set timezone
         uses: szenius/set-timezone@1f9716b0f7120e344f0c62bb7b1ee98819aefd42
