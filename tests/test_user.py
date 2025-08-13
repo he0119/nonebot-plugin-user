@@ -183,6 +183,15 @@ async def test_user_set_email(app: App, patch_current_time):
         async with app.test_matcher(user_cmd) as ctx:
             adapter = get_adapter(Adapter)
             bot = ctx.create_bot(base=Bot, adapter=adapter)
+            event = fake_private_message_event_v11(message=Message("/user -e invalid"))
+
+            ctx.receive_event(bot, event)
+            ctx.should_call_send(event, "邮箱格式不正确，请输入有效的邮箱地址")
+            ctx.should_finished(user_cmd)
+
+        async with app.test_matcher(user_cmd) as ctx:
+            adapter = get_adapter(Adapter)
+            bot = ctx.create_bot(base=Bot, adapter=adapter)
             event = fake_private_message_event_v11(message=Message("/user -e new@example.com"))
 
             ctx.receive_event(bot, event)

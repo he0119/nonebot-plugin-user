@@ -1,4 +1,5 @@
 import random
+import re
 from typing import Optional
 
 from expiringdictx import ExpiringDict
@@ -21,6 +22,13 @@ from .utils import get_user as get_user
 from .utils import get_user_by_id as get_user_by_id
 from .utils import remove_bind, set_bind, set_user_email, set_user_name
 
+
+def is_valid_email(email: str) -> bool:
+    """简单的邮箱格式验证"""
+    pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+    return re.match(pattern, email) is not None
+
+
 user_cmd = on_alconna(
     Alconna(
         "user",
@@ -37,11 +45,7 @@ user_cmd = on_alconna(
 
 
 @user_cmd.handle()
-async def _(
-    session: UserSession,
-    name: Match[str],
-    email: Match[str],
-):
+async def _(session: UserSession, name: Match[str], email: Match[str]):
     if name.available:
         try:
             await set_user_name(session.platform, session.platform_user.id, name.result)
@@ -51,6 +55,9 @@ async def _(
             await user_cmd.finish("用户名修改成功")
 
     if email.available:
+        if not is_valid_email(email.result):
+            await user_cmd.finish("邮箱格式不正确，请输入有效的邮箱地址")
+
         await set_user_email(session.platform, session.platform_user.id, email.result)
         await user_cmd.finish("邮箱修改成功")
 
