@@ -24,8 +24,9 @@ REV_MAPPING = {
 
 class User(Model):
     id: Mapped[int] = mapped_column(primary_key=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now(timezone.utc))
     name: Mapped[str] = mapped_column(String(255), unique=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    email: Mapped[str] = mapped_column(String(255))
 
 
 class Bind(Model):
