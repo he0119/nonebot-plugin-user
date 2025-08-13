@@ -178,7 +178,7 @@ async def remove_bind(platform: Union[str, SupportScope], user_id: str) -> bool:
             return True
 
 
-async def get_user_platform_id(platform: Union[str, SupportScope], uid: int) -> Sequence[str]:
+async def get_user_platform_ids(platform: Union[str, SupportScope], uid: int) -> Sequence[str]:
     """获取用户在指定平台的 ID 列表"""
     async with get_session() as session:
         binds = (
