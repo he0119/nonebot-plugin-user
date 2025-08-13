@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 ## [Unreleased]
 
+### Added
+
+- 添加 --show-email 参数以显示用户邮箱信息
+
 ## [0.5.2] - 2025-08-13
 
 ### Added

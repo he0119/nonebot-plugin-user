@@ -34,9 +34,15 @@ user_cmd = on_alconna(
         "user",
         Option("-l|--name", Args["name", str], help_text="修改用户名"),
         Option("-e|--email", Args["email", str], help_text="修改邮箱"),
+        Option("--show-email", help_text="显示邮箱信息"),
         meta=CommandMeta(
             description="查看或修改用户信息",
-            example=("查看用户信息\n/user\n修改用户名\n/user -l [用户名]\n修改邮箱\n/user -e [邮箱]"),
+            example=(
+                "查看用户信息\n/user\n"
+                "修改用户名\n/user -l [用户名]\n"
+                "修改邮箱\n/user -e [邮箱]\n"
+                "显示邮箱\n/user --show-email"
+            ),
         ),
     ),
     use_cmd_start=True,
@@ -45,7 +51,12 @@ user_cmd = on_alconna(
 
 
 @user_cmd.handle()
-async def _(session: UserSession, name: Match[str], email: Match[str]):
+async def _(
+    session: UserSession,
+    name: Match[str],
+    email: Match[str],
+    show_email: Query[bool] = AlconnaQuery("show-email.value", default=False),
+):
     if name.available:
         try:
             await set_user_name(session.platform, session.platform_user.id, name.result)
@@ -61,14 +72,15 @@ async def _(session: UserSession, name: Match[str], email: Match[str]):
         await set_user_email(session.platform, session.platform_user.id, email.result)
         await user_cmd.finish("邮箱修改成功")
 
-    # 显示用户信息时包含邮箱
     user_info = [
         f"平台名：{session.platform}",
         f"平台 ID：{session.platform_user.id}",
         f"用户名：{session.user_name}",
-        f"邮箱：{session.user_email or '未设置'}",
         f"创建日期：{session.created_at.astimezone()}",
     ]
+
+    if show_email.result:
+        user_info.insert(3, f"邮箱：{session.user_email or '未设置'}")
 
     await user_cmd.finish("\n".join(user_info))
 
