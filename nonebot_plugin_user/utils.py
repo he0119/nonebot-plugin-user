@@ -138,6 +138,25 @@ async def set_user_name(platform: Union[str, SupportScope], user_id: str, name: 
         await session.commit()
 
 
+async def set_user_email(platform: Union[str, SupportScope], user_id: str, email: Optional[str]) -> None:
+    """设置用户邮箱"""
+    async with get_session() as session:
+        user = (
+            await session.scalars(
+                select(User)
+                .where(Bind.platform == f"{platform}")
+                .where(Bind.platform_id == user_id)
+                .join(Bind, User.id == Bind.bind_id)
+            )
+        ).one_or_none()
+
+        if not user:
+            raise ValueError("找不到用户信息")
+
+        user.email = email
+        await session.commit()
+
+
 async def remove_bind(platform: Union[str, SupportScope], user_id: str) -> bool:
     """解除账号绑定"""
     async with get_session() as db_session:
