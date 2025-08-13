@@ -6,7 +6,6 @@ require("nonebot_plugin_orm")
 
 from nonebot.plugin import PluginMetadata, inherit_supported_adapters
 
-from . import migrations
 from .annotated import User as User
 from .annotated import UserSession as UserSession
 from .config import Config
@@ -29,7 +28,6 @@ __plugin_meta__ = PluginMetadata(
     homepage="https://github.com/he0119/nonebot-plugin-user",
     config=Config,
     supported_adapters=inherit_supported_adapters("nonebot_plugin_alconna", "nonebot_plugin_uninfo"),
-    extra={"orm_version_location": migrations},
 )
 
 
