@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 ### Added
 
 - 添加用户邮箱
+- 添加获取用户在指定平台的 ID 列表的函数
 
 ### Fixed
 
