@@ -1,11 +1,12 @@
 from datetime import datetime, timezone
+from typing import Optional
 
 from nonebot.compat import PYDANTIC_V2, ConfigDict
 from nonebot_plugin_orm import Model
 from nonebot_plugin_uninfo import SceneType, Session
 from nonebot_plugin_uninfo import User as UninfoUser
 from pydantic import BaseModel
-from sqlalchemy import DateTime, String
+from sqlalchemy import DateTime, String, func
 from sqlalchemy.orm import Mapped, mapped_column
 from typing_extensions import deprecated
 
@@ -24,8 +25,9 @@ REV_MAPPING = {
 
 class User(Model):
     id: Mapped[int] = mapped_column(primary_key=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=func.now())
     name: Mapped[str] = mapped_column(String(255), unique=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    email: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
 
 
 class Bind(Model):
@@ -59,6 +61,11 @@ class UserSession(BaseModel):
     def user_name(self) -> str:
         """用户名"""
         return self.user.name
+
+    @property
+    def user_email(self) -> Optional[str]:
+        """用户邮箱"""
+        return self.user.email
 
     @property
     def created_at(self) -> datetime:

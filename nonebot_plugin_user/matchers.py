@@ -1,4 +1,5 @@
 import random
+import re
 from typing import Optional
 
 from expiringdictx import ExpiringDict
@@ -19,15 +20,23 @@ from .annotated import UserSession as UserSession
 from .config import plugin_config
 from .utils import get_user as get_user
 from .utils import get_user_by_id as get_user_by_id
-from .utils import remove_bind, set_bind, set_user_name
+from .utils import remove_bind, set_bind, set_user_email, set_user_name
+
+
+def is_valid_email(email: str) -> bool:
+    """简单的邮箱格式验证"""
+    pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+    return re.match(pattern, email) is not None
+
 
 user_cmd = on_alconna(
     Alconna(
         "user",
-        Option("-l", Args["name", str], help_text="修改用户名"),
+        Option("-l|--name", Args["name", str], help_text="修改用户名"),
+        Option("-e|--email", Args["email", str], help_text="修改邮箱"),
         meta=CommandMeta(
             description="查看或修改用户信息",
-            example="查看用户信息\n/user\n修改用户名\n/user -l [用户名]",
+            example=("查看用户信息\n/user\n修改用户名\n/user -l [用户名]\n修改邮箱\n/user -e [邮箱]"),
         ),
     ),
     use_cmd_start=True,
@@ -36,7 +45,7 @@ user_cmd = on_alconna(
 
 
 @user_cmd.handle()
-async def _(session: UserSession, name: Match[str]):
+async def _(session: UserSession, name: Match[str], email: Match[str]):
     if name.available:
         try:
             await set_user_name(session.platform, session.platform_user.id, name.result)
@@ -45,16 +54,23 @@ async def _(session: UserSession, name: Match[str]):
         else:
             await user_cmd.finish("用户名修改成功")
 
-    await user_cmd.finish(
-        "\n".join(
-            [
-                f"平台名：{session.platform}",
-                f"平台 ID：{session.platform_user.id}",
-                f"用户名：{session.user_name}",
-                f"创建日期：{session.created_at.astimezone()}",
-            ]
-        )
-    )
+    if email.available:
+        if not is_valid_email(email.result):
+            await user_cmd.finish("邮箱格式不正确，请输入有效的邮箱地址")
+
+        await set_user_email(session.platform, session.platform_user.id, email.result)
+        await user_cmd.finish("邮箱修改成功")
+
+    # 显示用户信息时包含邮箱
+    user_info = [
+        f"平台名：{session.platform}",
+        f"平台 ID：{session.platform_user.id}",
+        f"用户名：{session.user_name}",
+        f"邮箱：{session.user_email or '未设置'}",
+        f"创建日期：{session.created_at.astimezone()}",
+    ]
+
+    await user_cmd.finish("\n".join(user_info))
 
 
 tokens = ExpiringDict[str, tuple[str, str, int, Optional[SceneType]]](capacity=100, default_age=300)
