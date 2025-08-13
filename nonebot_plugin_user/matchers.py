@@ -24,11 +24,11 @@ from .utils import remove_bind, set_bind, set_user_email, set_user_name
 user_cmd = on_alconna(
     Alconna(
         "user",
-        Option("-u|--name", Args["name", str], help_text="修改用户名"),
+        Option("-l|--name", Args["name", str], help_text="修改用户名"),
         Option("-e|--email", Args["email", str], help_text="修改邮箱"),
         meta=CommandMeta(
             description="查看或修改用户信息",
-            example=("查看用户信息\n/user\n修改用户名\n/user -u [用户名]\n修改邮箱\n/user -e [邮箱]"),
+            example=("查看用户信息\n/user\n修改用户名\n/user -l [用户名]\n修改邮箱\n/user -e [邮箱]"),
         ),
     ),
     use_cmd_start=True,

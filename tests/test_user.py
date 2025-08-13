@@ -24,7 +24,7 @@ async def test_user(app: App, patch_current_time):
             )
             ctx.should_call_send(
                 event,
-                "平台名：QQClient\n平台 ID：10\n用户名：QQClient-10\n创建日期：2023-09-14 18:46:10+08:00",
+                "平台名：QQClient\n平台 ID：10\n用户名：QQClient-10\n邮箱：未设置\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -37,7 +37,7 @@ async def test_user(app: App, patch_current_time):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：QQClient\n平台 ID：10\n用户名：QQClient-10\n创建日期：2023-09-14 18:46:10+08:00",
+                "平台名：QQClient\n平台 ID：10\n用户名：QQClient-10\n邮箱：未设置\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -66,7 +66,7 @@ async def test_user_set_name(app: App, patch_current_time):
             )
             ctx.should_call_send(
                 event,
-                "平台名：QQClient\n平台 ID：10\n用户名：QQClient-10\n创建日期：2023-09-14 18:46:10+08:00",
+                "平台名：QQClient\n平台 ID：10\n用户名：QQClient-10\n邮箱：未设置\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -83,7 +83,7 @@ async def test_user_set_name(app: App, patch_current_time):
             )
             ctx.should_call_send(
                 event,
-                "平台名：QQClient\n平台 ID：1\n用户名：QQClient-1\n创建日期：2023-09-14 18:46:10+08:00",
+                "平台名：QQClient\n平台 ID：1\n用户名：QQClient-1\n邮箱：未设置\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -122,7 +122,7 @@ async def test_user_set_name(app: App, patch_current_time):
             ctx.receive_event(bot, event)
             ctx.should_call_send(
                 event,
-                "平台名：QQClient\n平台 ID：10\n用户名：name\n创建日期：2023-09-14 18:46:10+08:00",
+                "平台名：QQClient\n平台 ID：10\n用户名：name\n邮箱：未设置\n创建日期：2023-09-14 18:46:10+08:00",
                 True,
             )
             ctx.should_finished(user_cmd)
@@ -157,3 +157,49 @@ async def test_user_session(app: App, patch_current_time):
             )
             ctx.should_call_send(event, "QQClient_10000", True)
             ctx.should_finished(test_matcher)
+
+
+async def test_user_set_email(app: App, patch_current_time):
+    """设置邮箱"""
+    from nonebot_plugin_user.matchers import set_user_email, user_cmd
+
+    with patch_current_time("2023-09-14 10:46:10", tick=False):
+        async with app.test_matcher(user_cmd) as ctx:
+            adapter = get_adapter(Adapter)
+            bot = ctx.create_bot(base=Bot, adapter=adapter)
+            event = fake_group_message_event_v11(message=Message("/user"))
+
+            ctx.receive_event(bot, event)
+            ctx.should_call_api("get_group_info", {"group_id": 10000}, {})
+            ctx.should_call_api(
+                "get_group_member_info", {"group_id": 10000, "user_id": 10, "no_cache": True}, {}
+            )
+            ctx.should_call_send(
+                event,
+                "平台名：QQClient\n平台 ID：10\n用户名：QQClient-10\n邮箱：未设置\n创建日期：2023-09-14 18:46:10+08:00",
+            )
+            ctx.should_finished(user_cmd)
+
+        async with app.test_matcher(user_cmd) as ctx:
+            adapter = get_adapter(Adapter)
+            bot = ctx.create_bot(base=Bot, adapter=adapter)
+            event = fake_private_message_event_v11(message=Message("/user -e new@example.com"))
+
+            ctx.receive_event(bot, event)
+            ctx.should_call_send(event, "邮箱修改成功")
+            ctx.should_finished(user_cmd)
+
+        async with app.test_matcher(user_cmd) as ctx:
+            adapter = get_adapter(Adapter)
+            bot = ctx.create_bot(base=Bot, adapter=adapter)
+            event = fake_group_message_event_v11(message=Message("/user"))
+
+            ctx.receive_event(bot, event)
+            ctx.should_call_send(
+                event,
+                "平台名：QQClient\n平台 ID：10\n用户名：QQClient-10\n邮箱：new@example.com\n创建日期：2023-09-14 18:46:10+08:00",
+            )
+            ctx.should_finished(user_cmd)
+
+    with pytest.raises(ValueError, match="找不到用户信息"):
+        await set_user_email("123", "qq", "test@example.com")
