@@ -66,7 +66,7 @@ async def _(session: UserSession, name: Match[str], email: Match[str]):
         f"平台名：{session.platform}",
         f"平台 ID：{session.platform_user.id}",
         f"用户名：{session.user_name}",
-        f"邮箱：{session.user.email or '未设置'}",
+        f"邮箱：{session.user_email or '未设置'}",
         f"创建日期：{session.created_at.astimezone()}",
     ]
 
