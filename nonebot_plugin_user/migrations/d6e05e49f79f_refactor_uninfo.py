@@ -53,6 +53,8 @@ def upgrade(name: str = "") -> None:
 
     with Session(op.get_bind()) as sess:
         binds = sess.scalars(sa.select(Bind)).all()
+        if len(binds) == 0:
+            return
         for bind in binds:
             if bind.platform == "qq":
                 if bind.platform_id.isdigit():
@@ -64,7 +66,7 @@ def upgrade(name: str = "") -> None:
         sess.add_all(binds)
         sess.commit()
 
-    logger.info("[bind] 已成功替换平台名称")
+    logger.info("[user] 已成功替换 bind 表中平台名称")
     # ### end Alembic commands ###
 
 
