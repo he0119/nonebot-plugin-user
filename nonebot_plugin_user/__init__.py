@@ -12,6 +12,7 @@ from .annotated import UserSession as UserSession
 from .config import Config
 from .utils import get_user as get_user
 from .utils import get_user_by_id as get_user_by_id
+from .utils import get_user_platform_ids as get_user_platform_ids
 
 __plugin_meta__ = PluginMetadata(
     name="用户",
@@ -35,6 +36,7 @@ __plugin_meta__ = PluginMetadata(
 __all__ = [
     "get_user",
     "get_user_by_id",
+    "get_user_platform_ids",
     "User",
     "UserSession",
 ]
