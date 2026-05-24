@@ -1,5 +1,4 @@
 from datetime import datetime, timezone
-from typing import Optional
 
 from nonebot.compat import PYDANTIC_V2, ConfigDict
 from nonebot_plugin_orm import Model
@@ -27,7 +26,7 @@ class User(Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=func.now())
     name: Mapped[str] = mapped_column(String(255), unique=True)
-    email: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    email: Mapped[str | None] = mapped_column(String(255), nullable=True)
 
 
 class Bind(Model):
@@ -63,7 +62,7 @@ class UserSession(BaseModel):
         return self.user.name
 
     @property
-    def user_email(self) -> Optional[str]:
+    def user_email(self) -> str | None:
         """用户邮箱"""
         return self.user.email
 

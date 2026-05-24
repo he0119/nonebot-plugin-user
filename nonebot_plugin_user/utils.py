@@ -1,6 +1,5 @@
 import asyncio
 from collections.abc import Sequence
-from typing import Optional, Union
 
 from nonebot_plugin_orm import get_scoped_session, get_session
 from nonebot_plugin_uninfo import SupportScope
@@ -8,7 +7,7 @@ from sqlalchemy import exc, select
 
 from .models import Bind, User
 
-_insert_mutex: Optional[asyncio.Lock] = None
+_insert_mutex: asyncio.Lock | None = None
 
 
 def _get_insert_mutex():
@@ -20,7 +19,7 @@ def _get_insert_mutex():
     return _insert_mutex
 
 
-async def _get_user(session, platform: str, user_id: str) -> Optional[User]:
+async def _get_user(session, platform: str, user_id: str) -> User | None:
     """获取账号"""
     return (
         await session.scalars(
@@ -32,7 +31,7 @@ async def _get_user(session, platform: str, user_id: str) -> Optional[User]:
     ).one_or_none()
 
 
-async def create_user(platform: Union[str, SupportScope], user_id: str) -> User:
+async def create_user(platform: str | SupportScope, user_id: str) -> User:
     """创建账号"""
     async with _get_insert_mutex():
         try:
@@ -65,7 +64,7 @@ async def create_user(platform: Union[str, SupportScope], user_id: str) -> User:
     return user
 
 
-async def get_user(platform: Union[str, SupportScope], user_id: str) -> User:
+async def get_user(platform: str | SupportScope, user_id: str) -> User:
     """获取或创建账号"""
     async with get_session() as session:
         user = await _get_user(session, f"{platform}", user_id)
@@ -76,7 +75,7 @@ async def get_user(platform: Union[str, SupportScope], user_id: str) -> User:
     return user
 
 
-async def get_user_depends(platform: Union[str, SupportScope], user_id: str) -> User:
+async def get_user_depends(platform: str | SupportScope, user_id: str) -> User:
     """获取或创建账号（依赖注入专用）
 
     使用 scoped_session 来进行数据库操作
@@ -104,7 +103,7 @@ async def get_user_by_id(uid: int) -> User:
         return user
 
 
-async def set_bind(platform: Union[str, SupportScope], user_id: str, aid: int) -> None:
+async def set_bind(platform: str | SupportScope, user_id: str, aid: int) -> None:
     """设置账号绑定"""
     async with get_session() as session:
         bind = (
@@ -120,7 +119,7 @@ async def set_bind(platform: Union[str, SupportScope], user_id: str, aid: int) -
             await session.commit()
 
 
-async def set_user_name(platform: Union[str, SupportScope], user_id: str, name: str) -> None:
+async def set_user_name(platform: str | SupportScope, user_id: str, name: str) -> None:
     """设置用户名"""
     async with get_session() as session:
         user = (
@@ -139,7 +138,7 @@ async def set_user_name(platform: Union[str, SupportScope], user_id: str, name: 
         await session.commit()
 
 
-async def set_user_email(platform: Union[str, SupportScope], user_id: str, email: Optional[str]) -> None:
+async def set_user_email(platform: str | SupportScope, user_id: str, email: str | None) -> None:
     """设置用户邮箱"""
     async with get_session() as session:
         user = (
@@ -158,7 +157,7 @@ async def set_user_email(platform: Union[str, SupportScope], user_id: str, email
         await session.commit()
 
 
-async def remove_bind(platform: Union[str, SupportScope], user_id: str) -> bool:
+async def remove_bind(platform: str | SupportScope, user_id: str) -> bool:
     """解除账号绑定"""
     async with get_session() as db_session:
         bind = (
@@ -178,7 +177,7 @@ async def remove_bind(platform: Union[str, SupportScope], user_id: str) -> bool:
             return True
 
 
-async def get_user_platform_ids(platform: Union[str, SupportScope], uid: int) -> Sequence[str]:
+async def get_user_platform_ids(platform: str | SupportScope, uid: int) -> Sequence[str]:
     """获取用户在指定平台的 ID 列表"""
     async with get_session() as session:
         binds = (
