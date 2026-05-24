@@ -1,6 +1,5 @@
 import random
 import re
-from typing import Optional
 
 from expiringdictx import ExpiringDict
 from nonebot_plugin_alconna import (
@@ -85,7 +84,7 @@ async def _(
     await user_cmd.finish("\n".join(user_info))
 
 
-tokens = ExpiringDict[str, tuple[str, str, int, Optional[SceneType]]](capacity=100, default_age=300)
+tokens = ExpiringDict[str, tuple[str, str, int, SceneType | None]](capacity=100, default_age=300)
 
 
 def generate_token() -> str:
@@ -107,7 +106,7 @@ bind_cmd = on_alconna(
 @bind_cmd.handle()
 async def _(
     session: UserSession,
-    token: Optional[str] = None,
+    token: str | None = None,
     remove: Query[bool] = AlconnaQuery("r.value", default=False),
 ):
     if remove.result:
