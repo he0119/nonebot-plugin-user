@@ -11,8 +11,8 @@ async def test_bind_group(app: App, patch_current_time, mocker: MockerFixture):
     """群聊绑定用户"""
     from nonebot_plugin_user.matchers import bind_cmd, user_cmd
 
-    mocked_random = mocker.patch("nonebot_plugin_user.matchers.random.randint")
-    mocked_random.return_value = 123456
+    mocked_randbelow = mocker.patch("nonebot_plugin_user.matchers.secrets.randbelow")
+    mocked_randbelow.return_value = 23456
 
     with patch_current_time("2023-09-14 10:46:10", tick=False):
         async with app.test_matcher(user_cmd) as ctx:
@@ -115,8 +115,8 @@ async def test_bind_group_different_user(app: App, patch_current_time, mocker: M
     """群聊绑定用户，不是最开始发送绑定命令的用户"""
     from nonebot_plugin_user.matchers import bind_cmd, user_cmd
 
-    mocked_random = mocker.patch("nonebot_plugin_user.matchers.random.randint")
-    mocked_random.return_value = 123456
+    mocked_randbelow = mocker.patch("nonebot_plugin_user.matchers.secrets.randbelow")
+    mocked_randbelow.return_value = 23456
 
     with patch_current_time("2023-09-14 10:46:10", tick=False):
         async with app.test_matcher(user_cmd) as ctx:
