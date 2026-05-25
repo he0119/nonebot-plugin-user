@@ -93,7 +93,7 @@ def generate_token() -> str:
         if token not in tokens:
             return token
 
-    raise RuntimeError("生成绑定令牌失败，请稍后重试")
+    raise RuntimeError("生成绑定令牌失败，请稍后重试")  # pragma: no cover
 
 
 bind_cmd = on_alconna(
