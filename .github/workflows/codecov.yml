@@ -102,7 +102,7 @@ jobs:
           env_vars: OS,PYTHON_VERSION
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           env_vars: OS,PYTHON_VERSION
