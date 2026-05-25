@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 ## [Unreleased]
 
+### Fixed
+
+- 修复绑定令牌重复时会覆盖已有绑定上下文的问题
+
 ## [0.5.3] - 2025-08-13
 
 ### Added

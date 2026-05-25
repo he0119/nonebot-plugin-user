@@ -1,5 +1,5 @@
-import random
 import re
+import secrets
 
 from expiringdictx import ExpiringDict
 from nonebot_plugin_alconna import (
@@ -88,7 +88,12 @@ tokens = ExpiringDict[str, tuple[str, str, int, SceneType | None]](capacity=100,
 
 
 def generate_token() -> str:
-    return f"{plugin_config.user_token_prefix}{random.randint(100000, 999999)}"
+    for _ in range(100):
+        token = f"{plugin_config.user_token_prefix}{secrets.randbelow(900000) + 100000}"
+        if token not in tokens:
+            return token
+
+    raise RuntimeError("生成绑定令牌失败，请稍后重试")
 
 
 bind_cmd = on_alconna(

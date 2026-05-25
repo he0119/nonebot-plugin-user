@@ -46,24 +46,20 @@
 ## 4. 重要模式与约定
 
 - **命令处理与 Alconna**:
-
   - 用户命令使用 `Alconna`、`Option`、`Args`、`Match`、`Query` 进行结构化定义，不要改成手写字符串解析。
   - `/user` 负责展示和修改用户信息；`/bind` 负责绑定、二阶段群聊绑定和解除绑定。修改命令参数时，需要同步更新 README 和测试期望。
 
 - **用户与会话识别**:
-
   - 跨平台身份来自 `nonebot-plugin-uninfo` 的 `Session`，平台名称优先使用 `session.scope`，平台用户 ID 使用 `session.user.id`。
   - 对外返回用户会话信息时使用 `UserSession`，其中 `session_id` 由 `session.scope` 和 `session.scene_path` 组合。
   - 保留已标记 deprecated 的旧属性时，应继续通过 `typing_extensions.deprecated` 标注，避免直接删除公共 API。
 
 - **绑定流程**:
-
   - `Bind.original_id` 表示初始绑定账号，`Bind.bind_id` 表示当前绑定到的内部账号。解除绑定时只应将 `bind_id` 恢复为 `original_id`，不要删除绑定记录。
   - 群聊绑定是两阶段流程：第一阶段在原始平台验证令牌，第二阶段回到目标平台确认账号；私聊绑定可以直接完成。
   - 绑定令牌应保持短期有效，不要写入日志或持久化存储。测试中如需固定令牌，请 mock 令牌生成函数使用的随机源。
 
 - **数据库访问与迁移**:
-
   - 普通数据库操作使用 `nonebot_plugin_orm.get_session()`。
   - 依赖注入链路中使用 `get_scoped_session()`，新创建的用户需要 merge 回 scoped session。
   - 创建用户和绑定记录时注意并发写入，当前实现通过 `_insert_mutex` 和 `IntegrityError` 兜底处理重复创建。
@@ -71,12 +67,10 @@
   - 修改 `models.py` 中的 ORM 模型后，使用 `nb orm` CLI 生成迁移，并在提交前执行 `uvx --from nb-cli nb orm upgrade` 验证迁移可应用。
 
 - **Pydantic 兼容性**:
-
   - 当前依赖允许 Pydantic v1/v2 共存，模型中保留了 `PYDANTIC_V2` 分支。除非项目明确提升到 Pydantic v2-only，否则不要移除 v1 兼容代码。
   - `pyproject.toml` 中 pyright 定义了 `PYDANTIC_V2 = true`，但运行时仍可能处在兼容依赖范围内。
 
 - **配置**:
-
   - 可变配置应添加到 `config.py` 的 `Config` 模型中，并提供合理默认值。
   - 新配置需要在 README 的配置项部分说明名称、类型、默认值和含义。
 

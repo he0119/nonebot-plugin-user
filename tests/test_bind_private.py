@@ -1,4 +1,5 @@
 # ruff: noqa: E501
+import pytest
 from nonebot import get_adapter
 from nonebot.adapters.onebot.v11 import Adapter, Bot, Message
 from nonebug import App
@@ -7,12 +8,43 @@ from pytest_mock import MockerFixture
 from tests.fake import fake_private_message_event_v11
 
 
+async def test_generate_token_skips_existing_token(app: App, mocker: MockerFixture):
+    """生成令牌时跳过已有令牌"""
+    from nonebot_plugin_user.matchers import generate_token, tokens
+
+    tokens["nonebot/123456"] = ("QQClient", "1", 1, None)
+    mocked_randbelow = mocker.patch("nonebot_plugin_user.matchers.secrets.randbelow")
+    mocked_randbelow.side_effect = [23456, 23457]
+
+    try:
+        assert generate_token() == "nonebot/123457"
+    finally:
+        tokens.pop("nonebot/123456")
+
+
+async def test_generate_token_raises_when_all_retries_conflict(app: App, mocker: MockerFixture):
+    """生成令牌持续重复时抛出错误"""
+    from nonebot_plugin_user.matchers import generate_token, tokens
+
+    tokens["nonebot/123456"] = ("QQClient", "1", 1, None)
+    mocked_randbelow = mocker.patch("nonebot_plugin_user.matchers.secrets.randbelow")
+    mocked_randbelow.return_value = 23456
+
+    try:
+        with pytest.raises(RuntimeError, match="生成绑定令牌失败，请稍后重试"):
+            generate_token()
+    finally:
+        tokens.pop("nonebot/123456")
+
+    assert mocked_randbelow.call_count == 100
+
+
 async def test_bind_private(app: App, patch_current_time, mocker: MockerFixture):
     """私聊绑定用户"""
     from nonebot_plugin_user.matchers import bind_cmd, user_cmd
 
-    mocked_random = mocker.patch("nonebot_plugin_user.matchers.random.randint")
-    mocked_random.return_value = 123456
+    mocked_randbelow = mocker.patch("nonebot_plugin_user.matchers.secrets.randbelow")
+    mocked_randbelow.return_value = 23456
 
     with patch_current_time("2023-09-14 10:46:10", tick=False):
         async with app.test_matcher(user_cmd) as ctx:
@@ -94,8 +126,8 @@ async def test_bind_private_invalid_token(app: App, patch_current_time, mocker: 
     """私聊绑定用户，无效的令牌"""
     from nonebot_plugin_user.matchers import bind_cmd, user_cmd
 
-    mocked_random = mocker.patch("nonebot_plugin_user.matchers.random.randint")
-    mocked_random.return_value = 123456
+    mocked_randbelow = mocker.patch("nonebot_plugin_user.matchers.secrets.randbelow")
+    mocked_randbelow.return_value = 23456
 
     with patch_current_time("2023-09-14 10:46:10", tick=False):
         async with app.test_matcher(user_cmd) as ctx:
@@ -180,8 +212,8 @@ async def test_bind_private_prefix(app: App, patch_current_time, mocker: MockerF
 
     mocker.patch.object(plugin_config, "user_token_prefix", "test/")
 
-    mocked_random = mocker.patch("nonebot_plugin_user.matchers.random.randint")
-    mocked_random.return_value = 123456
+    mocked_randbelow = mocker.patch("nonebot_plugin_user.matchers.secrets.randbelow")
+    mocked_randbelow.return_value = 23456
 
     with patch_current_time("2023-09-14 18:46:10+08:00", tick=False):
         async with app.test_matcher(user_cmd) as ctx:

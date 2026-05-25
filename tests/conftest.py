@@ -60,7 +60,10 @@ async def app(app: App, mocker: MockerFixture, tmp_path: Path):
 
     # 清理数据库
 
+    from nonebot_plugin_user.matchers import tokens
     from nonebot_plugin_user.models import Bind, User
+
+    tokens.clear()
 
     async with get_session() as session, session.begin():
         await session.execute(delete(Bind))
