@@ -47,6 +47,31 @@ async def test_concurrency(app: App):
     await asyncio.gather(*tasks)
 
 
+async def test_create_user_reuses_pending_task(app: App, monkeypatch: pytest.MonkeyPatch):
+    """测试同一平台账号复用正在进行的创建任务"""
+    from nonebot_plugin_user import utils
+    from nonebot_plugin_user.models import User
+
+    calls = 0
+    utils._create_user_tasks.clear()
+
+    async def fake_create_user(platform: str, user_id: str) -> User:
+        nonlocal calls
+
+        calls += 1
+        await asyncio.sleep(0.01)
+        return User(id=1, name=f"{platform}-{user_id}")
+
+    monkeypatch.setattr(utils, "_create_user", fake_create_user)
+
+    users = await asyncio.gather(*(utils.create_user("QQClient", "1") for _ in range(100)))
+    await asyncio.sleep(0)
+
+    assert calls == 1
+    assert all(user is users[0] for user in users)
+    assert utils._create_user_tasks == {}
+
+
 async def test_permission_concurrency(app: App):
     """测试权限和其他响应器同时访问数据库"""
     from nonebot_plugin_orm import get_session
