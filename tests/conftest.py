@@ -41,7 +41,7 @@ async def app(app: App, mocker: MockerFixture, tmp_path: Path):
     nonebot.require("nonebot_plugin_user")
     nonebot.require("tests.plugins.admin")
     nonebot.require("tests.plugins.orm")
-    from nonebot_plugin_orm import get_session, init_orm
+    from nonebot_plugin_orm import get_scoped_session, get_session, init_orm
 
     mocker.patch("nonebot_plugin_orm._data_dir", tmp_path)
     # 确保 _insert_mutex 是在当前事件循环中创建的
@@ -65,6 +65,14 @@ async def app(app: App, mocker: MockerFixture, tmp_path: Path):
 
     tokens.clear()
 
+    # matcher 中通过依赖注入拿到的是 scoped session，正常情况下
+    # nonebot-plugin-orm 会在 postprocessor 中 remove。但这里马上要
+    # 做跨测试的清理，并且 MySQL 重置自增值需要执行 ALTER TABLE。
+    # 如果还有 scoped session 持有连接或事务，MySQL 的 DDL 可能会等
+    # 元数据锁，表现为 CI 卡在下一个测试文件开始前。因此清理数据前
+    # 先主动 remove 一次，确保测试 fixture 不依赖 matcher 回收时机。
+    await get_scoped_session().remove()
+
     async with get_session() as session, session.begin():
         await session.execute(delete(Bind))
         await session.execute(delete(User))
@@ -73,8 +81,14 @@ async def app(app: App, mocker: MockerFixture, tmp_path: Path):
         if session.bind.dialect.name == "postgresql":
             # PostgreSQL 重置序列
             await session.execute(text("ALTER SEQUENCE nonebot_plugin_user_user_id_seq RESTART WITH 1"))
-        elif session.bind.dialect.name == "mysql":
-            # MySQL 重置自增序列
+
+        dialect_name = session.bind.dialect.name
+
+    if dialect_name == "mysql":
+        async with get_session() as session, session.begin():
+            # MySQL 的 ALTER TABLE 会隐式提交并获取元数据锁，不能和上面的
+            # DELETE 放在同一个事务上下文里。先让删除事务完整提交，再单独
+            # 重置自增值，可以避免 DDL 等待当前清理事务或残留 session 释放锁。
             await session.execute(text("ALTER TABLE nonebot_plugin_user_user AUTO_INCREMENT = 1"))
 
 

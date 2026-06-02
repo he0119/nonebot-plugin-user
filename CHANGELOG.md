@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 ### Fixed
 
 - 修复绑定令牌重复时会覆盖已有绑定上下文的问题
+- 修复并发创建同一平台账号时可能触发唯一约束错误的问题
 
 ## [0.5.3] - 2025-08-13
 

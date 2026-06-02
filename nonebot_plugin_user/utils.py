@@ -8,6 +8,7 @@ from sqlalchemy import exc, select
 from .models import Bind, User
 
 _insert_mutex: asyncio.Lock | None = None
+_create_user_tasks: dict[tuple[str, str], asyncio.Task[User]] = {}
 
 
 def _get_insert_mutex():
@@ -17,6 +18,11 @@ def _get_insert_mutex():
         _insert_mutex = asyncio.Lock()
 
     return _insert_mutex
+
+
+def _remove_create_user_task(key: tuple[str, str], task: asyncio.Task[User]) -> None:
+    if _create_user_tasks.get(key) is task:
+        _create_user_tasks.pop(key, None)
 
 
 async def _get_user(session, platform: str, user_id: str) -> User | None:
@@ -32,13 +38,37 @@ async def _get_user(session, platform: str, user_id: str) -> User | None:
 
 
 async def create_user(platform: str | SupportScope, user_id: str) -> User:
+    """创建账号，并复用同一平台账号正在进行的创建任务"""
+    key = (f"{platform}", user_id)
+
+    task = _create_user_tasks.get(key)
+    if task is None:
+        task = asyncio.create_task(_create_user(platform, user_id))
+        _create_user_tasks[key] = task
+        task.add_done_callback(lambda task: _remove_create_user_task(key, task))
+
+    # 同一个平台账号的并发请求会等待同一个创建任务，避免它们逐个进入锁内查库。
+    # shield 可以防止某个调用方被取消时连带取消共享任务，影响其他等待者。
+    return await asyncio.shield(task)
+
+
+async def _create_user(platform: str | SupportScope, user_id: str) -> User:
     """创建账号"""
     async with _get_insert_mutex():
-        try:
-            async with get_session(expire_on_commit=False) as session:
+        async with get_session(expire_on_commit=False) as session:
+            # create_user() 通常会合并同一平台账号的并发创建请求，但这里仍
+            # 保留锁内最终确认，覆盖跨任务清理边界和跨进程等数据库层竞态。
+            # 如果省略这次检查，后进入的协程可能会继续插入同名 User，
+            # 先触发 User.name 唯一约束；此时 Bind 记录可能还不可见，
+            # IntegrityError 兜底回查就会找不到用户。
+            user = await _get_user(session, f"{platform}", user_id)
+            if user:
+                return user
+
+            try:
                 user = User(name=f"{platform}-{user_id}")
                 session.add(user)
-                await session.commit()
+                await session.flush()
 
                 bind = Bind(
                     platform_id=user_id,
@@ -48,8 +78,9 @@ async def create_user(platform: str | SupportScope, user_id: str) -> User:
                 )
                 session.add(bind)
                 await session.commit()
-        except exc.IntegrityError:
-            async with get_session() as session:
+                await session.refresh(user)
+            except exc.IntegrityError:
+                await session.rollback()
                 user = (
                     await session.scalars(
                         select(User)
@@ -86,8 +117,10 @@ async def get_user_depends(platform: str | SupportScope, user_id: str) -> User:
 
     if not user:
         user = await create_user(platform, user_id)
-        # 当前 user 是在新的 session 中创建的，需要 merge 到 scoped_session 中
-        user = await scoped_session.merge(user)
+        # 当前 user 是在新的 session 中创建并提交的，需要 merge 到 scoped_session 中。
+        # create_user() 返回前已经 refresh 过 user，这里只需要把对象附加到
+        # scoped_session，不需要再从数据库加载一次状态。
+        user = await scoped_session.merge(user, load=False)
 
     return user
 

@@ -1,7 +1,7 @@
 from nonebot.params import Depends
 from nonebot_plugin_uninfo import Session, get_session
 
-from .models import UserSession
+from .models import User, UserSession
 from .utils import get_user_depends
 
 
@@ -18,8 +18,10 @@ async def get_user(session: Session | None = Depends(get_session)):
     return user
 
 
-async def get_user_session(session: Session | None = Depends(get_session)):
+async def get_user_session(
+    session: Session | None = Depends(get_session),
+    user: User | None = Depends(get_user),
+):
     """获取用户会话"""
-    user = await get_user(session)
     if session and user:
         return UserSession(session=session, user=user)
