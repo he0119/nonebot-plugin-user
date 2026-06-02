@@ -1,6 +1,6 @@
 [project]
 name = "nonebot-plugin-user"
-version = "0.5.3"
+version = "0.6.0"
 description = "适用于 Nonebot2 的用户插件"
 authors = [{ name = "uy_sun", email = "hmy0119@gmail.com" }]
 readme = "README.md"
@@ -122,7 +122,7 @@ asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "session"
 
 [tool.bumpversion]
-current_version = "0.5.3"
+current_version = "0.6.0"
 commit = true
 message = "chore(release): {new_version}"
 
