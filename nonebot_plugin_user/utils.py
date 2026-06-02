@@ -35,6 +35,16 @@ async def create_user(platform: str | SupportScope, user_id: str) -> User:
     """创建账号"""
     async with _get_insert_mutex():
         async with get_session(expire_on_commit=False) as session:
+            # get_user() 会先在锁外查询一次，但多个协程可能同时查到空结果，
+            # 然后排队进入这里。拿到插入锁后需要再次查询，确认前一个协程
+            # 是否已经完成 User + Bind 的创建。
+            # 如果省略这次检查，后进入的协程可能会继续插入同名 User，
+            # 先触发 User.name 唯一约束；此时 Bind 记录可能还不可见，
+            # IntegrityError 兜底回查就会找不到用户。
+            user = await _get_user(session, f"{platform}", user_id)
+            if user:
+                return user
+
             try:
                 user = User(name=f"{platform}-{user_id}")
                 session.add(user)
