@@ -98,6 +98,8 @@ async def get_user_depends(platform: str | SupportScope, user_id: str) -> User:
     if not user:
         user = await create_user(platform, user_id)
         # 当前 user 是在新的 session 中创建并提交的，需要 merge 到 scoped_session 中。
+        # create_user() 返回前已经 refresh 过 user，这里只需要把对象附加到
+        # scoped_session，不需要再从数据库加载一次状态。
         user = await scoped_session.merge(user, load=False)
 
     return user
