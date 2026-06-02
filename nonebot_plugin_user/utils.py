@@ -34,11 +34,11 @@ async def _get_user(session, platform: str, user_id: str) -> User | None:
 async def create_user(platform: str | SupportScope, user_id: str) -> User:
     """创建账号"""
     async with _get_insert_mutex():
-        try:
-            async with get_session(expire_on_commit=False) as session:
+        async with get_session(expire_on_commit=False) as session:
+            try:
                 user = User(name=f"{platform}-{user_id}")
                 session.add(user)
-                await session.commit()
+                await session.flush()
 
                 bind = Bind(
                     platform_id=user_id,
@@ -48,8 +48,9 @@ async def create_user(platform: str | SupportScope, user_id: str) -> User:
                 )
                 session.add(bind)
                 await session.commit()
-        except exc.IntegrityError:
-            async with get_session() as session:
+                await session.refresh(user)
+            except exc.IntegrityError:
+                await session.rollback()
                 user = (
                     await session.scalars(
                         select(User)
@@ -86,8 +87,8 @@ async def get_user_depends(platform: str | SupportScope, user_id: str) -> User:
 
     if not user:
         user = await create_user(platform, user_id)
-        # 当前 user 是在新的 session 中创建的，需要 merge 到 scoped_session 中
-        user = await scoped_session.merge(user)
+        # 当前 user 是在新的 session 中创建并提交的，需要 merge 到 scoped_session 中。
+        user = await scoped_session.merge(user, load=False)
 
     return user
 
