@@ -96,10 +96,6 @@ async def _(session: UserSession):
 - 默认: `nonebot/`
 - 说明: 生成令牌的前缀
 
-## 计划
-
-- [ ] 支持权限
-
 ## 鸣谢
 
 - [Koishi](https://github.com/koishijs/koishi): 本项目直接参考
