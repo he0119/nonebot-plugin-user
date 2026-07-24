@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 ## [Unreleased]
 
+## [0.6.1] - 2026-07-24
+
 ### Fixed
 
 - 修复迁移脚本反射其他插件数据表时可能因关系命名冲突而中断的问题
@@ -160,7 +162,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 - 可以使用的版本。
 
-[Unreleased]: https://github.com/he0119/nonebot-plugin-user/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/he0119/nonebot-plugin-user/compare/v0.6.1...HEAD
+[0.6.1]: https://github.com/he0119/nonebot-plugin-user/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/he0119/nonebot-plugin-user/compare/v0.5.3...v0.6.0
 [0.5.3]: https://github.com/he0119/nonebot-plugin-user/compare/v0.5.2...v0.5.3
 [0.5.2]: https://github.com/he0119/nonebot-plugin-user/compare/v0.5.1...v0.5.2
