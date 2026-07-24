@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/lang/zh-CN/
 
 ## [Unreleased]
 
+### Fixed
+
+- 修复迁移脚本反射其他插件数据表时可能因关系命名冲突而中断的问题
+
 ## [0.6.0] - 2026-06-02
 
 ### Fixed
