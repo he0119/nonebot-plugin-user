@@ -62,6 +62,7 @@ _✨ NoneBot 用户插件 ✨_
 
 ```python
 from nonebot import require
+
 require("nonebot_plugin_user")
 ```
 
@@ -69,6 +70,7 @@ require("nonebot_plugin_user")
 
 ```python
 from nonebot_plugin_user import User
+
 
 @matcher.handle()
 async def _(user: User):
@@ -83,7 +85,7 @@ from nonebot_plugin_user import UserSession
 
 @matcher.handle()
 async def _(session: UserSession):
-  await matcher.finish(session.platform_user.id)
+    await matcher.finish(session.platform_user.id)
 ```
 
 ## 配置项
